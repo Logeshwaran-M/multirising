@@ -1,0 +1,33 @@
+
+.navbar-brand {
+  text-align: center;
+}
+
+/* Nav container */
+.custom-nav {
+  display: flex;
+  gap: 10px;
+}
+
+/* Default link */
+.custom-link {
+  padding: 12px 30px !important;
+  background-color: #e0e0e0;
+  font-weight: 600;
+  color: blue;
+  text-decoration: none !important;
+  clip-path: polygon(10% 0%, 100% 0%, 90% 100%, 0% 100%);
+  transition: 0.3s ease;
+}
+
+/* Hover = Green */
+.custom-link:hover {
+  background-color: #2e7d32 !important;   /* Dark Green */
+  color: white !important;
+}
+
+/* Active = Green */
+.active-link {
+  background-color: #2e7d32 !important;
+  color: white !important;
+}
