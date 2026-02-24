@@ -2,16 +2,18 @@ import { Routes, Route } from "react-router-dom";
 import NavbarComponent from "./components/Nav";
 import HeroSection from "./components/Home";
 import PortfolioBanner from "./components/Portfolio";
+import About from "./components/About";
+import Footer from "./components/Footer";
+
 
 // Dummy pages (create these files)
 // import Products from "./pages/Products";
-// import About from "./pages/About";
+
 
 function App() {
   return (
     <>
       <NavbarComponent />
-
       <Routes>
         {/* Home Page */}
         <Route path="/" element={<HeroSection />} />
@@ -22,7 +24,7 @@ function App() {
         <Route path="/portfolio" element={<PortfolioBanner />} />
 
         {/* About Page */}
-        {/* <Route path="/about" element={<About />} /> */}
+        <Route path="/about" element={<About/>} />
 
         {/* 404 Page */}
         <Route
@@ -34,6 +36,7 @@ function App() {
           }
         />
       </Routes>
+      <Footer/>
     </>
   );
 }

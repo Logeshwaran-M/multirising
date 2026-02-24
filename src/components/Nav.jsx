@@ -2,6 +2,8 @@ import { Navbar, Nav, Container } from "react-bootstrap";
 import { FaUser, FaShoppingCart } from "react-icons/fa";
 import logo from "../assets/logo.png";
 import { Link } from "react-router-dom";
+import { NavLink } from "react-router-dom";
+import { NavDropdown } from "react-bootstrap";
 
 const NavbarComponent = () => {
   return (
@@ -42,29 +44,76 @@ const NavbarComponent = () => {
           className="justify-content-center pb-3"
         >
           <Nav>
-            <Nav.Link   className={({ isActive }) =>
-    isActive ? "custom-link active-link" : "custom-link  nav-link-custom px-4"
-  } as={Link} to="/">
+            <Nav.Link
+              as={NavLink}
+              to="/"
+              className={({ isActive }) =>
+                isActive
+                  ? "custom-link active-link px-4"
+                  : "custom-link nav-link-custom px-4"
+              }
+            >
               MRE Finds
             </Nav.Link>
-            <Nav.Link as={Link} to="/products" className={({ isActive }) =>
-    isActive ? "custom-link active-link" : "custom-link  nav-link-custom px-4"
-  }>
-              Products
-            </Nav.Link>
-            <Nav.Link as={Link} to="/abroad"className={({ isActive }) =>
-    isActive ? "custom-link active-link" : "custom-link  nav-link-custom px-4"
-  }>
+        <NavDropdown
+  title="Products"
+  id="products-dropdown"
+  className="px-4 custom-link-dropdown"
+>
+  <NavDropdown.Item
+    as={NavLink}
+    to="/products"
+    className={({ isActive }) =>
+      isActive
+        ? "custom-link active-link px-3"
+        : "custom-link nav-link-custom px-3"
+    }
+  >
+    All Products
+  </NavDropdown.Item>
+  <NavDropdown.Item
+    as={NavLink}
+    to="/facilities"
+    className={({ isActive }) =>
+      isActive
+        ? "custom-link active-link px-3"
+        : "custom-link nav-link-custom px-3"
+    }
+  >
+  Facilities
+  </NavDropdown.Item>
+  <NavDropdown.Item
+    as={NavLink}
+    to="/portfolio"
+    className={({ isActive }) =>
+      isActive
+        ? "custom-link active-link px-3"
+        : "custom-link nav-link-custom px-3"
+    }
+  >
+   Product Portfolio
+  </NavDropdown.Item>
+</NavDropdown>
+            <Nav.Link
+              as={NavLink}
+              to="/abroad"
+              className={({ isActive }) =>
+                isActive
+                  ? "custom-link active-link px-4"
+                  : "custom-link nav-link-custom px-4"
+              }
+            >
               Send Bulk Gifts to Abroad
             </Nav.Link>
-            <Nav.Link as={Link} to="/portfolio" className={({ isActive }) =>
-    isActive ? "custom-link active-link" : "custom-link  nav-link-custom px-4"
-  }>
-              Portfolio
-            </Nav.Link>
-            <Nav.Link as={Link} to="/about" className={({ isActive }) =>
-    isActive ? "custom-link active-link" : "custom-link  nav-link-custom px-4"
-  }>
+            <Nav.Link
+              as={NavLink}
+              to="/about"
+              className={({ isActive }) =>
+                isActive
+                  ? "custom-link active-link px-4"
+                  : "custom-link nav-link-custom px-4"
+              }
+            >
               About Us
             </Nav.Link>
           </Nav>
