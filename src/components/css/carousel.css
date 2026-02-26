@@ -1,0 +1,51 @@
+.scroll-wrapper {
+  overflow: hidden;
+  width: 100%;
+}
+
+.scroll-track {
+  display: flex;
+  animation: scroll 5s linear infinite;
+}
+
+/* Each Country Box */
+.country-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;             /* gap between image and text */
+  margin-right: 60px;    /* gap between countries */
+}
+
+/* Smaller Image */
+.scroll-image {
+  width: 60px;           /* smaller size */
+  height: 40px;
+  object-fit: cover;
+  border-radius: 6px;
+}
+
+/* Country Text */
+.country-name {
+  font-weight: 600;
+  color: #333;
+  font-size: 15px;
+}
+
+/* Smooth Infinite Scroll */
+@keyframes scroll {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
+.hover-card {
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.hover-card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 1rem 2rem rgba(0, 0, 0, 0.15) !important;
+}

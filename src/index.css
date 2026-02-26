@@ -1,66 +1,564 @@
-
+/* ================= NAVBAR BRAND ================= */
 .navbar-brand {
   text-align: center;
 }
 
-/* Nav container */
-.custom-nav {
-  display: flex;
-  gap: 10px;
-}
-
-/* Normal link → Blue */
+/* ================= NAV LINKS ================= */
 .navbar-nav .nav-link {
-  color: rgba(42, 139, 250, 0.952) !important;
+  color:green !important;
   font-weight: 500;
+  position: relative;
+  transition: all 0.3s ease;
+  padding-bottom: 6px;
 }
 
-/* Active link → Green */
-.navbar-nav .nav-link.active {
-  color: green !important;
-  font-weight: 600;
-   border-bottom: 3px solid green;
+/* Animated Underline Effect */
+.navbar-nav .nav-link::after {
+  content: "";
+  position: absolute;
+  width: 0%;
+  height: 2px;
+  left: 0;
+  bottom: 0;
+  background-color: green;
+  transition: width 0.3s ease;
 }
-
-/* Open dropdown on hover instead of click */
-.navbar .dropdown:hover > .dropdown-menu {
-  display: block;
-  margin-top: 0; /* optional to align nicely */
-}
-
-/* Remove default fade effect */
-.navbar .dropdown-menu {
-  transition: none !important;
-}
-
 
 /* Hover */
 .navbar-nav .nav-link:hover {
-    border-bottom: 1px solid green;
+   color: rgba(5, 91, 189, 0.95) !important;
 }
 
-
-
-/* Active dropdown item → green like main links */
-/* Dropdown items */
-.dropdown-menu .dropdown-item {
-  color: rgba(42, 139, 250, 0.95); /* same as main links */
-  font-weight: 500;
-   background-color: transparent !important;
-  padding: 6px 16px;
+.navbar-nav .nav-link:hover::after {
+  width: 100%;
 }
 
-/* Hover effect */
-.dropdown-menu .dropdown-item:hover {
-    color: rgba(42, 139, 250, 0.95);
-   border-bottom:1px solid green;
-  background-color: transparent !important; /* remove default bg hover */
-}
-
-/* Active route highlight */
-.dropdown-menu .dropdown-item.active {
-  color: green !important;
+/* Active Link */
+.navbar-nav .nav-link.active {
+  color: rgba(5, 91, 189, 0.95) !important;
   font-weight: 600;
-  border-bottom: 3px solid green;
 }
 
+.navbar-nav .nav-link.active::after {
+  width: 100%;
+  height: 3px;
+}
+
+/* ================= DROPDOWN ================= */
+
+/* Open dropdown on hover */
+.navbar .dropdown:hover > .dropdown-menu {
+  display: block;
+  margin-top: 0;
+}
+
+/* Modern dropdown style */
+.navbar .dropdown-menu {
+  border-radius: 12px;
+  border: none;
+  padding: 10px 0;
+  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
+  animation: fadeIn 0.2s ease-in-out;
+}
+
+/* Dropdown animation */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Dropdown Items */
+.dropdown-menu .dropdown-item {
+ 
+  color: green;
+  font-weight: 500;
+  padding: 8px 18px;
+  transition: all 0.3s ease;
+}
+
+/* Hover Effect */
+.dropdown-menu .dropdown-item:hover {
+   color: rgba(5, 91, 189, 0.95)!important;
+  background-color: rgba(0, 128, 0, 0.05) !important;
+  padding-left: 22px;
+}
+
+/* Active Dropdown Item */
+.dropdown-menu .dropdown-item.active {
+  color: rgba(5, 91, 189, 0.95) !important;
+  font-weight: 600;
+  background-color: rgba(0, 128, 0, 0.08) !important;
+  border-left: 4px solid rgba(5, 91, 189, 0.95);
+}
+
+/* ❌ Remove underline for NavDropdown toggle (Products) */
+.navbar-nav .dropdown-toggle::after {
+  display: none !important;
+}
+
+/* ❌ Remove custom underline effect for dropdown toggle */
+.navbar-nav .dropdown-toggle::before {
+  display: none !important;
+}
+
+/* 🔥 Completely disable animated underline for Products */
+.navbar-nav .dropdown-toggle::after,
+.navbar-nav .dropdown-toggle:hover::after,
+.navbar-nav .dropdown-toggle.active::after {
+  width: 0 !important;
+  height: 0 !important;
+}
+
+
+/*Gallery*/
+
+.gallery-box {
+  position: relative;
+  overflow: hidden;
+  border-radius: 15px;
+  cursor: pointer;
+}
+
+.gallery-box img {
+  width: 100%;
+  height: 250px;
+  object-fit: cover;
+  transition: transform 0.5s ease;
+}
+
+.gallery-box:hover img {
+  transform: scale(1.1);
+}
+
+.overlay {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  background: rgba(0, 0, 0, 0.6);
+  color: white;
+  text-align: center;
+  padding: 15px;
+  transform: translateY(100%);
+  transition: transform 0.5s ease;
+}
+
+.gallery-box:hover .overlay {
+  transform: translateY(0);
+}
+
+/* image zoom*/
+
+.image-hover {
+  position: relative;
+  overflow: hidden;
+  border-radius: 20px;
+}
+
+.image-hover img {
+  transition: transform 0.6s ease;
+}
+
+.image-hover:hover img {
+  transform: scale(1.1);
+}
+
+/* all products */
+
+.product-title {
+  letter-spacing: 1px;
+  position: relative;
+}
+
+.product-card {
+  border-radius: 20px;
+  overflow: hidden;
+  transition: 0.4s ease;
+  background: #ffffff;
+}
+
+.product-card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+}
+
+.img-wrapper {
+  height: 170px;
+  overflow: hidden;
+}
+
+.img-wrapper img {
+  height: 100%;
+  width: 100%;
+  object-fit: cover;
+  transition: 0.4s ease;
+}
+
+.product-card:hover img {
+  transform: scale(1.1);
+}
+
+.price {
+  color: #2e7d32;
+  font-weight: 600;
+  margin-bottom: 10px;
+}
+
+.add-btn {
+  background: linear-gradient(45deg, #2e7d32, #66bb6a);
+  border: none;
+  padding: 6px 18px;
+  border-radius: 50px;
+  font-size: 13px;
+  transition: 0.3s ease;
+}
+
+.add-btn:hover {
+  background: linear-gradient(45deg, #1b5e20, #43a047);
+}
+
+/* Auth */
+
+.auth-bg {
+  min-height: 100vh;
+  background: linear-gradient(135deg, #141e30, #243b55);
+  display: flex;
+  align-items: center;
+}
+
+.auth-card {
+  border-radius: 25px;
+  backdrop-filter: blur(20px);
+  background: rgba(255, 255, 255, 0.08);
+  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.3);
+  padding: 30px;
+}
+
+.custom-input {
+  border-radius: 50px;
+  padding: 12px 20px;
+  border: none;
+  background: rgba(255, 255, 255, 0.15);
+  color: white;
+}
+
+.custom-input::placeholder {
+  color: #ddd;
+}
+
+.custom-input:focus {
+  box-shadow: 0 0 0 2px #4fc3f7;
+  background: rgba(255, 255, 255, 0.2);
+  color: white;
+}
+
+.eye-icon {
+  position: absolute;
+  right: 15px;
+  top: 10px;
+  color: #ccc;
+  cursor: pointer;
+}
+
+.auth-btn {
+  border-radius: 50px;
+  padding: 10px;
+  font-weight: 600;
+  border: none;
+  background: linear-gradient(45deg, #00c6ff, #0072ff);
+  transition: 0.3s ease;
+}
+
+.auth-btn:hover {
+  transform: scale(1.05);
+  background: linear-gradient(45deg, #0072ff, #00c6ff);
+}
+
+.toggle-link {
+  cursor: pointer;
+  font-weight: 600;
+  color: #4fc3f7;
+}
+
+.toggle-link:hover {
+  text-decoration: underline;
+}
+
+
+/*Cart*/
+
+
+.cart-title {
+  letter-spacing: 1px;
+}
+
+.cart-card {
+  border-radius: 15px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.06);
+  transition: 0.3s ease;
+}
+
+.cart-card:hover {
+  transform: translateY(-4px);
+}
+
+.cart-img {
+  width: 90px;
+  height: 90px;
+  object-fit: cover;
+  border-radius: 12px;
+}
+
+.qty-box {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-top: 8px;
+}
+
+.qty-number {
+  font-weight: 600;
+  font-size: 16px;
+}
+
+.remove-btn {
+  border-radius: 50%;
+  width: 38px;
+  height: 38px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: 0.3s;
+}
+
+.remove-btn:hover {
+  background-color: #ff4d4f;
+  color: white;
+}
+
+.summary-card {
+  border-radius: 18px;
+  padding: 10px;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
+  position: sticky;
+  
+}
+
+.empty-cart-box {
+  padding: 60px 20px;
+  border-radius: 20px;
+  background: linear-gradient(135deg, #f8f9fa, #ffffff);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+}
+
+/* Checkout Buttons */
+.indian-checkout-btn {
+  background: linear-gradient(45deg, #ff9933, #138808);
+  border: none;
+  font-weight: 600;
+  padding: 12px;
+  border-radius: 10px;
+  transition: 0.3s ease;
+}
+
+.indian-checkout-btn:hover {
+  transform: scale(1.04);
+  opacity: 0.9;
+}
+
+.international-checkout-btn {
+  background: linear-gradient(45deg, #007bff, #00c6ff);
+  border: none;
+  font-weight: 600;
+  padding: 12px;
+  border-radius: 10px;
+  transition: 0.3s ease;
+}
+
+.international-checkout-btn:hover {
+  transform: scale(1.04);
+  opacity: 0.9;
+}
+
+/* Home */
+
+.hero-wrapper {
+  position: relative;
+}
+
+.hero-img {
+  width: 100%;
+  height: 500px;
+  object-fit: cover;
+}
+
+/* 🔥 DARK GRADIENT OVERLAY */
+.hero-dark-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    rgba(0, 0, 0, 0.35),
+    rgba(0, 0, 0, 0.35)
+  );
+}
+
+/* Text Layer */
+.hero-overlay {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  text-align: center;
+  z-index: 2;
+  width: 90%;
+}
+
+.hero-title {
+  color: white;
+  font-size: 3rem;
+  font-weight: 700;
+  text-shadow: 2px 4px 15px rgba(0, 0, 0, 0.8);
+}
+
+.hero-subtitle {
+  color: #f1f1f1;
+  font-size: 1.2rem;
+}
+
+.hero-btn {
+  background: linear-gradient(135deg, #138808, #28a745, #20c997);
+  background-size: 200% 200%;
+  color: #fff;
+  border: none;
+  padding: 14px 32px;
+  font-weight: 600;
+  font-size: 16px;
+  border-radius: 50px; /* pill shape */
+  cursor: pointer;
+  transition: all 0.4s ease-in-out;
+  box-shadow: 0 8px 20px rgba(0, 128, 0, 0.3);
+  position: relative;
+  overflow: hidden;
+}
+
+/* Gradient Animation */
+.hero-btn:hover {
+  background-position: right center;
+  transform: translateY(-4px) scale(1.05);
+  box-shadow: 0 12px 25px rgba(0, 128, 0, 0.4);
+}
+
+/* Click Effect */
+.hero-btn:active {
+  transform: scale(0.95);
+}
+.feature-box {
+  background: #f8f9fa;
+  padding: 30px;
+  border-radius: 15px;
+  transition: 0.3s;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.05);
+}
+
+.feature-box:hover {
+  transform: translateY(-8px);
+}
+
+.service-card {
+  padding: 25px;
+  border-radius: 15px;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.06);
+  transition: 0.3s;
+}
+
+.service-card img {
+  width: 90px;
+  height: 90px;
+  object-fit: cover;
+}
+
+.service-card:hover {
+  transform: translateY(-6px);
+}
+
+.product-card {
+  border-radius: 15px;
+  overflow: hidden;
+  transition: 0.3s;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.06);
+}
+
+.product-card:hover {
+  transform: scale(1.03);
+}
+
+.shop-btn {
+  background: black;
+  border: none;
+  padding: 12px 30px;
+  font-weight: 600;
+  border-radius: 8px;
+  transition: 0.3s;
+}
+
+.shop-btn:hover {
+  background: #333;
+  transform: scale(1.05);
+}
+/* Brand Colors (from your logo) */
+:root {
+  --brand-blue: #003b73;
+  --brand-red: #d62828;
+  --brand-green: #4caf50;
+}
+
+/* HERO */
+.brand-hero .hero-title {
+  color: #fff;
+  font-size: 3rem;
+  font-weight: 700;
+}
+
+.brand-hero .hero-subtitle {
+  color: #e8e8e8;
+  font-size: 1.3rem;
+}
+
+/* Buttons */
+.brand-btn {
+  background-color: var(--brand-red);
+  border: none;
+  padding: 10px 28px;
+  font-weight: 600;
+}
+.brand-btn:hover {
+  background-color: var(--brand-blue);
+}
+
+/* Section Titles */
+.brand-title {
+  border-bottom: 3px solid var(--brand-green);
+  padding-bottom: 8px;
+  display: inline-block;
+  color: var(--brand-blue);
+}
+
+/* Cards */
+.brand-card-hover {
+  transition: transform 0.25s, box-shadow 0.25s;
+}
+.brand-card-hover:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+}
+
+/* Brand text highlight */
+.brand-text {
+  color: var(--brand-red);
+  font-weight: 600;
+}

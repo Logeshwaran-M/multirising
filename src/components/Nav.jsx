@@ -1,121 +1,96 @@
-import { Navbar, Nav, Container } from "react-bootstrap";
+import { Navbar, Nav, Container, NavDropdown, Badge } from "react-bootstrap";
 import { FaUser, FaShoppingCart } from "react-icons/fa";
 import logo from "../assets/logo.png";
-import { Link } from "react-router-dom";
-import { NavLink } from "react-router-dom";
-import { NavDropdown } from "react-bootstrap";
+import { Link, NavLink, useLocation } from "react-router-dom";
+import { useState } from "react";
+import { useCart } from "../components/CartContext";   // 👈 import this
 
 const NavbarComponent = () => {
+  const [showDropdown, setShowDropdown] = useState(false);
+  const location = useLocation();
+
+  const { cartCount } = useCart();  // 👈 get count
+
+  const isProductActive =
+    location.pathname === "/products" ||
+    location.pathname === "/gallery" ||
+    location.pathname === "/facilities" ||
+    location.pathname === "/portfolio";
+
   return (
-    <Navbar expand="lg" className="shadow-sm border-bottom flex-column">
+    <Navbar expand="lg" className="shadow-sm border-bottom bg-white flex-column">
 
-      {/* 🔹 Row 1 → Logo + Icons */}
-      <Container className="d-flex align-items-center justify-content-between ">
-
-        {/* Empty div for left balance (optional) */}
+      <Container className="d-flex align-items-center justify-content-between py-2">
         <div style={{ width: "40px" }}></div>
 
-        {/* Center Logo */}
         <Navbar.Brand as={Link} to="/" className="mx-auto">
-          <img
-            src={logo}
-            alt="Company Logo"
-            height="90"
-          />
+          <img src={logo} alt="Company Logo" height="90" />
         </Navbar.Brand>
 
-        {/* Right Icons */}
-        <Nav className="d-flex flex-row gap-4">
-          <Nav.Link className="nav-link-custom">
+        <Nav className="d-flex flex-row gap-4 align-items-center">
+
+          <Nav.Link as={NavLink} to="/auth" className="icon-hover">
             <FaUser size={20} />
           </Nav.Link>
-          <Nav.Link className="nav-link-custom">
-            <FaShoppingCart size={20} />
-          </Nav.Link>
-        </Nav>
 
+          {/* 🛒 Cart Icon With Badge */}
+          <Nav.Link as={NavLink} to="/cart" className="icon-hover position-relative">
+            <FaShoppingCart size={20} />
+
+            {cartCount > 0 && (
+              <Badge
+                bg="danger"
+                pill
+                className="position-absolute top-0 start-100 translate-middle"
+                style={{ fontSize: "10px" }}
+              >
+                {cartCount}
+              </Badge>
+            )}
+          </Nav.Link>
+
+        </Nav>
       </Container>
 
-      {/* 🔹 Row 2 → Center Links */}
+      {/* Second Row (Keep Your Existing Code) */}
       <Container>
-        <Navbar.Toggle aria-controls="basic-navbar-nav" />
-        <Navbar.Collapse
-          id="basic-navbar-nav"
-          className="justify-content-center pb-3"
-        >
-          <Nav>
-            <Nav.Link
-              as={NavLink}
-              to="/"
-              className={({ isActive }) =>
-                isActive
-                  ? "custom-link active-link px-4"
-                  : "custom-link nav-link-custom px-4"
-              }
-            >
+        <Navbar.Toggle />
+        <Navbar.Collapse className="justify-content-center pb-3">
+          <Nav className="fw-semibold">
+            <Nav.Link as={NavLink} to="/" className="nav-item-custom px-4">
               MRE Finds
             </Nav.Link>
-        <NavDropdown
-  title="Products"
-  id="products-dropdown"
-  className="px-4 custom-link-dropdown"
->
-  <NavDropdown.Item
-    as={NavLink}
-    to="/products"
-    className={({ isActive }) =>
-      isActive
-        ? "custom-link active-link px-3"
-        : "custom-link nav-link-custom px-3"
-    }
-  >
-    All Products
-  </NavDropdown.Item>
-  <NavDropdown.Item
-    as={NavLink}
-    to="/facilities"
-    className={({ isActive }) =>
-      isActive
-        ? "custom-link active-link px-3"
-        : "custom-link nav-link-custom px-3"
-    }
-  >
-  Facilities
-  </NavDropdown.Item>
-  <NavDropdown.Item
-    as={NavLink}
-    to="/portfolio"
-    className={({ isActive }) =>
-      isActive
-        ? "custom-link active-link px-3"
-        : "custom-link nav-link-custom px-3"
-    }
-  >
-   Product Portfolio
-  </NavDropdown.Item>
-</NavDropdown>
-            <Nav.Link
-              as={NavLink}
-              to="/abroad"
-              className={({ isActive }) =>
-                isActive
-                  ? "custom-link active-link px-4"
-                  : "custom-link nav-link-custom px-4"
-              }
+
+            <NavDropdown
+              title="Products"
+              id="products-dropdown"
+              className="px-4 nav-item-custom"
+              show={showDropdown}
+              onMouseEnter={() => setShowDropdown(true)}
+              onMouseLeave={() => setShowDropdown(false)}
             >
+              <NavDropdown.Item as={NavLink} to="/products">
+                All Products
+              </NavDropdown.Item>
+              <NavDropdown.Item as={NavLink} to="/gallery">
+                Gallery
+              </NavDropdown.Item>
+              <NavDropdown.Item as={NavLink} to="/facilities">
+                Facilities
+              </NavDropdown.Item>
+              <NavDropdown.Item as={NavLink} to="/portfolio">
+                Product Portfolio
+              </NavDropdown.Item>
+            </NavDropdown>
+
+            <Nav.Link as={NavLink} to="/abroad" className="nav-item-custom px-4">
               Send Bulk Gifts to Abroad
             </Nav.Link>
-            <Nav.Link
-              as={NavLink}
-              to="/about"
-              className={({ isActive }) =>
-                isActive
-                  ? "custom-link active-link px-4"
-                  : "custom-link nav-link-custom px-4"
-              }
-            >
+
+            <Nav.Link as={NavLink} to="/about" className="nav-item-custom px-4">
               About Us
             </Nav.Link>
+
           </Nav>
         </Navbar.Collapse>
       </Container>

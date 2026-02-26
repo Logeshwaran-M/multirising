@@ -1,23 +1,29 @@
 import { Container, Row, Col } from "react-bootstrap";
 import { FaPhone, FaEnvelope, FaMapMarkerAlt } from "react-icons/fa";
+import logo from "../assets/logo.png"; // add your logo path
+import "./css/footer.css"
 
 const Footer = () => {
   return (
-    <footer className="bg-dark text-light pt-5 pb-3">
+    <footer className="footer-section pt-5 pb-3">
       <Container>
         <Row>
 
           {/* Company Info */}
           <Col md={4} className="mb-4">
-            <h5 className="fw-bold mb-3">Multirising Exports</h5>
-            <p className="text-muted">
-              We manufacture and export premium quality areca palm leaf
-              products that are eco-friendly, biodegradable, and
-              chemical-free. Promoting sustainable living worldwide.
-            </p>
+          <div >
+              <img 
+              className="bg-light footer-logo "
+                src={logo} 
+                alt="Multirising Exports Logo" 
+                style={{ width: "245px", marginRight: "10px" }} 
+              />
+          </div>
+          <p className="footer-text mt-2">
+  Premium eco-friendly areca leaf products for a sustainable future.
+</p>
           </Col>
 
-        
           {/* Contact Info */}
           <Col md={4} className="mb-4">
             <h5 className="fw-bold mb-3">Contact Us</h5>
@@ -25,6 +31,7 @@ const Footer = () => {
             <p><FaPhone className="me-2" /> +91 76192 10277</p>
           </Col>
 
+          {/* Address */}
           <Col md={4} className="mb-4">
             <h5 className="fw-bold mb-3">Address</h5>
             <p><FaMapMarkerAlt className="me-2" /> Karnataka, India</p>
@@ -32,7 +39,7 @@ const Footer = () => {
 
         </Row>
 
-        <hr className="border-secondary" />
+        <hr className="footer-line" />
 
         <div className="text-center">
           <small>

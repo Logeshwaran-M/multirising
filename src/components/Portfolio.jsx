@@ -1,5 +1,7 @@
 import heroImage from "../assets/palm.jpg"; // your background image
-import { Navbar, Nav, Container } from "react-bootstrap";
+ import { Container, Row, Col } from "react-bootstrap";
+ import eco from "../assets/eco.jpg"
+ import tining from "../assets/tining.webp"
 
 const PortfolioBanner = () => {
   return (<>
@@ -40,7 +42,7 @@ const PortfolioBanner = () => {
       </div>
     </section>
            <Container className="text-center py-5  rounded-4 ">
-        <h2 className="fw-bold mb-3 text-primary">
+       <h2 className="fw-bold  d-inline-block border-bottom border-3 border-primary pb-2">
          Product Portfolio
         </h2>
         <p className="text-muted mb-0 px-md-5">
@@ -55,10 +57,21 @@ const PortfolioBanner = () => {
       </Container>
 
 
-         <Container className="py-5">
-      <h3 className="fw-bold mb-4 text-center text-primary">Our Eco-Friendly Process</h3>
+    
 
-      <ul className="list-group  shadow-sm rounded-3">
+<Container className="py-5">
+  <Row className="align-items-center">
+
+    {/* Left Side Image */}
+   
+
+    {/* Right Side Content */}
+    <Col md={6}>
+      <h3 className="fw-bold d-inline-block border-bottom border-3 border-primary pb-2">
+        Our Eco-Friendly Process
+      </h3>
+
+      <ul className="list-group shadow-sm rounded-3 mt-3">
         <li className="list-group-item border-0 py-3">
           🌿 Naturally fallen areca palm leaves are collected
         </li>
@@ -69,7 +82,20 @@ const PortfolioBanner = () => {
           🌿 No chemicals, coatings, or additives are used
         </li>
       </ul>
-    </Container>
+    </Col>
+
+     <Col md={6} className="mb-4 mb-md-0">
+      <img
+        src={eco}
+       style={{ height: "350px", objectFit: "cover", width: "70%" }}
+        alt="Eco Friendly Process"
+        className="img-fluid rounded"
+      />
+    </Col>
+
+  </Row>
+</Container>
+   
 
     <div class="container my-5">
   <div class="table-responsive">
@@ -107,28 +133,66 @@ const PortfolioBanner = () => {
   </div>
 </div>
 
-      <Container className="py-5">
-      <h3 className="fw-bold mb-4 text-center text-primary">Uses</h3>
+<Container className="py-5">
+  <Row className="align-items-center">
 
-      <ul className="list-group shadow-sm rounded-4">
+    {/* Image with Text Overlay */}
+    <Col md={6}>
+      <div style={{ position: "relative" }}>
+        <img
+          src={tining}
+          alt="Areca plates usage"
+          className="img-fluid rounded shadow"
+          style={{ height: "350px", objectFit: "cover", width: "100%" }}
+        />
+
+        {/* Overlay */}
+        <div
+          style={{
+            position: "absolute",
+            top: 0,
+            left: 0,
+            width: "100%",
+            height: "100%",
+            background: "rgba(0,0,0,0.5)",
+            borderRadius: "8px",
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
+            textAlign: "center",
+            color: "white",
+            padding: "20px"
+          }}
+        >
+          <div>
+            <h3 className="fw-bold">Eco-Friendly Uses</h3>
+            <p>Perfect for Events, Catering & Sustainable Dining</p>
+          </div>
+        </div>
+      </div>
+    </Col>
+
+    {/* Right Side Content */}
+    <Col md={6}>
+
+      <ul className="list-group shadow-sm rounded-4 mt-3">
         <li className="list-group-item border-0 py-3">
-          <strong>Parties and Events:</strong> Perfect for serving food at birthdays, weddings, family gatherings, sustainable home use, and religious functions.
+          <strong>Parties and Events:</strong> Perfect for birthdays, weddings, family gatherings, and religious functions.
         </li>
-
         <li className="list-group-item border-0 py-3">
-          <strong>Catering Services:</strong> A sustainable option for catering businesses looking to reduce their environmental impact.
+          <strong>Catering Services:</strong> Sustainable option for catering businesses.
         </li>
-
         <li className="list-group-item border-0 py-3">
-          <strong>Everyday Use:</strong> Great for picnics, barbecues, and outdoor dining where disposable tableware is needed.
+          <strong>Everyday Use:</strong> Great for picnics, barbecues, and outdoor dining.
         </li>
-
         <li className="list-group-item border-0 py-3">
-          <strong>Restaurants & Eco-Conscious Cafés:</strong> Ideal for businesses promoting sustainable dining solutions.
+          <strong>Restaurants & Eco Cafés:</strong> Ideal for eco-conscious dining businesses.
         </li>
       </ul>
-    </Container>
+    </Col>
 
+  </Row>
+</Container>
     
      </> 
   );

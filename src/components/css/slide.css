@@ -1,0 +1,28 @@
+.top-scroll-bar {
+  background: linear-gradient(90deg, #1f4037,  #1f4037);
+  overflow: hidden;
+  white-space: nowrap;
+  padding: 12px 0;
+}
+
+.scroll-content {
+  display: flex;
+  width: max-content;
+  animation: scroll 20s linear infinite;
+}
+
+.scroll-item {
+  margin-right: 60px;
+  font-weight: 500;
+  color: white;
+  font-size: 15px;
+}
+
+@keyframes scroll {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
