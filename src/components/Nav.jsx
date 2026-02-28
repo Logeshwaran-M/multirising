@@ -18,7 +18,7 @@ const NavbarComponent = () => {
     location.pathname === "/portfolio";
 
   return (
-    <Navbar expand="lg" className="shadow-sm border-bottom bg-white flex-column">
+    <Navbar expand="lg" className="shadow-sm border-bottom bg-white flex-column ">
 
       <Container className="d-flex align-items-center justify-content-between py-2">
         <div style={{ width: "40px" }}></div>
@@ -82,7 +82,9 @@ const NavbarComponent = () => {
                 Product Portfolio
               </NavDropdown.Item>
             </NavDropdown>
-
+             <Nav.Link as={NavLink} to="/process" className="nav-item-custom px-4">
+             Process
+            </Nav.Link>
             <Nav.Link as={NavLink} to="/abroad" className="nav-item-custom px-4">
               Send Bulk Gifts to Abroad
             </Nav.Link>

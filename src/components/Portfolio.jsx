@@ -102,9 +102,9 @@ const PortfolioBanner = () => {
     <table class="table table-bordered text-center align-middle">
       <thead class="table-light">
         <tr>
-          <th>Features</th>
-          <th>Areca Leaf Plates</th>
-          <th>Plastic/Styrofoam</th>
+          <th className="text-success">Features</th>
+          <th className="text-success">Areca Leaf Plates</th>
+          <th className="text-success">Plastic/Styrofoam</th>
         </tr>
       </thead>
       <tbody>

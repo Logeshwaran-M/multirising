@@ -1,26 +1,25 @@
 import { Container, Row, Col, Card, Button } from "react-bootstrap";
 import { useCart } from "../components/CartContext";
 import { toast } from "react-toastify";
-import "../components/css/slide.css"
-
-const products = [
-  { id: 1, name: "Round Plate 10 inch", price: 120, image: "https://images.unsplash.com/photo-1607083206968-13611e3d76db?w=500" },
-  { id: 2, name: "Square Plate", price: 140, image: "https://images.unsplash.com/photo-1587049352846-4a222e784d38?w=500" },
-  { id: 3, name: "Leaf Bowl", price: 90, image: "https://images.unsplash.com/photo-1606312619344-3627b1f74b77?w=500" },
-  { id: 4, name: "Serving Tray", price: 180, image: "https://images.unsplash.com/photo-1542444459-db63c6c0a3c9?w=500" },
-];
+import { useNavigate } from "react-router-dom";
+import { products } from "./produc"; // ✅ Import here
+import "../components/css/slide.css";
+import panner from "../assets/productPanner.jpeg"
 
 function Products() {
   const { addToCart } = useCart();
+  const navigate = useNavigate();
 
-  const handleAdd = (product) => {
+  const handleAdd = (product, e) => {
+    e.stopPropagation();
     addToCart(product);
     toast.success("✅ Product Added to Cart!");
   };
 
-  return (
-<>
-<div className="top-scroll-bar">
+  return (<>
+
+  <img src={panner} alt=""  style={{height:"380px",width:"100%"}}/>
+  <div className="top-scroll-bar mt-3">
   <div className="scroll-content">
 
     <div className="scroll-item">🌿 100% Natural Areca Leaf Plates</div>
@@ -40,14 +39,17 @@ function Products() {
 
   </div>
 </div>
-    
     <Container className="py-5 text-center">
-      <h2 className="fw-bold mb-4">🌿 Our Eco Products</h2>
+        <h2 className="fw-bold brand-title">🌿 Our Eco Products</h2>
 
       <Row className="g-4">
         {products.map((product) => (
           <Col key={product.id} xs={6} md={3}>
-            <Card className="h-100 shadow-sm border-0 rounded-4">
+            <Card
+              className="h-100 shadow-sm border-0 rounded-4"
+              style={{ cursor: "pointer" }}
+              onClick={() => navigate(`/product/${product.id}`)}
+            >
               <Card.Img
                 variant="top"
                 src={product.image}
@@ -61,7 +63,7 @@ function Products() {
                 <Button
                   variant="success"
                   className="mt-auto rounded-pill"
-                  onClick={() => handleAdd(product)}
+                  onClick={(e) => handleAdd(product, e)}
                 >
                   Add to Cart
                 </Button>

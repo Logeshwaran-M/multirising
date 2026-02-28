@@ -5,47 +5,65 @@
 
 .scroll-track {
   display: flex;
-  animation: scroll 5s linear infinite;
+  gap: 40px; /* space between items */
+  animation: scroll 10s linear infinite;
 }
 
-/* Each Country Box */
+.scroll-track > * {
+  flex-shrink: 0;
+}
+
+/* Country item */
 .country-item {
   display: flex;
+  flex-direction: column;
   align-items: center;
-  gap: 12px;             /* gap between image and text */
-  margin-right: 60px;    /* gap between countries */
+  gap: 8px;
 }
 
-/* Smaller Image */
+/* Image */
 .scroll-image {
-  width: 60px;           /* smaller size */
-  height: 40px;
+  width: 80px;
+  height: 50px;
   object-fit: cover;
   border-radius: 6px;
 }
 
-/* Country Text */
+/* Country name */
 .country-name {
   font-weight: 600;
+  font-size: 14px;
   color: #333;
-  font-size: 15px;
 }
 
-/* Smooth Infinite Scroll */
+/* Smooth infinite scroll */
 @keyframes scroll {
   0% {
     transform: translateX(0);
   }
   100% {
-    transform: translateX(-50%);
+    transform: translateX(-50%); /* scroll exactly half of the total duplicated items */
   }
 }
 
-.hover-card {
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
+.hero-section {
+  width: 100%;
+  max-width: 1200px; /* limits the width */
+  margin: 0 auto; /* center horizontally */
+  height: 300px; /* smaller height */
+  overflow: hidden;
+  border-radius: 15px; /* optional rounded corners */
+  box-shadow: 0 4px 12px rgba(0,0,0,0.2); /* optional shadow */
 }
 
-.hover-card:hover {
-  transform: translateY(-8px);
-  box-shadow: 0 1rem 2rem rgba(0, 0, 0, 0.15) !important;
+.hero-section .hero-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover; /* scales the image nicely */
+  transition: transform 0.5s ease;
+}
+
+/* optional subtle zoom on hover */
+.hero-section:hover .hero-img {
+  transform: scale(1.05);
 }

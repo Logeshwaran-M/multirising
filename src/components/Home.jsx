@@ -1,7 +1,7 @@
 import { Container, Row, Col, Button, Card } from "react-bootstrap";
 import { FaWhatsapp } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
-import heroImage from "../assets/hero.jpeg";
+import heroImage from "../assets/hero.png";
 import service1 from "../assets/fsdelivery.jpg";
 import service2 from "../assets/premium.webp";
 import service3 from "../assets/exports.jpg";
@@ -17,7 +17,7 @@ const HeroSection = () => {
   const navigate = useNavigate();
 
   return (
-    <section>
+    <section className="home-page">
 
       {/* HERO WITH OVERLAY */}
       <div className="hero-wrapper brand-hero">
@@ -60,6 +60,12 @@ const HeroSection = () => {
           Multirising Exports delivers premium Areca leaf plates worldwide.
           Our eco-friendly plates are made using only water, heat, and pressure.
           No chemicals. No tree cutting. Just sustainable nature-friendly products.
+          Areca catechu (areca palm tree). They’re also commonly called areca leaf plates or palm leaf plates.
+           Areca leaf plates are an earth conscious choice for single-use disposables. 
+           There have no chemical polish or wax finish on the plates just pure palm leaf.
+            Unlike wood plates, no trees are ever cut down  using only water, heat, and pressure in the manufacturing process.  
+            With a woodlike appearance, areca leaf plates add a touch of nature to any dining experience, making them a 
+            great substitute  during formal and casual events.
         </p>
       </Container>
 
@@ -75,10 +81,10 @@ const HeroSection = () => {
               <Card className="product-card shadow-sm border-0 brand-card-hover">
                 <Card.Img
                   variant="top"
-                  src="https://images.unsplash.com/photo-1607083206968-13611e3d76db?w=600"
+                  src="https://agrileaf.in/wp-content/uploads/2024/04/7xm.xyz288434-1280x821.jpg"
                 />
                 <Card.Body>
-                  <h6 className="fw-bold brand-text">Areca Leaf Plate</h6>
+                  <h6 className="fw-bold text-success">Areca Leaf Plate</h6>
                   <p className="text-muted">Eco-friendly disposable plate</p>
                 </Card.Body>
               </Card>
@@ -110,9 +116,9 @@ const HeroSection = () => {
         <Row className="g-4 mt-3">
           {[service1, service2, service3].map((img, i) => (
             <Col md={4} key={i}>
-              <div className="service-card shadow-sm p-3 brand-card-hover">
+              <div className="service-card shadow-sm p-3 brand-card-hover bg-light">
                 <img src={img} alt="" className="rounded" />
-                <h5 className="fw-bold mt-3 brand-text">
+                <h5 className="fw-bold mt-3 text-success">
                   {i === 0
                     ? "Fast Delivery"
                     : i === 1
@@ -153,7 +159,7 @@ const HeroSection = () => {
   <Col md={4}>
     <div className="feature-box p-4 shadow-sm brand-card-hover h-100">
       <img src={leaf} alt="Eco Friendly" style={{ width: "180px" }} />
-      <h5 className="mt-3 brand-text">🌱 100% Natural & Eco-Friendly</h5>
+      <h5 className="mt-3 text-success">🌱 100% Natural & Eco-Friendly</h5>
       <p className="text-muted">
         Our products are made from naturally fallen Areca leaves.
         No chemicals, no plastic, no tree cutting — completely
@@ -170,7 +176,7 @@ const HeroSection = () => {
   <Col md={4}>
     <div className="feature-box p-4 shadow-sm brand-card-hover h-100">
       <img src={iso} alt="Export Quality" style={{ width: "180px" }} />
-      <h5 className="mt-3 brand-text">🌍 International Export Standards</h5>
+      <h5 className="mt-3 text-success">🌍 International Export Standards</h5>
       <p className="text-muted">
         Manufactured under strict hygiene and quality control
         processes to meet global export requirements.
@@ -186,7 +192,7 @@ const HeroSection = () => {
   <Col md={4}>
     <div className="feature-box p-4 shadow-sm brand-card-hover h-100">
       <img src={support} alt="Trusted" style={{ width: "230px" }} />
-      <h5 className="mt-3 brand-text">🤝 Trusted by Global Clients</h5>
+      <h5 className="mt-3 text-success">🤝 Trusted by Global Clients</h5>
       <p className="text-muted">
         We serve restaurants, wholesalers, and distributors
         worldwide with reliable service and long-term partnerships.

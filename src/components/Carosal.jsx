@@ -26,11 +26,14 @@ const countries = [
 ];
 
 const MultiImageCarousel = () => {
+  // Duplicate the array for continuous scroll
+  const continuousCountries = [...countries, ...countries];
+
   return (
-    <Container className="my-5 overflow-hidden">
+    <Container className="my-5">
       <div className="scroll-wrapper">
         <div className="scroll-track">
-          {countries.concat(countries).map((country, index) => (
+          {continuousCountries.map((country, index) => (
             <div key={index} className="country-item">
               <img
                 src={country.img}

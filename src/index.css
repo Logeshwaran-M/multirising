@@ -1,3 +1,15 @@
+.home-page {
+  background-color: #F5F1E9
+}
+body{
+   background-color: #F5F1E9
+}
+body {
+  margin: 0;
+  padding: 0;
+}
+
+
 /* ================= NAVBAR BRAND ================= */
 .navbar-brand {
   text-align: center;
@@ -562,3 +574,6 @@
   color: var(--brand-red);
   font-weight: 600;
 }
+
+
+

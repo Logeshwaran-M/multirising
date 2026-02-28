@@ -12,6 +12,9 @@ import Auth from "./components/Auth";
 import Cart from "./components/Cart";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import ProductDetails from "./components/ProductDetails";
+import DeliveryForm from "./components/DeliveryForm";
+import ArecaLifecycle from "./components/Process";
 
 
 // Dummy pages (create these files)
@@ -30,8 +33,11 @@ function App() {
         <Route path="/auth"  element={<Auth/>}/>
 
         <Route path="/cart" element={<Cart/>}/>
+          <Route path="/DeliveryForm" element={<DeliveryForm/>}/>
+
         {/* Products Page */}
-         <Route path="/products" element={<AllProducts/>} /> 
+         <Route path="/products" element={<AllProducts/>} />
+           <Route path="/product/:id" element={<ProductDetails />} /> 
 
         {/* Portfolio Page */}
         <Route path="/portfolio" element={<PortfolioBanner />} />
@@ -39,6 +45,7 @@ function App() {
         <Route path="/facilities" element={<Facilities/>}/>
 
         <Route path="/gallery" element={<PhotoGallery/>}/>
+        <Route path="/process" element={<ArecaLifecycle/>}/>
 
         <Route path="/abroad" element={<CountriesSection/>}/>
 

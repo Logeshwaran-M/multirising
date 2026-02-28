@@ -46,7 +46,7 @@ export default function About(){
       {/* 🔹 About Content Section */}
       <section className="py-5">
         <div className="text-center rounded-4">
-          <h2 className="fw-bold  d-inline-block border-bottom border-3 border-primary pb-2">About Us</h2>
+          <h2 className="fw-bold brand-title">About Us</h2>
           <p className="text-muted px-md-5">
            At Multirising Exports, we are committed to delivering eco-friendly and sustainable alternatives to traditional disposable tableware. Our premium areca palm leaf products are crafted from naturally fallen leaves, ensuring zero harm to trees and the environment.
 
@@ -68,7 +68,7 @@ At Multirising Exports, sustainability is not just a product feature — it is o
 
           <Col md={6}>
             <div className="mb-4">
-             <h4 className="fw-bold  d-inline-block border-bottom border-3 border-primary pb-2">Our Quality Assurance</h4>
+            <h4 className="fw-bold brand-title">Our Quality Assurance</h4>
               <p className="text-muted">
                Being a quality oriented firm, we channelize all our efforts and endeavors to maintain consistent quality in our entire areca palm leafes.We assure that the offered products 
                are hygienically processed in adherence to the international standards of quality
@@ -76,7 +76,7 @@ At Multirising Exports, sustainability is not just a product feature — it is o
             </div>
 
             <div>
-             <h4 className="fw-bold  d-inline-block border-bottom border-3 border-primary pb-2">Client Satisfaction</h4>
+            <h4 className="fw-bold brand-title">Client Satisfaction</h4>
               <p className="text-muted">
                We are a client conscious organization that strives hard to provide the clients maximum level of contentment. Our industry experts maintain close proximity with the clients to comprehend their exact requirements and accordingly provide desired products. By following ethical business policies and maintain a level of transparency in all our dealings, we have been able to retain our clients with repetitive orders. Owing to timely delivery, easy payment options, qualitative gamut
                 and competitive pricing, we have become the ideal choice of our valuable clients.
