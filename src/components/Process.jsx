@@ -4,6 +4,11 @@ import { FaLeaf, FaHandHolding, FaIndustry, FaCheckCircle } from "react-icons/fa
 import "../components/css/ArecaLifecycle.css";
 import AOS from "aos";
 import { useEffect } from "react";
+import cut from "../assets/process/cut.png"
+import collect from "../assets/process/collect.png"
+import dry from "../assets/process/dry.png"
+import pack from "../assets/process/pack.png"
+import wash from "../assets/process/wash.png"
 
 
 const lifecycleSteps = [
@@ -21,18 +26,42 @@ const lifecycleSteps = [
     title: "LEAVES COLLECTION",
     description:
       "Leaves are manually collected with care, ensuring only perfect natural leaves are transported.",
-    image: "https://www.arecaleafplates.com/assets/images/process/collection_of_fallen_areca_leaf.webp",
+    image: collect
   },
+  {
+  id: 5,
+  icon: <FaLeaf />,
+  title: "SUN DRYING PROCESS",
+  description:
+    "Collected leaves are naturally sun-dried to remove moisture while preserving strength and texture.",
+  image: dry
+},
+{
+  id: 6,
+  icon: <FaIndustry />,
+  title: "CUTTING & TRIMMING",
+  description:
+    "Dried leaves are precisely trimmed and cut into required sizes before molding begins.",
+  image: cut
+},
   {
     id: 3,
     icon: <FaIndustry />,
     title: "ECO-MANUFACTURING",
     description:
       "Leaves are washed, steam-pressed and heat-molded into durable shapes — 100% chemical-free.",
-      image: "https://rsmarecaplates.com/infrastructure/machine.jpg",
+      image: wash,
     
   },
-  {
+{
+  id: 7,
+  icon: <FaHandHolding />,
+  title: "HEAT PRESS MOLDING",
+  description:
+    "Leaves are pressed under high temperature molds to form plates, bowls, and trays with strong durability.",
+  image: "https://rsmarecaplates.com/infrastructure/machine.jpg"
+},
+ {
     id: 4,
     icon: <FaCheckCircle />,
     title: "QUALITY CONTROL",
@@ -40,6 +69,14 @@ const lifecycleSteps = [
       "Each product undergoes UV sterilization and strict quality checks before packaging.",
     image: "https://miro.medium.com/v2/resize:fit:736/1*jVc9zOREBsCNFMcqzZCJhg.jpeg",
   },
+{
+  id: 8,
+  icon: <FaCheckCircle />,
+  title: "PACKAGING & DISPATCH",
+  description:
+    "Finished products are hygienically packed and dispatched to retailers and export markets.",
+  image: pack
+}
 ];
 
 function ArecaLifecycle() {
@@ -52,7 +89,7 @@ function ArecaLifecycle() {
   });
 }, []);
   return (
-    <section className="areca-section">
+    <section className="areca-section"  style={{paddingTop:"40px"}}>
       <Container className="py-5">
         <h2 className="text-center lifecycle-title mb-5">
           🌿 Sustainable Life Cycle of Areca Leaf Plates

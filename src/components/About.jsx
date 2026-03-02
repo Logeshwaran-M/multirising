@@ -11,12 +11,14 @@ export default function About(){
       {/* 🔹 Hero Section Only */}
       <section
         style={{
+          paddingTop:'40px',
           backgroundImage: `url(${heroImage})`,
           backgroundSize: "cover",
           backgroundPosition: "center",
           height: "300px",
           position: "relative",
         }}
+        className="home-page"
       >
         <div
           style={{
@@ -31,23 +33,37 @@ export default function About(){
             textAlign: "center",
           }}
         >
-          <h1 className="fw-bold">ABOUT US</h1>
-          <div
-            style={{
-              width: "60px",
-              height: "3px",
-              backgroundColor: "white",
-              margin: "10px auto",
-            }}
-          ></div>
+         <h1 className="fw-bold" data-aos="fade-down">
+  ABOUT US
+</h1>
+
+<div
+  style={{
+    width: "60px",
+    height: "3px",
+    backgroundColor: "white",
+    margin: "10px auto",
+  }}
+  data-aos="fade-up"
+></div>
         </div>
       </section>
 
       {/* 🔹 About Content Section */}
       <section className="py-5">
         <div className="text-center rounded-4">
-          <h2 className="fw-bold brand-title">About Us</h2>
-          <p className="text-muted px-md-5">
+        <h2
+  className="fw-bold brand-title"
+  data-aos="fade-up"
+>
+  About Us
+</h2>
+
+<p
+  className="text-muted px-md-5"
+  data-aos="fade-up"
+  data-aos-delay="200"
+>
            At Multirising Exports, we are committed to delivering eco-friendly and sustainable alternatives to traditional disposable tableware. Our premium areca palm leaf products are crafted from naturally fallen leaves, ensuring zero harm to trees and the environment.
 
 We specialize in manufacturing high-quality biodegradable plates, bowls, and trays that are durable, chemical-free, and completely compostable. Every product is carefully washed and heat-pressed without the use of any chemicals, coatings, or additives, preserving the natural strength and texture of the leaf.
@@ -62,11 +78,15 @@ At Multirising Exports, sustainability is not just a product feature — it is o
       {/* 🔹 Quality Section */}
       <Container className="py-5">
         <Row className="align-items-center">
-          <Col md={6} className="mb-4 mb-md-0">
-            <Image src={plate} fluid rounded className="shadow" />
-          </Col>
+       <Col
+  md={6}
+  className="mb-4 mb-md-0"
+  data-aos="fade-right"
+>
+  <Image src={plate} fluid rounded className="shadow" />
+</Col>
 
-          <Col md={6}>
+        <Col md={6} data-aos="fade-left">
             <div className="mb-4">
             <h4 className="fw-bold brand-title">Our Quality Assurance</h4>
               <p className="text-muted">

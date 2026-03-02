@@ -1,12 +1,15 @@
 .home-page {
-  background-color: #F5F1E9
+  background: linear-gradient(135deg, #f4fff6, #e3f5e9);
 }
 body{
-   background-color: #F5F1E9
+   background: linear-gradient(135deg, #f4fff6, #e3f5e9);
 }
 body {
   margin: 0;
   padding: 0;
+}
+body {
+  padding-top: 140px;
 }
 
 
@@ -401,6 +404,18 @@ body {
 
 .hero-wrapper {
   position: relative;
+  height: 500px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+
+.hero-overlay {
+  position: absolute;
+  z-index: 2;
+  width: 100%;
+  padding: 0 20px;
 }
 
 .hero-img {
@@ -420,15 +435,7 @@ body {
 }
 
 /* Text Layer */
-.hero-overlay {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  text-align: center;
-  z-index: 2;
-  width: 90%;
-}
+
 
 .hero-title {
   color: white;
@@ -442,28 +449,10 @@ body {
   font-size: 1.2rem;
 }
 
-.hero-btn {
-  background: linear-gradient(135deg, #138808, #28a745, #20c997);
-  background-size: 200% 200%;
-  color: #fff;
-  border: none;
-  padding: 14px 32px;
-  font-weight: 600;
-  font-size: 16px;
-  border-radius: 50px; /* pill shape */
-  cursor: pointer;
-  transition: all 0.4s ease-in-out;
-  box-shadow: 0 8px 20px rgba(0, 128, 0, 0.3);
-  position: relative;
-  overflow: hidden;
-}
+
 
 /* Gradient Animation */
-.hero-btn:hover {
-  background-position: right center;
-  transform: translateY(-4px) scale(1.05);
-  box-shadow: 0 12px 25px rgba(0, 128, 0, 0.4);
-}
+
 
 /* Click Effect */
 .hero-btn:active {

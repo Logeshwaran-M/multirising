@@ -1,7 +1,12 @@
 import heroImage from "../assets/palm.jpg"; // your background image
 import { Container,Row,Col } from "react-bootstrap";
+import AOS from "aos";
+import { useEffect } from "react";
 
 export default function Facilities(){
+
+
+ 
     return(<>
 
      <section
@@ -12,6 +17,7 @@ export default function Facilities(){
         height: "300px",
         position: "relative",
       }}
+      className="home-page"
     >
       {/* Dark Overlay */}
       <div
@@ -27,27 +33,37 @@ export default function Facilities(){
           textAlign: "center",
         }}
       >
-        <h1 className="fw-bold">FACILITIES</h1>
+     <h1 className="fw-bold" data-aos="fade-down">
+  FACILITIES
+</h1>
 
         {/* Small underline */}
-        <div
-          style={{
-            width: "60px",
-            height: "3px",
-            backgroundColor: "white",
-            margin: "10px auto",
-          }}
-        ></div>
+       <div
+  style={{
+    width: "60px",
+    height: "3px",
+    backgroundColor: "white",
+    margin: "10px auto",
+  }}
+  data-aos="fade-up"
+></div>
       </div>
     </section>
 
     <Container className="py-5">
   <Row className="text-center mb-4">
     <Col>
-      <h2 className="fw-bold border-bottom border-3 border-success d-inline-block pb-2">
-        Our Facilities
-      </h2>
-      <p className="text-muted mt-3 px-md-5">
+      <h2
+  className="fw-bold border-bottom border-3 border-success d-inline-block pb-2"
+  data-aos="fade-up"
+>
+  Our Facilities
+</h2>
+     <p
+  className="text-muted mt-3 px-md-5"
+  data-aos="fade-up"
+  data-aos-delay="200"
+>
         Multirising Exports operates with advanced infrastructure and strict
         quality control systems to ensure premium-grade eco-friendly products
         for global markets.
@@ -58,7 +74,11 @@ export default function Facilities(){
   <Row className="g-4">
 
     <Col md={4}>
-      <div className="p-4 shadow-sm rounded-4 bg-light h-100">
+      <div
+  className="p-4 shadow-sm rounded-4 bg-light h-100"
+  data-aos="fade-up"
+  data-aos-delay="100"
+>
         <h5 className="fw-bold">🏭 Modern Manufacturing Unit</h5>
         <p className="text-muted">
           Equipped with advanced heat-press technology to produce durable,
@@ -68,7 +88,11 @@ export default function Facilities(){
     </Col>
 
     <Col md={4}>
-      <div className="p-4 shadow-sm rounded-4 bg-light h-100">
+   <div
+  className="p-4 shadow-sm rounded-4 bg-light h-100"
+  data-aos="fade-up"
+  data-aos-delay="200"
+>
         <h5 className="fw-bold">🧪 Quality Control Lab</h5>
         <p className="text-muted">
           Every batch is inspected for strength, finish, hygiene, and
@@ -78,7 +102,11 @@ export default function Facilities(){
     </Col>
 
     <Col md={4}>
-      <div className="p-4 shadow-sm rounded-4 bg-light h-100">
+    <div
+  className="p-4 shadow-sm rounded-4 bg-light h-100"
+  data-aos="fade-up"
+  data-aos-delay="300"
+>
         <h5 className="fw-bold">📦 Hygienic Packaging Unit</h5>
         <p className="text-muted">
           Products are packed in moisture-resistant, eco-safe packaging
@@ -88,7 +116,11 @@ export default function Facilities(){
     </Col>
 
     <Col md={4}>
-      <div className="p-4 shadow-sm rounded-4 bg-light h-100">
+   <div
+  className="p-4 shadow-sm rounded-4 bg-light h-100"
+  data-aos="fade-up"
+  data-aos-delay="400"
+>
         <h5 className="fw-bold">🌍 Export & Logistics Support</h5>
         <p className="text-muted">
           Strong supply chain network enabling timely delivery to multiple
@@ -98,7 +130,11 @@ export default function Facilities(){
     </Col>
 
     <Col md={4}>
-      <div className="p-4 shadow-sm rounded-4 bg-light h-100">
+    <div
+  className="p-4 shadow-sm rounded-4 bg-light h-100"
+  data-aos="fade-up"
+  data-aos-delay="500"
+>
         <h5 className="fw-bold">🌱 Sustainable Sourcing</h5>
         <p className="text-muted">
           Naturally fallen areca leaves are sourced responsibly, ensuring zero
@@ -108,7 +144,11 @@ export default function Facilities(){
     </Col>
 
     <Col md={4}>
-      <div className="p-4 shadow-sm rounded-4 bg-light h-100">
+     <div
+  className="p-4 shadow-sm rounded-4 bg-light h-100"
+  data-aos="fade-up"
+  data-aos-delay="600"
+>
         <h5 className="fw-bold">👷 Skilled Workforce</h5>
         <p className="text-muted">
           Experienced team dedicated to maintaining quality, precision and
@@ -137,8 +177,12 @@ export default function Facilities(){
 
     {/* Image 1 */}
     <Col md={6}>
-      <div style={{ position: "relative" }}>
-         <div className="image-hover shadow-lg">
+     <div style={{ position: "relative" }}>
+     
+   <div
+  className="image-hover shadow-lg"
+  data-aos="zoom-in-right"
+>
          <img
     src="https://images.unsplash.com/photo-1555244162-803834f70033?w=800"
     alt=""
@@ -170,7 +214,10 @@ export default function Facilities(){
     {/* Image 2 */}
     <Col md={6}>
       <div style={{ position: "relative" }}>
-       <div className="image-hover shadow-lg">
+     <div
+  className="image-hover shadow-lg"
+  data-aos="zoom-in-left"
+>
   <img
     src="https://static.vecteezy.com/system/resources/thumbnails/039/001/632/original/eco-friendly-tableware-set-on-a-wooden-table-video.jpg"
     alt=""

@@ -17,9 +17,14 @@ function Products() {
   };
 
   return (<>
-
-  <img src={panner} alt=""  style={{height:"380px",width:"100%"}}/>
-  <div className="top-scroll-bar mt-3">
+ 
+ <img 
+  src={panner} 
+  alt=""  
+  style={{height:"380px",width:"100%",paddingTop:"40px"}}
+  data-aos="fade-down"
+/>
+  <div className="top-scroll-bar mt-3" data-aos="fade-up">
   <div className="scroll-content">
 
     <div className="scroll-item">🌿 100% Natural Areca Leaf Plates</div>
@@ -39,12 +44,44 @@ function Products() {
 
   </div>
 </div>
+
+    <Container className="py-5 my-3 card rounded-4">
+  <Row className="text-center">
+   <Col md={3} data-aos="fade-up" data-aos-delay="100">
+      <h2 className="fw-bold text-success">500K+</h2>
+      <p>Plates Produced Monthly</p>
+    </Col>
+    <Col md={3} data-aos="fade-up" data-aos-delay="200">
+      <h2 className="fw-bold text-success">25+</h2>
+      <p>Product Variants</p>
+    </Col>
+    <Col md={3} data-aos="fade-up" data-aos-delay="300">
+      <h2 className="fw-bold text-success">10+</h2>
+      <p>Export Countries</p>
+    </Col>
+    <Col md={3} data-aos="fade-up" data-aos-delay="400">
+      <h2 className="fw-bold text-success">100%</h2>
+      <p>Eco-Friendly Commitment</p>
+    </Col>
+  </Row>
+</Container>
     <Container className="py-5 text-center">
-        <h2 className="fw-bold brand-title">🌿 Our Eco Products</h2>
+       <h2 
+  className="fw-bold brand-title"
+  data-aos="fade-up"
+>
+  🌿 Our Eco Products
+</h2>
 
       <Row className="g-4">
-        {products.map((product) => (
-          <Col key={product.id} xs={6} md={3}>
+       {products.map((product, index) => (
+  <Col 
+    key={product.id} 
+    xs={6} 
+    md={3}
+    data-aos="zoom-in"
+    data-aos-delay={index * 100}
+  >
             <Card
               className="h-100 shadow-sm border-0 rounded-4"
               style={{ cursor: "pointer" }}

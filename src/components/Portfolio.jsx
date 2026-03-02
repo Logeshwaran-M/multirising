@@ -2,32 +2,44 @@ import heroImage from "../assets/palm.jpg"; // your background image
  import { Container, Row, Col } from "react-bootstrap";
  import eco from "../assets/eco.jpg"
  import tining from "../assets/tining.webp"
+ import { useEffect } from "react";
+ import AOS from "aos";
 
 const PortfolioBanner = () => {
+
+  useEffect(() => {
+  AOS.init({
+    duration: 1000,
+    once: true,
+    easing: "ease-in-out",
+  });
+}, []);
   return (<>
     <section
       style={{
+        paddingTop:"40px",
         backgroundImage: `url(${heroImage})`,
         backgroundSize: "cover",
         backgroundPosition: "center",
         height: "300px",
         position: "relative",
-      }}
+      }} className="home-page"
     >
       {/* Dark Overlay */}
-      <div
-        style={{
-          backgroundColor: "rgba(0,0,0,0.5)",
-          height: "100%",
-          width: "100%",
-          display: "flex",
-          flexDirection: "column",
-          justifyContent: "center",
-          alignItems: "center",
-          color: "white",
-          textAlign: "center",
-        }}
-      >
+    <div
+  data-aos="zoom-in"
+  style={{
+    backgroundColor: "rgba(0,0,0,0.5)",
+    height: "100%",
+    width: "100%",
+    display: "flex",
+    flexDirection: "column",
+    justifyContent: "center",
+    alignItems: "center",
+    color: "white",
+    textAlign: "center",
+  }}
+>
         <h1 className="fw-bold">PRODUCT PORTFOLIO</h1>
 
         {/* Small underline */}
@@ -41,7 +53,10 @@ const PortfolioBanner = () => {
         ></div>
       </div>
     </section>
-           <Container className="text-center py-5  rounded-4 ">
+        <Container
+  className="text-center py-5 rounded-4"
+  data-aos="fade-up"
+>
        <h2 className="fw-bold  d-inline-block border-bottom border-3 border-primary pb-2">
          Product Portfolio
         </h2>
@@ -59,8 +74,8 @@ const PortfolioBanner = () => {
 
     
 
-<Container className="py-5">
-  <Row className="align-items-center">
+<Container className="py-5 card " >
+  <Row className="align-items-center" data-aos="fade-right">
 
     {/* Left Side Image */}
    
@@ -84,7 +99,7 @@ const PortfolioBanner = () => {
       </ul>
     </Col>
 
-     <Col md={6} className="mb-4 mb-md-0">
+    <Col md={6} className="mb-4 mb-md-0" data-aos="zoom-in" data-aos-delay="200">
       <img
         src={eco}
        style={{ height: "350px", objectFit: "cover", width: "70%" }}
@@ -95,12 +110,49 @@ const PortfolioBanner = () => {
 
   </Row>
 </Container>
+
+
+
+<Container className="py-5 text-center">
+  <h3 className="fw-bold border-bottom border-3 border-success d-inline-block pb-2">
+    Why Choose Our Areca Products?
+  </h3>
+
+  <Row className="mt-4">
+ <Col md={4} data-aos="fade-up" data-aos-delay="100">
+      <div className="p-4 shadow rounded-4 h-100 bg-light">
+        <h5>🌍 100% Biodegradable</h5>
+        <p className="text-muted">
+          Completely decomposes within 60–90 days without harming the environment.
+        </p>
+      </div>
+    </Col>
+
+    <Col md={4} data-aos="fade-up" data-aos-delay="300">
+      <div className="p-4 shadow rounded-4 bg-light h-100">
+        <h5>🔥 Heat & Liquid Resistant</h5>
+        <p className="text-muted">
+          Suitable for hot curries, soups, and oily foods without leakage.
+        </p>
+      </div>
+    </Col>
+
+    <Col md={4} data-aos="fade-up" data-aos-delay="500">
+      <div className="p-4 shadow rounded-4 bg-light h-100">
+        <h5>🌱 Chemical Free</h5>
+        <p className="text-muted">
+          No polish, wax, bleach, or synthetic additives used.
+        </p>
+      </div>
+    </Col>
+  </Row>
+</Container>
    
 
-    <div class="container my-5">
-  <div class="table-responsive">
-    <table class="table table-bordered text-center align-middle">
-      <thead class="table-light">
+  <div className="container my-5" data-aos="fade-up">
+  <div className="table-responsive">
+    <table className="table table-bordered text-center align-middle">
+      <thead className="table-light">
         <tr>
           <th className="text-success">Features</th>
           <th className="text-success">Areca Leaf Plates</th>
@@ -137,7 +189,7 @@ const PortfolioBanner = () => {
   <Row className="align-items-center">
 
     {/* Image with Text Overlay */}
-    <Col md={6}>
+<Col md={6} data-aos="fade-right">
       <div style={{ position: "relative" }}>
         <img
           src={tining}
@@ -173,7 +225,7 @@ const PortfolioBanner = () => {
     </Col>
 
     {/* Right Side Content */}
-    <Col md={6}>
+   <Col md={6} data-aos="fade-left">
 
       <ul className="list-group shadow-sm rounded-4 mt-3">
         <li className="list-group-item border-0 py-3">

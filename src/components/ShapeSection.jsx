@@ -5,6 +5,8 @@ import trays from "../assets/Trays.png";
 import spoons from "../assets/spoons.png";
 import compartment from "../assets/compartment.png";
 import bowl from "../assets/Bowls.png";
+import AOS from "aos";
+import { useEffect } from "react";
 
 const products = [
   { title: "Round Plates (6”–12”)", img: round },
@@ -16,8 +18,16 @@ const products = [
 ];
 
 export default function ShapesSection() {
+   useEffect(() => {
+    AOS.init({
+      duration: 1000,
+      once: true,
+      easing: "ease-in-out",
+    });
+  }, []);
+  
   return (
-    <section className="py-5 bg-light text-center">
+    <section className="py-5 bg-light text-center home-page">
       <Container>
         <div className="mb-5">
                <h2 className="fw-bold brand-title">
@@ -32,12 +42,10 @@ export default function ShapesSection() {
           {products.map((item, index) => (
             <Col md={4} sm={6} key={index}>
               <Card
-                className="border-0 shadow-sm h-100 product-card"
-                style={{
-                  transition: "all 0.3s ease",
-                  cursor: "pointer",
-                }}
-              >
+  className="product-card shadow-sm border-0 brand-card-hover"
+  data-aos="fade-up"
+  data-aos-delay={item * 200}
+>
                 <div style={{ overflow: "hidden" }}>
                   <Card.Img
                     variant="top"

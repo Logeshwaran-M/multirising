@@ -22,7 +22,7 @@ const PhotoGallery = () => {
   ];
 
   return (
-    <div className="container my-5">
+    <div className="container my-5 "  style={{paddingTop:"40px"}}>
       <div className="row g-4">
         {images.map((item, index) => (
           <div className="col-md-3 col-sm-6" key={index}>

@@ -15,6 +15,9 @@ import "react-toastify/dist/ReactToastify.css";
 import ProductDetails from "./components/ProductDetails";
 import DeliveryForm from "./components/DeliveryForm";
 import ArecaLifecycle from "./components/Process";
+import AOS from "aos";
+import "aos/dist/aos.css";
+import { useEffect } from "react";
 
 
 // Dummy pages (create these files)
@@ -22,6 +25,13 @@ import ArecaLifecycle from "./components/Process";
 
 
 function App() {
+
+  useEffect(() => {
+  AOS.init({
+    duration: 1000, // animation speed
+    once: true,     // animation happens only once
+  });
+}, []);
   return (
     <>
      <ToastContainer position="top-right" autoClose={1500} />

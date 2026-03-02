@@ -18,16 +18,18 @@ const NavbarComponent = () => {
     location.pathname === "/portfolio";
 
   return (
-    <Navbar expand="lg" className="shadow-sm border-bottom bg-white flex-column ">
+    <Navbar expand="lg"   fixed="top"   className="shadow-sm border-bottom bg-white flex-lg-column home-page">
 
       <Container className="d-flex align-items-center justify-content-between py-2">
-        <div style={{ width: "40px" }}></div>
+        <div style={{ width: "200px" }}></div>
 
         <Navbar.Brand as={Link} to="/" className="mx-auto">
           <img src={logo} alt="Company Logo" height="90" />
         </Navbar.Brand>
 
-        <Nav className="d-flex flex-row gap-4 align-items-center">
+      <div className="d-flex align-items-center ms-auto">
+  <Nav className="d-flex flex-row gap-3 align-items-center">
+
 
           <Nav.Link as={NavLink} to="/auth" className="icon-hover">
             <FaUser size={20} />
@@ -48,13 +50,17 @@ const NavbarComponent = () => {
               </Badge>
             )}
           </Nav.Link>
+          <div>
+                <Navbar.Toggle  />
+          </div>
 
         </Nav>
+        </div>
       </Container>
 
       {/* Second Row (Keep Your Existing Code) */}
       <Container>
-        <Navbar.Toggle />
+        
         <Navbar.Collapse className="justify-content-center pb-3">
           <Nav className="fw-semibold">
             <Nav.Link as={NavLink} to="/" className="nav-item-custom px-4">
@@ -94,6 +100,7 @@ const NavbarComponent = () => {
             </Nav.Link>
 
           </Nav>
+         
         </Navbar.Collapse>
       </Container>
 

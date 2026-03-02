@@ -42,23 +42,39 @@ const CountriesSection = () => {
     <div className="home-page">
       {/* 🔹 Banner */}
       <div className="position-relative">
-        <img
-          src={banner}
-          alt="Send Gifts Worldwide"
-          className="w-100"
-          style={{ height: "450px", objectFit: "cover" }}
-        />
+       <img
+  src={banner}
+  alt="Send Gifts Worldwide"
+  className="w-100"
+  style={{ height: "450px", objectFit: "cover" }}
+  data-aos="fade-down"
+/>
       </div>
 
       {/* 🔹 Countries Scroll */}
-      <MultiImageCarousel />
+    <div data-aos="fade-up">
+  <MultiImageCarousel />
+</div>
 
       {/* 🔹 Products */}
       <Container className="my-5 text-center">
-         <h2 className="fw-bold brand-title mb-4">Our Premium Products</h2>
+      <h2
+  className="fw-bold brand-title mb-4"
+  data-aos="fade-up"
+>
+  Our Premium Products
+</h2>
         <Row>
-          {products.map((product) => (
-            <Col key={product.id} lg={3} md={4} sm={6} className="mb-4">
+          {products.map((product, index) => (
+  <Col
+    key={product.id}
+    lg={3}
+    md={4}
+    sm={6}
+    className="mb-4"
+    data-aos="zoom-in"
+    data-aos-delay={index * 100}
+  >
               <Card className="h-100 shadow-sm border-0 rounded-4 hover-card">
                 <Card.Img
                   variant="top"
@@ -86,10 +102,17 @@ const CountriesSection = () => {
 
       {/* 🔹 Frames in single row */}
       <div className="p-2  text-center">
-         <h2 className="fw-bold brand-title">
+         <h2
+  className="fw-bold brand-title"
+  data-aos="fade-up"
+>
           How We Make Your International Shopping Easy
         </h2>
-        <p className="text-center mb-4 text-muted">
+        <p
+  className="text-center mb-4 text-muted"
+  data-aos="fade-up"
+  data-aos-delay="200"
+>
           Step-by-step process to get your favorite products delivered worldwide
         </p>
 
@@ -101,12 +124,14 @@ const CountriesSection = () => {
             padding: "10px 0",
           }}
         >
-          {images.map((item, index) => (
-            <Card
-              key={index}
-              className="shadow-lg border-0 rounded-4 text-center hover-card"
-              style={{ minWidth: "200px", flex: "0 0 auto" }}
-            >
+        {images.map((item, index) => (
+  <Card
+    key={index}
+    className="shadow-lg border-0 rounded-4 text-center hover-card"
+    style={{ minWidth: "200px", flex: "0 0 auto" }}
+    data-aos="flip-left"
+    data-aos-delay={index * 150}
+  >
               <Card.Img
                 variant="top"
                 src={item.url}

@@ -19,7 +19,7 @@ function ProductDetails() {
   };
 
   return (
-    <Container className="py-5">
+    <Container className="py-5 home-page">
       <Row>
         <Col md={6}>
           <Image src={product.image} fluid rounded />

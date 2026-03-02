@@ -12,19 +12,29 @@ import leaf from "../assets/leaf.jpg";
 import '../components/css/home.css'
 import frame from "../assets/frame1.png"
 import frame2 from "../assets/frame2.png"
+import { useEffect } from "react";
+import AOS from "aos";
 
 const HeroSection = () => {
   const navigate = useNavigate();
+
+  useEffect(() => {
+  AOS.init({
+    duration: 1000,
+    once: true,
+    easing: "ease-in-out",
+  });
+}, []);
 
   return (
     <section className="home-page">
 
       {/* HERO WITH OVERLAY */}
-      <div className="hero-wrapper brand-hero">
+      <div className="hero-wrapper brand-hero ">
         <img src={heroImage} alt="Hero" className="hero-img" />
         <div className="hero-dark-overlay"></div>
 
-        <div className="hero-overlay text-center">
+        <div className="hero-overlay text-center" data-aos="zoom-in">
           <h1 className="hero-title">
             Premium Areca Leaf Products
           </h1>
@@ -40,6 +50,8 @@ const HeroSection = () => {
         </div>
       </div>
 
+      
+
   <a
   href="https://wa.me/919999999999"
   className="whatsapp-float"
@@ -52,7 +64,7 @@ const HeroSection = () => {
 
 
       {/* ABOUT SECTION */}
-      <Container className="text-center py-5">
+      <Container className="text-center py-5" data-aos="fade-up">
         <h2 className="fw-bold brand-title">
           Welcome To Multirising Exports
         </h2>
@@ -78,7 +90,11 @@ const HeroSection = () => {
         <Row className="g-4 mt-3">
           {[1, 2, 3].map((item) => (
             <Col md={4} key={item}>
-              <Card className="product-card shadow-sm border-0 brand-card-hover">
+           <Card
+  className="product-card shadow-sm border-0 brand-card-hover"
+  data-aos="fade-up"
+  data-aos-delay={item * 200}
+>
                 <Card.Img
                   variant="top"
                   src="https://agrileaf.in/wp-content/uploads/2024/04/7xm.xyz288434-1280x821.jpg"
@@ -100,12 +116,11 @@ const HeroSection = () => {
         </Button>
       </Container>
 
-      <Container fluid className="p-0">
+     <Container fluid className="p-0">
   <img
     src={frame}
     alt="Banner"
-    className="w-100"
-    style={{ height: "350px", objectFit: "cover" }}
+    className="frame-banner"
   />
 </Container>
 
@@ -115,7 +130,7 @@ const HeroSection = () => {
 
         <Row className="g-4 mt-3">
           {[service1, service2, service3].map((img, i) => (
-            <Col md={4} key={i}>
+         <Col md={4} key={i} data-aos="fade-up" data-aos-delay={i * 200}>
               <div className="service-card shadow-sm p-3 brand-card-hover bg-light">
                 <img src={img} alt="" className="rounded" />
                 <h5 className="fw-bold mt-3 text-success">
@@ -141,12 +156,11 @@ const HeroSection = () => {
       <ShapesSection />
 
 
-    <Container fluid className="p-0">
+ <Container fluid className="p-0">
   <img
     src={frame2}
     alt="Banner"
-    className="w-100"
-    style={{ height: "450px", objectFit: "cover" }}
+    className="frame-banner"
   />
 </Container>
       {/* WHY CHOOSE US */}
@@ -156,7 +170,7 @@ const HeroSection = () => {
  <Row className="g-4 mt-3">
 
   {/* 1 */}
-  <Col md={4}>
+ <Col md={4} data-aos="zoom-in" data-aos-delay="200">
     <div className="feature-box p-4 shadow-sm brand-card-hover h-100">
       <img src={leaf} alt="Eco Friendly" style={{ width: "180px" }} />
       <h5 className="mt-3 text-success">🌱 100% Natural & Eco-Friendly</h5>
@@ -173,7 +187,7 @@ const HeroSection = () => {
   </Col>
 
   {/* 2 */}
-  <Col md={4}>
+ <Col md={4} data-aos="zoom-in" data-aos-delay="200">
     <div className="feature-box p-4 shadow-sm brand-card-hover h-100">
       <img src={iso} alt="Export Quality" style={{ width: "180px" }} />
       <h5 className="mt-3 text-success">🌍 International Export Standards</h5>
@@ -189,7 +203,7 @@ const HeroSection = () => {
   </Col>
 
   {/* 3 */}
-  <Col md={4}>
+  <Col md={4} data-aos="zoom-in" data-aos-delay="200">
     <div className="feature-box p-4 shadow-sm brand-card-hover h-100">
       <img src={support} alt="Trusted" style={{ width: "230px" }} />
       <h5 className="mt-3 text-success">🤝 Trusted by Global Clients</h5>

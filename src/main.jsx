@@ -6,7 +6,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import { BrowserRouter } from 'react-router-dom';
 import { CartProvider } from "../src/components/CartContext.jsx";
 import "aos/dist/aos.css";
-import AOS from "aos";
+
 
 createRoot(document.getElementById('root')).render(
  <BrowserRouter>
