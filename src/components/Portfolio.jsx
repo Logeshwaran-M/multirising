@@ -161,7 +161,7 @@ const PortfolioBanner = () => {
       </thead>
       <tbody>
         <tr>
-           <td><b>Meterial</b></td>
+           <td><b>Material</b></td>
           <td>Fallen leaves (Renewable)</td>
           <td>Petroleum-based (Non-renewable)</td>
         </tr>
