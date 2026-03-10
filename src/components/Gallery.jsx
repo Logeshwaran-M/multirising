@@ -1,23 +1,45 @@
 import React from "react";
+import plate from "../assets/round.png"
+import eco from "../assets/leaf.jpg"
+import collect from "../assets/process/collect.png"
+import dry from "../assets/process/dry.png"
+import cut from "../assets/process/cut.png"
+import wash from "../assets/process/wash.png"
+import pack from "../assets/process/pack.png"
+
+
 
 
 const PhotoGallery = () => {
   const images = [
     {
-      url: "https://images.unsplash.com/photo-1607083206968-13611e3d76db?w=500",
-      text: "Add Product to Cart"
+      url: plate,
+      text: "Round Plate"
     },
     {
-      url: "https://images.unsplash.com/photo-1587049352846-4a222e784d38?w=500",
-      text: "Select International Address"
+      url: eco,
+      text: "Eco Friendly"
     },
     {
-      url: "https://images.unsplash.com/photo-1606312619344-3627b1f74b77?w=500",
-      text: "Add Delivery Address"
+      url: collect,
+      text: "Collecting Process"
     },
     {
-      url: "https://images.unsplash.com/photo-1542444459-db63c6c0a3c9?w=500",
-      text: "Pay with Indian Currency"
+      url: dry,
+      text: "Dry Process"
+    },
+
+     {
+      url: cut,
+      text: "Cutting Process"
+    },
+     {
+      url: wash,
+      text: "Washing Process"
+    },
+     {
+      url: pack,
+      text: "Packing Process"
     }
   ];
 

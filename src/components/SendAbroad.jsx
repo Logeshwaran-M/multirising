@@ -14,22 +14,22 @@ const CountriesSection = () => {
 
   const images = [
     { url: frame1, title: "Add Products to the Cart" },
+    { url: frame5, title: "Fast & Reliable Shipping WorldWide" },
     { url: frame2, title: "Select International Address" },
     { url: frame3, title: "Add Delivery Address" },
     { url: frame4, title: "Pay with Indian and Foreign Currency" },
-    { url: frame5, title: "Fast & Reliable Shipping WorldWide" },
+    
   ];
 
-  const products = [
-    { id: 1, name: "organic jaggery", price: 2499, image: "https://organest.co.in/wp-content/uploads/2020/06/blogimage4.png" },
-    { id: 2, name: "Tropical jackfruit", price: 599, image: "https://media.thenationaldigest.com/wp-content/uploads/2020/02/27164603/Tropical-Jackfruit-400x400-1.jpg" },
-    { id: 3, name: "Ice apple", price: 899, image: "https://healthturnedup.com/wp-content/uploads/2024/04/dc87edbf-f1f4-455c-bbca-af208302a179-1024x683.png" },
-    { id: 4, name: "Watermelon", price: 1299, image: "https://img.freepik.com/premium-photo/fresh-watermelon-slices-photo_863013-148801.jpg" },
-    { id: 5, name: "Festival Special Kit", price: 1999, image: "https://images.unsplash.com/photo-1607082348824-0a96f2a4b9da?w=500" },
-    { id: 6, name: "Dry Fruits Pack", price: 1499, image: "https://images.unsplash.com/photo-1615485290382-441e4d049cb5?w=500" },
-    { id: 7, name: "Aromatic Candle Set", price: 799, image: "https://images.unsplash.com/photo-1602874801006-9d8b6c1a5f63?w=500" },
-    { id: 8, name: "Luxury Tea Collection", price: 999, image: "https://images.unsplash.com/photo-1542444459-db63c6c0a3c9?w=500" },
-  ];
+ const products = [
+  { id: 1, name: "organic jaggery", price: 2499, image: "https://organest.co.in/wp-content/uploads/2020/06/blogimage4.png" },
+  { id: 2, name: "Tropical jackfruit", price: 599, image: "https://media.thenationaldigest.com/wp-content/uploads/2020/02/27164603/Tropical-Jackfruit-400x400-1.jpg" },
+  { id: 3, name: "Ice apple", price: 899, image: "https://healthturnedup.com/wp-content/uploads/2024/04/dc87edbf-f1f4-455c-bbca-af208302a179-1024x683.png" },
+  { id: 4, name: "Watermelon", price: 1299, image: "https://img.freepik.com/premium-photo/fresh-watermelon-slices-photo_863013-148801.jpg" },
+  { id: 5, name: "bamboo baskets", price: 1999, image: "https://i.etsystatic.com/25551155/r/il/8425f6/2634950095/il_1080xN.2634950095_dhjr.jpg" },
+  { id: 6, name: "chanpatna toys", price: 1499, image: "https://s7ap1.scene7.com/is/image/incredibleindia/channapatna-toys-and-dolls-Karnataka-1-craft-hero?qlt=82&ts=1726641410733" },
+ 
+];
 
   // Add to cart function with toast notification
   const handleAdd = (product, e) => {
@@ -42,39 +42,39 @@ const CountriesSection = () => {
     <div className="home-page">
       {/* 🔹 Banner */}
       <div className="position-relative">
-       <img
-  src={banner}
-  alt="Send Gifts Worldwide"
-  className="w-100"
-  style={{ height: "450px", objectFit: "cover" }}
-  data-aos="fade-down"
-/>
+        <img
+          src={banner}
+          alt="Send Gifts Worldwide"
+          className="w-100"
+          style={{ height: "450px", objectFit: "cover" }}
+          data-aos="fade-down"
+        />
       </div>
 
       {/* 🔹 Countries Scroll */}
-    <div data-aos="fade-up">
-  <MultiImageCarousel />
-</div>
+      <div data-aos="fade-up">
+        <MultiImageCarousel />
+      </div>
 
       {/* 🔹 Products */}
       <Container className="my-5 text-center">
-      <h2
-  className="fw-bold brand-title mb-4"
-  data-aos="fade-up"
->
-  Our Premium Products
-</h2>
+        <h2
+          className="fw-bold brand-title mb-4"
+          data-aos="fade-up"
+        >
+          Our Premium Products
+        </h2>
         <Row>
           {products.map((product, index) => (
-  <Col
-    key={product.id}
-    lg={3}
-    md={4}
-    sm={6}
-    className="mb-4"
-    data-aos="zoom-in"
-    data-aos-delay={index * 100}
-  >
+            <Col
+              key={product.id}
+              lg={3}
+              md={4}
+              sm={6}
+              className="mb-4"
+              data-aos="zoom-in"
+              data-aos-delay={index * 100}
+            >
               <Card className="h-100 shadow-sm border-0 rounded-4 hover-card">
                 <Card.Img
                   variant="top"
@@ -102,17 +102,17 @@ const CountriesSection = () => {
 
       {/* 🔹 Frames in single row */}
       <div className="p-2  text-center">
-         <h2
-  className="fw-bold brand-title"
-  data-aos="fade-up"
->
+        <h2
+          className="fw-bold brand-title"
+          data-aos="fade-up"
+        >
           How We Make Your International Shopping Easy
         </h2>
         <p
-  className="text-center mb-4 text-muted"
-  data-aos="fade-up"
-  data-aos-delay="200"
->
+          className="text-center mb-4 text-muted"
+          data-aos="fade-up"
+          data-aos-delay="200"
+        >
           Step-by-step process to get your favorite products delivered worldwide
         </p>
 
@@ -124,14 +124,14 @@ const CountriesSection = () => {
             padding: "10px 0",
           }}
         >
-        {images.map((item, index) => (
-  <Card
-    key={index}
-    className="shadow-lg border-0 rounded-4 text-center hover-card"
-    style={{ minWidth: "200px", flex: "0 0 auto" }}
-    data-aos="flip-left"
-    data-aos-delay={index * 150}
-  >
+          {images.map((item, index) => (
+            <Card
+              key={index}
+              className="shadow-lg border-0 rounded-4 text-center hover-card"
+              style={{ minWidth: "200px", flex: "0 0 auto" }}
+              data-aos="flip-left"
+              data-aos-delay={index * 150}
+            >
               <Card.Img
                 variant="top"
                 src={item.url}

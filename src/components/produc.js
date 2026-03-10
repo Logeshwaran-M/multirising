@@ -1,34 +1,10 @@
 export const products = [
-  {
-    id: 1,
-    name: "Round Plate 10 inch",
-    price: 120,
-    image: "https://images.unsplash.com/photo-1607083206968-13611e3d76db?w=500",
-    description:
-      "Premium eco-friendly areca leaf product. 100% biodegradable, microwave safe, and perfect for catering.",
-  },
-  {
-    id: 2,
-    name: "Square Plate",
-    price: 140,
-    image: "https://images.unsplash.com/photo-1587049352846-4a222e784d38?w=500",
-    description:
-      "Stylish square plate made from sustainable materials. Ideal for home and events.",
-  },
-  {
-    id: 3,
-    name: "Leaf Bowl",
-    price: 90,
-    image: "https://images.unsplash.com/photo-1606312619344-3627b1f74b77?w=500",
-    description:
-      "Eco-friendly leaf bowl, lightweight, and 100% biodegradable. Perfect for salads or snacks.",
-  },
-  {
-    id: 4,
-    name: "Serving Tray",
-    price: 180,
-    image: "https://images.unsplash.com/photo-1542444459-db63c6c0a3c9?w=500",
-    description:
-      "Durable serving tray made from natural leaves. Great for parties and gatherings.",
-  },
+  { id: 1, name: "organic jaggery", price: 2499, image: "https://organest.co.in/wp-content/uploads/2020/06/blogimage4.png" },
+  { id: 2, name: "Tropical jackfruit", price: 599, image: "https://media.thenationaldigest.com/wp-content/uploads/2020/02/27164603/Tropical-Jackfruit-400x400-1.jpg" },
+  { id: 3, name: "Ice apple", price: 899, image: "https://healthturnedup.com/wp-content/uploads/2024/04/dc87edbf-f1f4-455c-bbca-af208302a179-1024x683.png" },
+  { id: 4, name: "Watermelon", price: 1299, image: "https://img.freepik.com/premium-photo/fresh-watermelon-slices-photo_863013-148801.jpg" },
+  { id: 5, name: "bamboo baskets", price: 1999, image: "https://i.etsystatic.com/25551155/r/il/8425f6/2634950095/il_1080xN.2634950095_dhjr.jpg" },
+  { id: 6, name: "chanpatna toys", price: 1499, image: "https://s7ap1.scene7.com/is/image/incredibleindia/channapatna-toys-and-dolls-Karnataka-1-craft-hero?qlt=82&ts=1726641410733" },
+ 
 ];
+
