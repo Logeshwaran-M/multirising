@@ -7,6 +7,7 @@ import { useCart } from "../components/CartContext";
 import i18n from "../i18n";
 import { signOut } from "firebase/auth";
 import { auth } from "../firebase";
+import UserMenu from "./UserMenu";
 
 const NavbarComponent = () => {
   const [showDropdown, setShowDropdown] = useState(false);
@@ -46,23 +47,14 @@ const NavbarComponent = () => {
 
             {/* USER LOGIN / DROPDOWN */}
             {user ? (
-              <NavDropdown
-                title={<FaUser size={20} />}
-                id="user-dropdown"
-                align="end"
-              >
-                <NavDropdown.ItemText>
-                  <strong>{user.name}</strong>
-                  <br />
-                  <small>{user.email}</small>
-                </NavDropdown.ItemText>
-
-                <NavDropdown.Divider />
-
-                <NavDropdown.Item onClick={handleLogout}>
-                  Logout
-                </NavDropdown.Item>
-              </NavDropdown>
+        <NavDropdown
+  title={<FaUser size={20} />}
+  id="user-dropdown"
+  align="end"
+  className="user-dropdown"
+>
+  <UserMenu />
+</NavDropdown>
             ) : (
               <Nav.Link as={NavLink} to="/auth" className="icon-hover">
                 <FaUser size={20} />

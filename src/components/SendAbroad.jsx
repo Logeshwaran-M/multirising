@@ -8,9 +8,11 @@ import frame4 from "../assets/Frame4.png";
 import frame5 from "../assets/Frame5.png";
 import { useCart } from "../components/CartContext"; // ✅ Use Cart Context
 import { toast } from "react-toastify";
+import { useNavigate } from "react-router-dom";
 
 const CountriesSection = () => {
-  const { addToCart } = useCart(); // ✅ Cart function
+  const { addToCart, cartItems } = useCart(); // ✅ Cart function
+   const navigate = useNavigate();
 
   const images = [
     { url: frame1, title: "Add Products to the Cart" },
@@ -75,7 +77,13 @@ const CountriesSection = () => {
               data-aos="zoom-in"
               data-aos-delay={index * 100}
             >
-              <Card className="h-100 shadow-sm border-0 rounded-4 hover-card">
+            <Card
+  className="h-100 shadow-sm border-0 rounded-4 hover-card"
+  onClick={() =>
+    navigate(`/product/${product.id}`, { state: { checkout: "international" } })
+  }
+   style={{ cursor: "pointer" }}
+>
                 <Card.Img
                   variant="top"
                   src={product.image}
@@ -86,13 +94,26 @@ const CountriesSection = () => {
                   <Card.Text className="fw-bold text-primary fs-5">
                     ₹{product.price}
                   </Card.Text>
-                  <Button
-                    variant="success"
-                    className="mt-auto rounded-pill"
-                    onClick={(e) => handleAdd(product, e)}
-                  >
-                    Add to Cart
-                  </Button>
+                 <Button
+  variant={cartItems.some((item) => item.id === product.id) ? "outline-primary" : "outline-success"}
+  className="mt-auto rounded-pill"
+  onClick={(e) => {
+    e.stopPropagation();
+
+    const isInCart = cartItems.some((item) => item.id === product.id);
+
+    if (isInCart) {
+      navigate("/cart");
+    } else {
+      addToCart(product);
+      toast.success(`✅ ${product.name} added to cart!`);
+    }
+  }}
+>
+  {cartItems.some((item) => item.id === product.id)
+    ? "View Cart"
+    : "Add to Cart"}
+</Button>
                 </Card.Body>
               </Card>
             </Col>

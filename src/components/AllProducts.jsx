@@ -1,5 +1,5 @@
 import { Container, Row, Col, Card, Button } from "react-bootstrap";
-import { useCart } from "../components/CartContext";
+import { useCart } from "./CartContext";
 import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
 import { products } from "./produc"; // ✅ Import here
@@ -7,7 +7,7 @@ import "../components/css/slide.css";
 import panner from "../assets/productPanner.jpeg"
 
 function Products() {
-  const { addToCart } = useCart();
+  const { addToCart,cartItems } = useCart();
   const navigate = useNavigate();
 
   const handleAdd = (product, e) => {
@@ -82,11 +82,13 @@ function Products() {
     data-aos="zoom-in"
     data-aos-delay={index * 100}
   >
-            <Card
-              className="h-100 shadow-sm border-0 rounded-4"
-              style={{ cursor: "pointer" }}
-              onClick={() => navigate(`/product/${product.id}`)}
-            >
+           <Card
+  className="h-100 shadow-sm border-0 rounded-4"
+  style={{ cursor: "pointer" }}
+  onClick={() =>
+    navigate(`/product/${product.id}`, { state: { checkout: "india" } })
+  }
+>
               <Card.Img
                 variant="top"
                 src={product.image}
@@ -97,13 +99,24 @@ function Products() {
                 <h6>{product.name}</h6>
                 <p className="fw-bold text-success">₹{product.price}</p>
 
-                <Button
-                  variant="success"
-                  className="mt-auto rounded-pill"
-                  onClick={(e) => handleAdd(product, e)}
-                >
-                  Add to Cart
-                </Button>
+              <Button
+  variant={cartItems.some((item) => item.id === product.id) ? "outline-primary" : "outline-success"}
+  className="mt-auto rounded-pill"
+  onClick={(e) => {
+    e.stopPropagation();
+
+    const isInCart = cartItems.some((item) => item.id === product.id);
+
+    if (isInCart) {
+      navigate("/cart");
+    } else {
+      addToCart(product);
+      toast.success("✅ Product Added to Cart!");
+    }
+  }}
+>
+  {cartItems.some((item) => item.id === product.id) ? "View Cart" : "Add to Cart"}
+</Button>
               </Card.Body>
             </Card>
           </Col>

@@ -18,6 +18,9 @@ import ArecaLifecycle from "./components/Process";
 import AOS from "aos";
 import "aos/dist/aos.css";
 import { useEffect } from "react";
+import CheckoutIndia from "./components/checkoutpages/IndianCheckout";
+import CheckoutInternational from "./components/checkoutpages/InternationalCheckout";
+import MyOrders from "./components/Myorders";
 
 
 // Dummy pages (create these files)
@@ -71,6 +74,10 @@ function App() {
             </div>
           }
         />
+
+        <Route path="/checkout-india" element={<CheckoutIndia />} />
+<Route path="/checkout-international" element={<CheckoutInternational />} />
+<Route path="/orders" element={<MyOrders />} />
       </Routes>
       <Footer/>
     </>
