@@ -7,13 +7,10 @@ import heroImage from "../assets/palm.jpg"; // your background image
 
 const PortfolioBanner = () => {
 
-  useEffect(() => {
-  AOS.init({
-    duration: 1000,
-    once: true,
-    easing: "ease-in-out",
-  });
-}, []);
+   useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+
   return (<>
     <section
       style={{

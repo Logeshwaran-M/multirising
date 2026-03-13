@@ -7,6 +7,7 @@ import { BrowserRouter } from 'react-router-dom';
 import { CartProvider } from "../src/components/CartContext.jsx";
 import "aos/dist/aos.css";
 import "./i18n";
+import "bootstrap-icons/font/bootstrap-icons.css";
 
 
 createRoot(document.getElementById('root')).render(

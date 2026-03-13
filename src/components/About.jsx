@@ -1,10 +1,13 @@
 import heroImage from "../assets/palm.jpg";
 import plate from "../assets/plates.webp"
 import { Row,Col,Image, Container } from "react-bootstrap";
+import { useEffect } from "react";
 
 
 export default function About(){
-    
+     useEffect(() => {
+        window.scrollTo(0, 0);
+      }, []);
 
   return (
     <>

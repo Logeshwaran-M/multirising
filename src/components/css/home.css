@@ -41,48 +41,106 @@
 }
 
 
-.banner-wrapper {
-  height: 600px;
-  overflow: hidden;
+.banner-wrapper{
+position:relative;
+width:100%;
+height:420px;
+overflow:hidden;
+margin-top:40px;
 }
 
-.banner-img {
-  height: 100%;
-  object-fit: cover;
-  transition: 0.5s ease;
+.banner-img{
+width:100%;
+height:100%;
+object-fit:cover;
+transition:0.5s ease;
 }
 
-.banner-wrapper:hover .banner-img {
-  transform: scale(1.05);
+/* zoom effect */
+.banner-wrapper:hover .banner-img{
+transform:scale(1.05);
 }
 
-.hero-title {
-  font-size: 48px;
-  font-weight: 700;
-  letter-spacing: 2px;
-  animation: fadeSlideDown 1.5s ease forwards;
+/* overlay like hero banner */
+
+
+
+.banner-overlay div{
+display:flex;
+flex-direction:column;
+align-items:flex-start;
+}
+.hero-content{
+display:flex;
+flex-direction:column;
+align-items:flex-start;
+gap:10px;
 }
 
-@keyframes fadeSlideDown {
-  from {
-    opacity: 0;
-    transform: translateY(-40px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
+
+.shop-btn{
+background:#28a745;
+border:none;
+padding:12px 30px;
+border-radius:30px;
+color:white;
+font-weight:600;
+transition:0.3s;
 }
 
-.hero-btn {
-  background: linear-gradient(45deg, #2e7d32, #1b5e20);
-  border: none;
-  transition: 0.3s ease;
+.shop-btn:hover{
+background:#1e7e34;
+transform:translateY(-2px);
 }
 
-.hero-btn:hover {
-  transform: scale(1.05);
-  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+.banner-overlay{
+position:absolute;
+top:0;
+left:0;
+width:100%;
+height:100%;
+background:linear-gradient(
+to right,
+rgba(0,0,0,0.65),
+rgba(0,0,0,0.2)
+);
+display:flex;
+align-items:center;
+padding-left:80px;
+}
+
+/* text */
+
+.hero-title{
+font-size:42px;
+font-weight:700;
+color:white;
+margin-bottom:15px;
+max-width:520px;
+animation:fadeSlideDown 1.5s ease forwards;
+}
+
+.hero-subtext{
+color:white;
+font-size:16px;
+line-height:1.6;
+margin-bottom:25px;
+max-width:520px;
+}
+
+/* button */
+
+/* animation */
+
+@keyframes fadeSlideDown{
+from{
+opacity:0;
+transform:translateY(-40px);
+}
+to{
+opacity:1;
+transform:translateY(0);
+}
 }
 
 .brand-card-hover {
@@ -118,4 +176,39 @@
   .frame-banner {
     height: 180px;
   }
+}
+
+.hero-overlay{
+position:absolute;
+top:0;
+left:0;
+width:100%;
+height:100%;
+display:flex;
+flex-direction:column;
+justify-content:center;
+align-items:center;
+text-align:center;
+color:white;
+padding:20px;
+}
+
+.hero-title{
+font-size:48px;
+font-weight:700;
+margin-bottom:10px;
+}
+
+.hero-subtitle{
+font-size:18px;
+opacity:0.9;
+margin-bottom:20px;
+}
+
+.hero-btn{
+background:#28a745;
+border:none;
+padding:12px 30px;
+border-radius:30px;
+font-weight:600;
 }

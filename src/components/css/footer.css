@@ -3,22 +3,39 @@
   color: #ffffff;
 }
 
-.footer-text {
-  color: #d8e6dc;
+.footer-links{
+list-style:none;
+padding:0;
 }
 
-.footer-section h5 {
-  color: #ffffff;
+.footer-links li{
+margin-bottom:8px;
 }
 
-.footer-section p {
-  color: #d8e6dc;
+.footer-links a{
+color:#bbb;
+text-decoration:none;
+transition:0.3s;
 }
 
-.footer-line {
-  border-color: rgba(255, 255, 255, 0.2);
+.footer-links a:hover{
+color:#0f9d7a;
 }
 
+.footer-social a{
+color:white;
+margin:0 10px;
+font-size:18px;
+transition:0.3s;
+}
+
+.footer-social a:hover{
+color:#0f9d7a;
+}
+
+.footer-line{
+border-color:#333;
+}
 .footer-logo {
   width: 245px;
   border-radius: 15px;

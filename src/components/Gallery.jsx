@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import plate from "../assets/round.png"
 import eco from "../assets/leaf.jpg"
 import collect from "../assets/process/collect.png"
@@ -11,6 +11,11 @@ import pack from "../assets/process/pack.png"
 
 
 const PhotoGallery = () => {
+
+   useEffect(() => {
+      window.scrollTo(0, 0);
+    }, []);
+
   const images = [
     {
       url: plate,
@@ -45,6 +50,9 @@ const PhotoGallery = () => {
 
   return (
     <div className="container my-5 "  style={{paddingTop:"40px"}}>
+      <h2 className="main-heading" data-aos="fade-up">
+         Our Gallery
+        </h2>
       <div className="row g-4">
         {images.map((item, index) => (
           <div className="col-md-3 col-sm-6" key={index}>

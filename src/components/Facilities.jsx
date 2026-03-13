@@ -6,7 +6,10 @@ import { useEffect } from "react";
 export default function Facilities(){
 
 
- 
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+  
     return(<>
 
      <section

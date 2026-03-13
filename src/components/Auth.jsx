@@ -26,6 +26,10 @@ function Auth() {
     password: "",
   });
 
+
+   useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
   /* ---------------- CHECK LOGIN ---------------- */
 
   useEffect(() => {

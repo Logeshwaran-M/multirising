@@ -26,6 +26,10 @@ const HeroSection = () => {
   });
 }, []);
 
+ useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+
   return (
     <section className="home-page">
 
@@ -34,21 +38,25 @@ const HeroSection = () => {
         <img src={heroImage} alt="Hero" className="hero-img" />
         <div className="hero-dark-overlay"></div>
 
-        <div className="hero-overlay text-center" data-aos="zoom-in">
-          <h1 className="hero-title">
-            Premium Areca Leaf Products
-          </h1>
-          <p className="hero-subtitle hero-title">
-            Eco-friendly • Sustainable • Export Quality
-          </p>
-          <Button
-            className="hero-btn  mt-3"
-            onClick={() => navigate("/products")}
-          >
-            Shop Now
-          </Button>
-        </div>
-      </div>
+   <div className="hero-overlay text-center" data-aos="zoom-in">
+
+  <h1 className="hero-title">
+    Premium Areca Leaf Products
+  </h1>
+
+  <p className="hero-subtitle">
+    Eco-friendly • Sustainable • Export Quality
+  </p>
+
+  <button
+    className="shop-btn mt-3"
+    onClick={() => navigate("/products")}
+  >
+    Shop Now
+  </button>
+
+</div>
+</div>
 
       
 

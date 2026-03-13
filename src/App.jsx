@@ -21,6 +21,10 @@ import { useEffect } from "react";
 import CheckoutIndia from "./components/checkoutpages/IndianCheckout";
 import CheckoutInternational from "./components/checkoutpages/InternationalCheckout";
 import MyOrders from "./components/Myorders";
+import PrivacyPolicy from "./components/legal/PrivacyPolicy";
+import Terms from "./components/legal/Terms";
+import ShippingPolicy from "./components/legal/ShippingPolicy";
+import RefundPolicy from "./components/legal/RefundPolicy";
 
 
 // Dummy pages (create these files)
@@ -78,6 +82,11 @@ function App() {
         <Route path="/checkout-india" element={<CheckoutIndia />} />
 <Route path="/checkout-international" element={<CheckoutInternational />} />
 <Route path="/orders" element={<MyOrders />} />
+
+<Route path="/privacy-policy" element={<PrivacyPolicy />} />
+<Route path="/terms" element={<Terms />} />
+<Route path="/shipping-policy" element={<ShippingPolicy />} />
+<Route path="/refund-policy" element={<RefundPolicy />} />
       </Routes>
       <Footer/>
     </>

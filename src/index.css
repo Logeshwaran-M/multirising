@@ -9,7 +9,7 @@ body {
   padding: 0;
 }
 body {
-  padding-top: 140px;
+  padding-top: 180px;
 }
 
 
@@ -39,6 +39,9 @@ body {
   transition: width 0.3s ease;
 }
 
+.navbar{
+top:34px !important;
+}
 /* Hover */
 .navbar-nav .nav-link:hover {
    color: rgba(5, 91, 189, 0.95) !important;
@@ -572,4 +575,83 @@ body {
   transform: translateY(-8px);
   box-shadow: 0 10px 25px rgba(0,0,0,0.15);
 }
+
+/* UNIVERSAL WEBSITE HEADING */
+
+.main-heading{
+font-size:34px;
+font-weight:700;
+text-align:center;
+color:#0239d1;
+margin-bottom:40px;
+
+}
+
+.main-heading span{
+color:#ffffff;
+}
+
+.main-heading::after{
+content:"";
+display:block;
+width:80px;
+height:4px;
+background:#28a745;   /* attractive green line */
+margin:10px auto 0;
+border-radius:3px;
+}
+
+.topbar{
+background:#0f9d7a;
+color:white;
+font-size:14px;
+height:40px;
+display:flex;
+align-items:center;
+position:fixed;
+top:0;
+left:0;
+width:100%;
+z-index:1100;
+}
+.topbar-container{
+max-width:1200px;
+margin:auto;
+display:flex;
+align-items:center;
+justify-content:space-between;
+padding:0 20px;
+}
+
+.topbar-left{
+font-weight:600;
+letter-spacing:0.5px;
+}
+
+.brand-name{
+font-size:15px;
+}
+
+.topbar-center{
+display:flex;
+gap:15px;
+align-items:center;
+}
+
+.divider{
+opacity:0.6;
+}
+
+.topbar-right select{
+background:transparent;
+border:none;
+color:white;
+font-size:14px;
+cursor:pointer;
+}
+
+.language-select option{
+color:black;
+}
+
 

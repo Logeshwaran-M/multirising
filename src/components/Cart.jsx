@@ -1,10 +1,15 @@
-import React, { useState } from "react";
+import React, { useState,useEffect } from "react";
 import { Container, Row, Col, Card, Button, Modal } from "react-bootstrap";
 import { useCart } from "../components/CartContext";
 import { FaTrash } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
 
 function Cart() {
+
+
+    useEffect(() => {
+        window.scrollTo(0, 0);
+      }, []);
 
 const { cartItems, increaseQty, decreaseQty, removeItem, total } = useCart();
 const navigate = useNavigate();

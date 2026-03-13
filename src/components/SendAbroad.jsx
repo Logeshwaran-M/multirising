@@ -1,4 +1,3 @@
-import { Container, Row, Col, Card, Button } from "react-bootstrap";
 import banner from "../assets/abroad.png";
 import MultiImageCarousel from "./Carosal";
 import frame1 from "../assets/Frame1.jpg";
@@ -6,172 +5,341 @@ import frame2 from "../assets/Frame2.jpg";
 import frame3 from "../assets/Frame3.jpg";
 import frame4 from "../assets/Frame4.png";
 import frame5 from "../assets/Frame5.png";
-import { useCart } from "../components/CartContext"; // ✅ Use Cart Context
+
+import { Container, Row, Col, Card, Button, Form } from "react-bootstrap";
+
+import { useCart } from "../components/CartContext";
 import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
+import { useState, useEffect } from "react";
+
+import { collection, getDocs } from "firebase/firestore";
+import { db } from "../firebase";
+
+import AOS from "aos";
+import "aos/dist/aos.css";
+
+import "./css/abroad.css";
 
 const CountriesSection = () => {
-  const { addToCart, cartItems } = useCart(); // ✅ Cart function
-   const navigate = useNavigate();
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+
+  useEffect(() => {
+    AOS.init({
+      duration: 1000,
+      once: true,
+    });
+  }, []);
+
+  const { addToCart, cartItems } = useCart();
+  const navigate = useNavigate();
+
+  const [categories, setCategories] = useState([]);
+  const [favorites, setFavorites] = useState({});
+  const [products, setProducts] = useState([]);
+  const [searchTerm, setSearchTerm] = useState("");
+  const [selectedCategory, setSelectedCategory] = useState("");
+
+  const filteredProducts = products.filter((product) => {
+
+    const matchesSearch =
+      product.name?.toLowerCase().includes(searchTerm.toLowerCase());
+
+    const matchesCategory =
+      selectedCategory ? product.category === selectedCategory : true;
+
+    return matchesSearch && matchesCategory;
+
+  });
+
+  const toggleFavorite = (id) => {
+    setFavorites((prev) => ({ ...prev, [id]: !prev[id] }));
+  };
+
+  const fetchProducts = async () => {
+
+    try {
+
+      const snapshot = await getDocs(collection(db, "products"));
+
+      const productsData = snapshot.docs.map((doc) => ({
+        id: doc.id,
+        ...doc.data(),
+      }));
+
+      setProducts(productsData);
+
+      const uniqueCategories = [
+        ...new Set(productsData.map((p) => p.category)),
+      ];
+
+      setCategories(uniqueCategories);
+
+    } catch (error) {
+      console.error("Error fetching products:", error);
+    }
+
+  };
+
+  useEffect(() => {
+    fetchProducts();
+  }, []);
 
   const images = [
     { url: frame1, title: "Add Products to the Cart" },
-    { url: frame5, title: "Fast & Reliable Shipping WorldWide" },
+    { url: frame5, title: "Fast & Reliable Shipping Worldwide" },
     { url: frame2, title: "Select International Address" },
     { url: frame3, title: "Add Delivery Address" },
     { url: frame4, title: "Pay with Indian and Foreign Currency" },
-    
   ];
 
- const products = [
-  { id: 1, name: "organic jaggery", price: 2499, image: "https://organest.co.in/wp-content/uploads/2020/06/blogimage4.png" },
-  { id: 2, name: "Tropical jackfruit", price: 599, image: "https://media.thenationaldigest.com/wp-content/uploads/2020/02/27164603/Tropical-Jackfruit-400x400-1.jpg" },
-  { id: 3, name: "Ice apple", price: 899, image: "https://healthturnedup.com/wp-content/uploads/2024/04/dc87edbf-f1f4-455c-bbca-af208302a179-1024x683.png" },
-  { id: 4, name: "Watermelon", price: 1299, image: "https://img.freepik.com/premium-photo/fresh-watermelon-slices-photo_863013-148801.jpg" },
-  { id: 5, name: "bamboo baskets", price: 1999, image: "https://i.etsystatic.com/25551155/r/il/8425f6/2634950095/il_1080xN.2634950095_dhjr.jpg" },
-  { id: 6, name: "chanpatna toys", price: 1499, image: "https://s7ap1.scene7.com/is/image/incredibleindia/channapatna-toys-and-dolls-Karnataka-1-craft-hero?qlt=82&ts=1726641410733" },
- 
-];
-
-  // Add to cart function with toast notification
-  const handleAdd = (product, e) => {
-    e.stopPropagation(); // Prevent parent click (if any)
-    addToCart(product);
-    toast.success(`✅ ${product.name} added to cart!`);
-  };
-
   return (
-    <div className="home-page">
-      {/* 🔹 Banner */}
-      <div className="position-relative">
-        <img
-          src={banner}
-          alt="Send Gifts Worldwide"
-          className="w-100"
-          style={{ height: "450px", objectFit: "cover" }}
-          data-aos="fade-down"
-        />
-      </div>
 
-      {/* 🔹 Countries Scroll */}
-      <div data-aos="fade-up">
+    <div className="products-page-wrapper">
+
+      {/* HERO BANNER */}
+
+      <img
+        src={banner}
+        alt="Send Gifts Worldwide"
+        className="hero-banner"
+        data-aos="fade-down"
+      />
+
+      <div className="py-4" data-aos="fade-up">
         <MultiImageCarousel />
       </div>
 
-      {/* 🔹 Products */}
-      <Container className="my-5 text-center">
-        <h2
-          className="fw-bold brand-title mb-4"
-          data-aos="fade-up"
-        >
-          Our Premium Products
+      {/* PRODUCTS */}
+
+      <div className="my-5 products-section">
+
+        <Row className="mb-4 g-3" data-aos="fade-up">
+
+          <Col md={6}>
+            <Form.Control
+              type="text"
+              placeholder="Search products..."
+              value={searchTerm}
+              onChange={(e) => setSearchTerm(e.target.value)}
+            />
+          </Col>
+
+          <Col md={6}>
+            <Form.Select
+              value={selectedCategory}
+              onChange={(e) => setSelectedCategory(e.target.value)}
+            >
+              <option value="">All Categories</option>
+
+              {categories.map((cat, idx) => (
+                <option key={idx} value={cat}>
+                  {cat}
+                </option>
+              ))}
+
+            </Form.Select>
+          </Col>
+
+        </Row>
+
+        <div className="mb-4 d-flex flex-wrap gap-2" data-aos="fade-up">
+
+          <button
+            className={`category-btn ${selectedCategory === "" ? "active" : ""}`}
+            onClick={() => setSelectedCategory("")}
+          >
+            All
+          </button>
+
+          {categories.map((cat, idx) => (
+
+            <button
+              key={idx}
+              className={`category-btn ${selectedCategory === cat ? "active" : ""}`}
+              onClick={() => setSelectedCategory(cat)}
+            >
+              {cat}
+            </button>
+
+          ))}
+
+        </div>
+
+        <h2 className="main-heading mb-4" data-aos="fade-up">
+          Our Premium <span>Products</span>
         </h2>
-        <Row>
-          {products.map((product, index) => (
+
+        <Row className="g-4">
+
+          {filteredProducts.map((product, index) => (
+
             <Col
               key={product.id}
               lg={3}
               md={4}
               sm={6}
-              className="mb-4"
               data-aos="zoom-in"
               data-aos-delay={index * 100}
             >
-            <Card
-  className="h-100 shadow-sm border-0 rounded-4 hover-card"
-  onClick={() =>
-    navigate(`/product/${product.id}`, { state: { checkout: "international" } })
-  }
-   style={{ cursor: "pointer" }}
->
+
+              <Card
+                className="product-card-modern border-0"
+                onClick={() =>
+                  navigate(`/product/${product.id}`, {
+                    state: { checkout: "international" },
+                  })
+                }
+              >
+
+                <div className="card-img-container">
+
+                  <Card.Img variant="top" src={product.image} />
+
+                  <button
+                    className="wishlist-btn"
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      toggleFavorite(product.id);
+                    }}
+                  >
+
+                    <i
+                      className={`bi ${
+                        favorites[product.id]
+                          ? "bi-heart-fill liked"
+                          : "bi-heart"
+                      }`}
+                    ></i>
+
+                  </button>
+
+                </div>
+
+                <Card.Body className="px-0">
+
+                  <div className="d-flex justify-content-between align-items-start">
+
+                    <Card.Title className="product-name">
+                      {product.name}
+                    </Card.Title>
+
+                    {/* <span className="product-price">
+                      ₹{product.price}
+                    </span> */}
+
+                  </div>
+
+                  <div className="rating-stars mb-2 mt-1">
+
+                    <i className="bi bi-star-fill"></i>
+                    <i className="bi bi-star-fill"></i>
+                    <i className="bi bi-star-fill"></i>
+                    <i className="bi bi-star-fill"></i>
+                    <i className="bi bi-star-fill"></i>
+
+                    <span className="review-count ms-1">(121)</span>
+
+                  </div>
+
+                  <Button
+                    variant={
+                      cartItems.some((item) => item.id === product.id)
+                        ? "primary"
+                        : "success"
+                    }
+                    className="w-100 mt-2 rounded-pill"
+                    onClick={(e) => {
+
+                      e.stopPropagation();
+
+                      if (cartItems.some((item) => item.id === product.id)) {
+
+                        navigate("/cart");
+
+                      } else {
+
+                        addToCart(product);
+                        toast.success("Added to cart");
+
+                      }
+
+                    }}
+                  >
+
+                    {cartItems.some((item) => item.id === product.id)
+                      ? "View Cart"
+                      : "Add to Cart"}
+
+                  </Button>
+
+                </Card.Body>
+
+              </Card>
+
+            </Col>
+
+          ))}
+
+        </Row>
+
+      </div>
+
+      {/* PROCESS */}
+
+      <div className="bg-light py-5 text-center">
+
+        <Container>
+
+          <h2 className="main-heading mb-2" data-aos="fade-up">
+            How We Make Shopping Easy
+          </h2>
+
+          <p className="text-muted mb-5" data-aos="fade-up">
+            Step-by-step process for global delivery
+          </p>
+
+          <div className="d-flex gap-3 overflow-auto pb-4">
+
+            {images.map((item, index) => (
+
+              <Card
+                key={index}
+                className="border-0 shadow-sm rounded-4 flex-shrink-0"
+                style={{ width: "240px" }}
+                data-aos="flip-left"
+                data-aos-delay={index * 150}
+              >
+
                 <Card.Img
                   variant="top"
-                  src={product.image}
-                  style={{ height: "220px", objectFit: "cover" }}
+                  src={item.url}
+                  style={{ height: "160px", objectFit: "cover" }}
                 />
-                <Card.Body className="d-flex flex-column text-center">
-                  <Card.Title className="fw-semibold">{product.name}</Card.Title>
-                  <Card.Text className="fw-bold text-primary fs-5">
-                    ₹{product.price}
+
+                <Card.Body>
+
+                  <Card.Text className="fw-bold small">
+                    {item.title}
                   </Card.Text>
-                 <Button
-  variant={cartItems.some((item) => item.id === product.id) ? "outline-primary" : "outline-success"}
-  className="mt-auto rounded-pill"
-  onClick={(e) => {
-    e.stopPropagation();
 
-    const isInCart = cartItems.some((item) => item.id === product.id);
-
-    if (isInCart) {
-      navigate("/cart");
-    } else {
-      addToCart(product);
-      toast.success(`✅ ${product.name} added to cart!`);
-    }
-  }}
->
-  {cartItems.some((item) => item.id === product.id)
-    ? "View Cart"
-    : "Add to Cart"}
-</Button>
                 </Card.Body>
+
               </Card>
-            </Col>
-          ))}
-        </Row>
-      </Container>
 
-      {/* 🔹 Frames in single row */}
-      <div className="p-2  text-center">
-        <h2
-          className="fw-bold brand-title"
-          data-aos="fade-up"
-        >
-          How We Make Your International Shopping Easy
-        </h2>
-        <p
-          className="text-center mb-4 text-muted"
-          data-aos="fade-up"
-          data-aos-delay="200"
-        >
-          Step-by-step process to get your favorite products delivered worldwide
-        </p>
+            ))}
 
-        <div
-          style={{
-            display: "flex",
-            gap: "20px",
-            overflowX: "auto",
-            padding: "10px 0",
-          }}
-        >
-          {images.map((item, index) => (
-            <Card
-              key={index}
-              className="shadow-lg border-0 rounded-4 text-center hover-card"
-              style={{ minWidth: "200px", flex: "0 0 auto" }}
-              data-aos="flip-left"
-              data-aos-delay={index * 150}
-            >
-              <Card.Img
-                variant="top"
-                src={item.url}
-                style={{
-                  height: "200px",
-                  objectFit: "cover",
-                  borderRadius: "12px 12px 0 0",
-                }}
-              />
-              <Card.Body>
-                <Card.Text className="fw-semibold" style={{ fontSize: "1rem" }}>
-                  {item.title}
-                </Card.Text>
-              </Card.Body>
-            </Card>
-          ))}
-        </div>
+          </div>
+
+        </Container>
+
       </div>
+
     </div>
+
   );
 };
 

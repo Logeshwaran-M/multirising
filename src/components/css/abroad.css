@@ -1,0 +1,62 @@
+.product-card-modern{
+background: linear-gradient(145deg,#ffffff,#f8fafc);
+border-radius:16px;
+padding:12px;
+transition:all 0.35s ease;
+cursor:pointer;
+position:relative;
+overflow:hidden;
+}
+
+.product-card-modern:hover{
+transform:translateY(-8px) scale(1.02);
+box-shadow:0 18px 35px rgba(0,0,0,0.15);
+}
+
+
+/* Step Cards specifically for CountriesSection */
+.step-card {
+    transition: transform 0.3s ease;
+    background: white;
+}
+
+.step-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 10px 20px rgba(0,0,0,0.1) !important;
+}
+
+/* Hide scrollbar but keep functionality */
+.no-scrollbar::-webkit-scrollbar {
+    display: none;
+}
+.no-scrollbar {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+}
+
+/* Green Small Rating Stars */
+.rating-stars {
+    display: flex;
+    align-items: center;
+    gap: 2px;
+}
+
+.rating-stars i {
+    color: #28a745; /* Bootstrap success green */
+    font-size: 0.7rem; /* Small size */
+}
+
+.review-count {
+    font-size: 0.75rem;
+    color: #6c757d;
+}
+
+/* Button Icon Spacing */
+.action-btn i {
+    font-size: 1rem;
+}
+
+.products-section{
+background: linear-gradient(135deg,#f0fdf4,#dcfce7);
+padding:60px 0;
+}

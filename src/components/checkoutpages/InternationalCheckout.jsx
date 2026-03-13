@@ -27,7 +27,7 @@ const lng = position.coords.longitude;
 try {
 
 const res = await fetch(
-`https://maps.googleapis.com/maps/api/geocode/json?latlng=${lat},${lng}&key=YOUR_GOOGLE_API_KEY`
+`https://maps.googleapis.com/maps/api/geocode/json?latlng=${lat},${lng}&key=AIzaSyCASQwQdrDCttNt6zkVw4zBqZfkVeWnf2I`
 );
 
 const dataRes = await res.json();
