@@ -16,7 +16,7 @@ const user = JSON.parse(localStorage.getItem("user"));
       <NavDropdown.Item>
         <User size={16} className="me-2 text-center" />
         Profile
-         <NavDropdown.ItemText className=" text-primary">
+         <NavDropdown.ItemText className=" text-dark">
             <strong>{user.name}</strong>
             <br />
             <small>{user.email}</small>

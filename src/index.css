@@ -12,7 +12,23 @@ body {
   padding-top: 180px;
 }
 
+@media (max-width: 991px){
+  body {
+  padding-top: 100px;
+}
+}
 
+.topbar{
+  background:#f8f9fa;
+  font-size:14px;
+  padding:6px 0;
+}
+
+@media (max-width: 991px){
+  .topbar{
+    display:none !important;
+  }
+}
 /* ================= NAVBAR BRAND ================= */
 .navbar-brand {
   text-align: center;
@@ -40,7 +56,14 @@ body {
 }
 
 .navbar{
-top:34px !important;
+  top:40px !important;
+}
+
+/* When topbar hidden (mobile) remove gap */
+@media (max-width: 991px){
+  .navbar{
+    top:0 !important;
+  }
 }
 /* Hover */
 .navbar-nav .nav-link:hover {
@@ -431,10 +454,11 @@ top:34px !important;
 .hero-dark-overlay {
   position: absolute;
   inset: 0;
-  background: linear-gradient(
-    rgba(0, 0, 0, 0.35),
-    rgba(0, 0, 0, 0.35)
-  );
+ background:linear-gradient(
+to right,
+rgba(0,0,0,0.65),
+rgba(0,0,0,0.2)
+);
 }
 
 /* Text Layer */

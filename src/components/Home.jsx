@@ -89,6 +89,41 @@ const HeroSection = () => {
         </p>
       </Container>
 
+<Container className="py-5 text-center">
+  <Row className="g-4">
+
+    <Col md={3} data-aos="fade-up">
+      <div className="stat-box">
+        <h2>50+</h2>
+        <p>Products</p>
+      </div>
+    </Col>
+
+    <Col md={3} data-aos="fade-up" data-aos-delay="100">
+      <div className="stat-box">
+        <h2>25+</h2>
+        <p>Countries Exported</p>
+      </div>
+    </Col>
+
+    <Col md={3} data-aos="fade-up" data-aos-delay="200">
+      <div className="stat-box">
+        <h2>10K+</h2>
+        <p>Happy Customers</p>
+      </div>
+    </Col>
+
+    <Col md={3} data-aos="fade-up" data-aos-delay="300">
+      <div className="stat-box">
+        <h2>100%</h2>
+        <p>Eco Friendly</p>
+      </div>
+    </Col>
+
+  </Row>
+</Container>
+
+
       {/* FEATURED PRODUCTS */}
       <Container className="py-5 text-center">
         <h2 className="fw-bold brand-title">
@@ -124,13 +159,25 @@ const HeroSection = () => {
         </Button>
       </Container>
 
-     <Container fluid className="p-0">
-  <img
-    src={frame}
-    alt="Banner"
-    className="frame-banner"
-  />
-</Container>
+      <div className="export-banner text-center">
+
+<h2>Looking for Bulk Orders?</h2>
+
+<p>
+We export Areca leaf plates worldwide with premium packaging
+and international quality standards.
+</p>
+
+<button
+className="shop-btn mt-3"
+onClick={()=>navigate("/abroad")}
+>
+Send Bulk Gifts Abroad
+</button>
+
+</div>
+
+    
 
       {/* OUR SERVICES */}
       <Container className="py-5 text-center">
@@ -139,7 +186,7 @@ const HeroSection = () => {
         <Row className="g-4 mt-3">
           {[service1, service2, service3].map((img, i) => (
          <Col md={4} key={i} data-aos="fade-up" data-aos-delay={i * 200}>
-              <div className="service-card shadow-sm p-3 brand-card-hover bg-light">
+              <div className="service-card shadow-sm p-3 brand-card-hover bg-white">
                 <img src={img} alt="" className="rounded" />
                 <h5 className="fw-bold mt-3 text-success">
                   {i === 0
@@ -161,6 +208,7 @@ const HeroSection = () => {
         </Row>
       </Container>
 
+
       <ShapesSection />
 
 
@@ -180,7 +228,7 @@ const HeroSection = () => {
   {/* 1 */}
  <Col md={4} data-aos="zoom-in" data-aos-delay="200">
     <div className="feature-box p-4 shadow-sm brand-card-hover h-100">
-      <img src={leaf} alt="Eco Friendly" style={{ width: "180px" }} />
+     <img src={leaf} alt="Eco Friendly" className="feature-img" />
       <h5 className="mt-3 text-success">🌱 100% Natural & Eco-Friendly</h5>
       <p className="text-muted">
         Our products are made from naturally fallen Areca leaves.
@@ -197,7 +245,7 @@ const HeroSection = () => {
   {/* 2 */}
  <Col md={4} data-aos="zoom-in" data-aos-delay="200">
     <div className="feature-box p-4 shadow-sm brand-card-hover h-100">
-      <img src={iso} alt="Export Quality" style={{ width: "180px" }} />
+    <img src={iso} alt="Export Quality" className="feature-img" />
       <h5 className="mt-3 text-success">🌍 International Export Standards</h5>
       <p className="text-muted">
         Manufactured under strict hygiene and quality control
@@ -213,7 +261,7 @@ const HeroSection = () => {
   {/* 3 */}
   <Col md={4} data-aos="zoom-in" data-aos-delay="200">
     <div className="feature-box p-4 shadow-sm brand-card-hover h-100">
-      <img src={support} alt="Trusted" style={{ width: "230px" }} />
+     <img src={support} alt="Trusted" className="feature-img" />
       <h5 className="mt-3 text-success">🤝 Trusted by Global Clients</h5>
       <p className="text-muted">
         We serve restaurants, wholesalers, and distributors
@@ -228,6 +276,8 @@ const HeroSection = () => {
 
 </Row>
 </Container>
+
+
     </section>
   );
 };

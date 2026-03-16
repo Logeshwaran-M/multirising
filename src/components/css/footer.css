@@ -22,13 +22,6 @@ transition:0.3s;
 color:#0f9d7a;
 }
 
-.footer-social a{
-color:white;
-margin:0 10px;
-font-size:18px;
-transition:0.3s;
-}
-
 .footer-social a:hover{
 color:#0f9d7a;
 }
@@ -44,4 +37,41 @@ border-color:#333;
   padding-right: 0;
   margin: 0;
   display: block;
+}
+
+@media (max-width:768px){
+
+.footer-section{
+text-align:center;
+padding:30px 15px;
+}
+
+.footer-logo{
+width:180px;
+margin:auto;
+display:block;
+margin-bottom:15px;
+}
+
+.footer-links{
+padding:0;
+}
+
+.footer-links li{
+margin-bottom:6px;
+}
+
+.footer-social{
+margin-top:10px;
+}
+
+.footer-social a{
+margin:0 8px;
+font-size:20px;
+}
+
+.footer-line{
+margin:20px 0;
+}
+
 }

@@ -1,0 +1,53 @@
+/* Page animation */
+
+.product-page{
+animation:fadePage 0.6s ease;
+}
+
+@keyframes fadePage{
+from{
+opacity:0;
+transform:translateY(20px);
+}
+to{
+opacity:1;
+transform:translateY(0);
+}
+}
+
+/* Product image zoom */
+
+.product-image-wrapper{
+overflow:hidden;
+border-radius:15px;
+}
+
+.product-image-wrapper img{
+transition:transform 0.5s ease;
+}
+
+.product-image-wrapper:hover img{
+transform:scale(1.15);
+}
+
+/* Buttons */
+
+.action-btn{
+transition:all 0.3s ease;
+}
+
+.action-btn:hover{
+transform:translateY(-3px) scale(1.05);
+box-shadow:0 8px 20px rgba(0,0,0,0.2);
+}
+
+/* suggestion cards */
+
+.suggestion-card{
+transition:all 0.3s ease;
+}
+
+.suggestion-card:hover{
+transform:translateY(-8px);
+box-shadow:0 15px 30px rgba(0,0,0,0.15);
+}

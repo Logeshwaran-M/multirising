@@ -35,7 +35,7 @@ navigate("/checkout-international");
 
 return(
 
-<Container className="py-5">
+<Container className="p-5 mt-5">
 
 <h2 className="fw-bold text-center mb-5">🛒 Your Shopping Cart</h2>
 
@@ -99,7 +99,7 @@ onClick={()=>increaseQty(item.id)}
 
 >
 
-*
++
 
 </Button>
 

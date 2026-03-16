@@ -25,6 +25,7 @@ import PrivacyPolicy from "./components/legal/PrivacyPolicy";
 import Terms from "./components/legal/Terms";
 import ShippingPolicy from "./components/legal/ShippingPolicy";
 import RefundPolicy from "./components/legal/RefundPolicy";
+import Wishlist from "./components/WishList";
 
 
 // Dummy pages (create these files)
@@ -87,6 +88,7 @@ function App() {
 <Route path="/terms" element={<Terms />} />
 <Route path="/shipping-policy" element={<ShippingPolicy />} />
 <Route path="/refund-policy" element={<RefundPolicy />} />
+<Route path="/wishlist" element={<Wishlist/>}/>
       </Routes>
       <Footer/>
     </>

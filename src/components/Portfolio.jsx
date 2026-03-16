@@ -99,7 +99,7 @@ const PortfolioBanner = () => {
     <Col md={6} className="mb-4 mb-md-0" data-aos="zoom-in" data-aos-delay="200">
       <img
         src={eco}
-       style={{ height: "350px", objectFit: "cover", width: "70%" }}
+       style={{ height: "350px", objectFit: "cover", width: "85%" }}
         alt="Eco Friendly Process"
         className="img-fluid rounded"
       />
@@ -116,8 +116,10 @@ const PortfolioBanner = () => {
   </h3>
 
   <Row className="mt-4">
- <Col md={4} data-aos="fade-up" data-aos-delay="100">
-      <div className="p-4 shadow rounded-4 h-100 bg-light">
+
+    <Col md={4} data-aos="fade-up" data-aos-delay="100">
+      <div className="p-4 shadow rounded-4 mb-2 h-100 bg-white card">
+        <img width={"100%"} src="https://cdn.vectorstock.com/i/preview-1x/90/97/biodegradable-icon-vector-29299097.jpg" alt="Biodegradable" className="feature-icon" />
         <h5>🌍 100% Biodegradable</h5>
         <p className="text-muted">
           Completely decomposes within 60–90 days without harming the environment.
@@ -126,7 +128,8 @@ const PortfolioBanner = () => {
     </Col>
 
     <Col md={4} data-aos="fade-up" data-aos-delay="300">
-      <div className="p-4 shadow rounded-4 bg-light h-100">
+      <div className="p-4 shadow mb-2 rounded-4 bg-light h-100 card">
+        <img  src="https://t4.ftcdn.net/jpg/07/86/72/79/360_F_786727946_37tj8pcfhSVegkVe3BxbccFJWvEm6ySZ.jpg" alt="Heat Resistant" className="feature-icon" />
         <h5>🔥 Heat & Liquid Resistant</h5>
         <p className="text-muted">
           Suitable for hot curries, soups, and oily foods without leakage.
@@ -135,13 +138,15 @@ const PortfolioBanner = () => {
     </Col>
 
     <Col md={4} data-aos="fade-up" data-aos-delay="500">
-      <div className="p-4 shadow rounded-4 bg-light h-100">
+      <div className="p-4 shadow mb-2 rounded-4 bg-light h-100 card">
+        <img src="https://img.freepik.com/premium-vector/natural-leaf-icon-100-natural-vector-image-template-green-nature-100-organic-natural_619470-320.jpg?" alt="Chemical Free" className="feature-icon" />
         <h5>🌱 Chemical Free</h5>
         <p className="text-muted">
           No polish, wax, bleach, or synthetic additives used.
         </p>
       </div>
     </Col>
+
   </Row>
 </Container>
    

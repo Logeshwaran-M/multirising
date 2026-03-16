@@ -212,3 +212,67 @@ padding:12px 30px;
 border-radius:30px;
 font-weight:600;
 }
+
+
+.stat-box{
+background:white;
+padding:30px;
+border-radius:15px;
+box-shadow:0 10px 25px rgba(0,0,0,0.08);
+transition:0.3s;
+}
+
+.stat-box:hover{
+transform:translateY(-6px);
+}
+
+.stat-box h2{
+color:#28a745;
+font-weight:700;
+}
+
+.export-banner{
+background:linear-gradient(135deg,#1e7e34,#28a745);
+color:white;
+padding:80px 20px;
+margin:60px 0;
+}
+
+.export-banner h2{
+font-weight:700;
+}
+
+.export-banner button{
+background:white;
+color:#1e7e34;
+border:none;
+padding:12px 32px;
+border-radius:30px;
+font-weight:600;
+transition:0.3s;
+}
+
+.export-banner button:hover{
+background:#f5f5f5;
+transform:scale(1.05);
+}
+
+.feature-box{
+text-align:center;
+}
+
+.feature-img{
+width:180px;
+max-width:100%;
+margin:auto;
+display:block;
+margin-bottom:15px;
+}
+
+@media (max-width:768px){
+
+.feature-img{
+width:140px;
+}
+
+}

@@ -37,6 +37,20 @@ function Products() {
     });
   }, []);
 
+
+  const addToWishlist = (product) => {
+
+  let wishlist = JSON.parse(localStorage.getItem("wishlist")) || [];
+
+  const exists = wishlist.find((item) => item.id === product.id);
+
+  if (!exists) {
+    wishlist.push(product);
+    localStorage.setItem("wishlist", JSON.stringify(wishlist));
+    alert("Added to Wishlist ❤️");
+  }
+};
+
   const fetchProducts = async () => {
 
     try {
@@ -259,8 +273,16 @@ function Products() {
                       className="wishlist-btn"
                       onClick={(e) => {
                         e.stopPropagation();
-                        toggleWishlist(product.id);
+                        toggleWishlist(product.id);              
+    addToWishlist({
+      id: product.id,
+      name: product.name,
+      image: product.image,
+      price:product.price
+    })
+  
                       }}
+                      
                     >
                       <i className={`bi ${likedProducts[product.id] ? "bi-heart-fill liked" : "bi-heart"}`}></i>
                     </button>

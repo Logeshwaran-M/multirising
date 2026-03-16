@@ -100,13 +100,7 @@ const Footer = () => {
 
         {/* Social Media */}
 
-        <div className="footer-social text-center mt-3">
-
-          <a href="#"><FaFacebookF /></a>
-          <a href="#"><FaInstagram /></a>
-          <a href="#"><FaLinkedin /></a>
-
-        </div>
+      
 
         <hr className="footer-line" />
 
