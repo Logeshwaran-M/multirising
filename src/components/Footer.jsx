@@ -7,6 +7,7 @@ import {
   FaInstagram,
   FaLinkedin
 } from "react-icons/fa";
+import { FaXTwitter } from "react-icons/fa6";
 
 import { Link } from "react-router-dom";
 
@@ -32,10 +33,26 @@ const Footer = () => {
               style={{ width: "200px" }}
             />
 
-            <p className="footer-text mt-3">
-              Premium eco-friendly areca leaf products for a sustainable future.
-              Delivering quality natural products worldwide.
-            </p>
+           {/* Social Media */}
+<div className="text-center mb-4 mt-3">
+
+  <a href="#" className="me-3 text-white fs-5">
+    <FaFacebookF />
+  </a>
+
+  <a href="#" className="me-3 text-white fs-5">
+    <FaInstagram />
+  </a>
+
+  <a href="#" className="me-3 text-white fs-5">
+    <FaLinkedin />
+  </a>
+
+  <a  href="#" className="text-white fs-5">
+  <FaXTwitter />
+</a>
+
+</div>
 
           </Col>
 
@@ -68,7 +85,7 @@ const Footer = () => {
             </p>
 
             <p>
-              <FaPhone className="me-2" />
+             <FaPhone style={{ transform: "rotate(90deg)", marginRight: "8px" }} />
               +91 76192 10277
             </p>
 

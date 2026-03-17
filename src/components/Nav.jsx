@@ -8,6 +8,7 @@ import { signOut } from "firebase/auth";
 import { auth } from "../firebase";
 import UserMenu from "./UserMenu";
 import LanguageTranslator from "./LanguageTranslate";
+import { FaEnvelope, FaPhone } from "react-icons/fa";
 
 const NavbarComponent = () => {
   const [showDropdown, setShowDropdown] = useState(false);
@@ -33,11 +34,12 @@ const NavbarComponent = () => {
       {/* TOP BAR */}
       <div className="topbar d-lg-flex  d-none ">
         <Container className="d-flex justify-content-between align-items-center">
-          <div><strong>Multirising Exports</strong></div>
+       
           <div className="d-flex gap-3">
-            <span>📧 multirisingexports@gmail.com</span>
-            <span>|</span>
-            <span>📞 +91 98765 43210</span>
+            <span>  <FaEnvelope/>  multirisingexports@gmail.com</span>
+            <span> <FaEnvelope/>  info@multirisingexports.com</span>
+            <span> <FaEnvelope/>  infomultirisingexports@gmail.com</span>
+            <span>    <FaPhone style={{ transform: "rotate(90deg)", marginRight: "8px" }} />  +91 76192 10277</span>
           </div>
           <LanguageTranslator />
         </Container>
