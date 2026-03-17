@@ -44,8 +44,8 @@ const HeroSection = () => {
     Premium Areca Leaf Products
   </h1>
 
-  <p className="hero-subtitle">
-    Eco-friendly • Sustainable • Export Quality
+  <p className="text-white">
+   <b> Eco-friendly • Sustainable • Export Quality</b>
   </p>
 
   <button

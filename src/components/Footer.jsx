@@ -47,9 +47,9 @@ const Footer = () => {
 
             <ul className="footer-links">
 
-              <li><Link to="/">Home</Link></li>
-              <li><Link to="/products">Products</Link></li>
-              <li><Link to="/about">About Us</Link></li>
+              <li><Link to="/" className="text-white">Home</Link></li>
+              <li><Link to="/products" className="text-white">Products</Link></li>
+              <li><Link to="/about" className="text-white">About Us</Link></li>
            
 
             </ul>
@@ -87,10 +87,10 @@ const Footer = () => {
 
             <ul className="footer-links">
 
-              <li><Link to="/privacy-policy">Privacy Policy</Link></li>
-              <li><Link to="/terms">Terms & Conditions</Link></li>
-              <li><Link to="/shipping-policy">Shipping Policy</Link></li>
-              <li><Link to="/refund-policy">Refund Policy</Link></li>
+              <li><Link to="/privacy-policy" className="text-white">Privacy Policy</Link></li>
+              <li><Link to="/terms" className="text-white">Terms & Conditions</Link></li>
+              <li><Link to="/shipping-policy" className="text-white">Shipping Policy</Link></li>
+              <li><Link to="/refund-policy" className="text-white">Refund Policy</Link></li>
 
             </ul>
 
@@ -104,13 +104,33 @@ const Footer = () => {
 
         <hr className="footer-line" />
 
-        <div className="text-center">
+    <div className="container border-top py-3">
+  <div className="row align-items-center">
+    
+    {/* Left Side */}
+    <div className="col-md-6 text-center text-md-start">
+      <small className="text-white">
+        © {new Date().getFullYear()} Multirising Exports. All Rights Reserved.
+      </small>
+    </div>
 
-          <small>
-            © {new Date().getFullYear()} Multirising Exports. All Rights Reserved.
-          </small>
+    {/* Right Side */}
+    <div className="col-md-6 text-center text-md-end">
+      <small className="text-white">
+        Powered By{" "}
+        <a 
+          href="https://www.innomatricstech.com/" 
+          target="_blank" 
+          rel="noopener noreferrer"
+          className="fw-bold text-decoration-none text-white"
+        >
+          Innomatrics Tech
+        </a>
+      </small>
+    </div>
 
-        </div>
+  </div>
+</div>
 
       </Container>
 

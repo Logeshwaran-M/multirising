@@ -1,7 +1,19 @@
 import React, { useEffect, useState } from "react";
-import { Container, Card, Row, Col, Badge, Spinner, Button } from "react-bootstrap";
-import { collection, getDocs, query, orderBy } from "firebase/firestore";
+import { Container, Card, Row, Col, Badge, Spinner, Button, ProgressBar } from "react-bootstrap";
+import {
+  collection,
+  query,
+  orderBy,
+  onSnapshot,
+  updateDoc,
+  doc
+} from "firebase/firestore";
 import { db, auth } from "../firebase";
+import { onAuthStateChanged } from "firebase/auth";
+import jsPDF from "jspdf";
+import { FaBox, FaCogs, FaTruck, FaCheckCircle, FaFlag, FaGlobeAsia  } from "react-icons/fa";
+import "../components/css/myorders.css"
+import Swal from "sweetalert2";
 
 function MyOrders() {
 
@@ -11,11 +23,9 @@ const [activeTab,setActiveTab] = useState("India");
 
 useEffect(()=>{
 
-const fetchOrders = async () => {
+let unsubscribeOrders;
 
-try{
-
-const user = auth.currentUser;
+const unsubscribeAuth = onAuthStateChanged(auth,(user)=>{
 
 if(!user){
 setLoading(false);
@@ -27,9 +37,9 @@ collection(db,"users",user.uid,"orders"),
 orderBy("createdAt","desc")
 );
 
-const snapshot = await getDocs(q);
+unsubscribeOrders = onSnapshot(q,(snapshot)=>{
 
-const ordersData = snapshot.docs.map(doc => ({
+const ordersData = snapshot.docs.map(doc=>({
 id:doc.id,
 ...doc.data()
 }));
@@ -37,42 +47,125 @@ id:doc.id,
 setOrders(ordersData);
 setLoading(false);
 
-}catch(error){
+});
 
-console.error("Error fetching orders:",error);
-setLoading(false);
+});
 
-}
-
+return ()=>{
+unsubscribeAuth();
+if(unsubscribeOrders) unsubscribeOrders();
 };
-
-fetchOrders();
 
 },[]);
 
 const getStatusColor = (status)=>{
+
 switch(status){
-case "Delivered":
-return "success";
-case "Shipped":
-return "primary";
-case "Cancelled":
-return "danger";
-default:
-return "warning";
+case "Delivered": return "success";
+case "Shipped": return "primary";
+case "Processing": return "info";
+case "Cancelled": return "danger";
+default: return "warning";
 }
+
 };
 
-const filteredOrders = orders.filter(order => order.orderType === activeTab);
+
+
+
+
+const cancelOrder = async (orderId) => {
+
+const result = await Swal.fire({
+title: "Cancel Order?",
+text: "Are you sure you want to cancel this order?",
+icon: "warning",
+showCancelButton: true,
+confirmButtonColor: "#d33",
+cancelButtonColor: "#6c757d",
+confirmButtonText: "Yes, Cancel it",
+cancelButtonText: "No"
+});
+
+if(result.isConfirmed){
+
+try{
+
+const user = auth.currentUser;
+
+const orderRef = doc(db,"users",user.uid,"orders",orderId);
+
+await updateDoc(orderRef,{
+orderStatus:"Cancelled"
+});
+
+setOrders(prev =>
+prev.map(order =>
+order.id === orderId
+? {...order,orderStatus:"Cancelled"}
+: order
+)
+);
+
+Swal.fire(
+"Cancelled!",
+"Your order has been cancelled.",
+"success"
+);
+
+}catch(error){
+
+console.error(error);
+
+Swal.fire(
+"Error",
+"Something went wrong",
+"error"
+);
+
+}
+
+}
+
+};
+const downloadInvoice = (order)=>{
+
+const docPDF = new jsPDF();
+
+docPDF.setFontSize(18);
+docPDF.text("Order Invoice",20,20);
+
+docPDF.setFontSize(12);
+
+docPDF.text(`Order ID: ${order.id}`,20,40);
+docPDF.text(`Order Type: ${order.orderType}`,20,50);
+docPDF.text(`Status: ${order.orderStatus}`,20,60);
+docPDF.text(`Total Amount: ₹${order.totalAmount}`,20,70);
+
+let y = 90;
+
+order.products?.forEach(p=>{
+docPDF.text(`${p.name} - ₹${p.price} x ${p.quantity}`,20,y);
+y+=10;
+});
+
+docPDF.save(`Invoice-${order.id}.pdf`);
+
+};
+
+const filteredOrders = orders.filter(o=>o.orderType===activeTab);
 
 if(loading){
+
 return(
 
 <div className="text-center mt-5">
 <Spinner animation="border"/>
 <p className="mt-3">Loading your orders...</p>
 </div>
+
 );
+
 }
 
 return(
@@ -83,54 +176,54 @@ return(
 🛍️ My Orders
 </h2>
 
-{/* Toggle Buttons */}
+{/* Tabs */}
 
-<div className="text-center mb-4">
+<div className="orders-tabs">
 
-<Button
-className="me-2"
-variant={activeTab==="India" ? "success" : "outline-success"}
+<div
+className={`tab ${activeTab === "India" ? "active" : ""}`}
 onClick={()=>setActiveTab("India")}
-
 >
+<FaFlag className="tab-icon"/>
+<span>Indian Orders</span>
+</div>
 
-🇮🇳 Indian Orders </Button>
-
-<Button
-variant={activeTab==="International" ? "primary" : "outline-primary"}
+<div
+className={`tab ${activeTab === "International" ? "active" : ""}`}
 onClick={()=>setActiveTab("International")}
-
 >
-
-🌍 International Orders </Button>
+<FaGlobeAsia className="tab-icon"/>
+<span>International Orders</span>
+</div>
 
 </div>
 
-{filteredOrders.length === 0 && (
+{filteredOrders.length===0 && (
 
 <div className="text-center mt-5">
+
 <h5>No {activeTab} Orders</h5>
+
 <p className="text-muted">
 You have not placed any {activeTab.toLowerCase()} orders yet.
 </p>
+
 </div>
 
 )}
 
-{filteredOrders.map(order => (
+{filteredOrders.map(order=>(
 
 <Card
 key={order.id}
 className="mb-4 border-0 shadow rounded-4"
-style={{background:"#ffffff"}}
-
 >
 
 <Card.Body>
 
 <Row>
 
-{/* Product Section */}
+{/* Products */}
 
 <Col md={8}>
 
@@ -141,14 +234,16 @@ Order ID: {order.id}
 </h6>
 
 <small className="text-muted">
+
 {order.createdAt?.seconds
 ? new Date(order.createdAt.seconds*1000).toLocaleDateString()
 : ""}
+
 </small>
 
 </div>
 
-{order.products.map(product => {
+{order.products?.map(product=>{
 
 const quantity = product.quantity || 1;
 
@@ -192,7 +287,7 @@ className="rounded shadow-sm"
 
 </Col>
 
-{/* Order Summary */}
+{/* Summary */}
 
 <Col md={4}>
 
@@ -226,6 +321,47 @@ Order Summary
 
 <hr/>
 
+{/* Attractive Tracking */}
+
+<p className="fw-semibold mb-3">
+Order Tracking
+</p>
+
+<div className="order-tracking">
+
+<div className={`step ${order.orderStatus ? "active" : ""}`}>
+<div className="icon"><FaBox /></div>
+<p>Ordered</p>
+</div>
+
+<div className={`step ${
+["Processing","Shipped","Delivered"].includes(order.orderStatus)
+? "active" : ""
+}`}>
+<div className="icon"><FaCogs /></div>
+<p>Processing</p>
+</div>
+
+<div className={`step ${
+["Shipped","Delivered"].includes(order.orderStatus)
+? "active" : ""
+}`}>
+<div className="icon"><FaTruck /></div>
+<p>Shipped</p>
+</div>
+
+<div className={`step ${
+order.orderStatus==="Delivered"
+? "active" : ""
+}`}>
+<div className="icon"><FaCheckCircle /></div>
+<p>Delivered</p>
+</div>
+
+</div>
+
+<hr/>
+
 <p className="fw-semibold mb-1">
 Delivery Address
 </p>
@@ -235,6 +371,33 @@ Delivery Address
 {order.address?.city}<br/>
 {order.address?.state || order.address?.country}
 </small>
+
+{/* Buttons */}
+
+{order.orderStatus!=="Delivered" &&
+order.orderStatus!=="Cancelled" && (
+
+<Button
+variant="danger"
+className="w-100 mt-3"
+onClick={()=>cancelOrder(order.id)}
+>
+
+Cancel Order
+
+</Button>
+
+)}
+
+<Button
+variant="dark"
+className="w-100 mt-2"
+onClick={()=>downloadInvoice(order)}
+>
+
+Download Invoice
+
+</Button>
 
 </div>
 

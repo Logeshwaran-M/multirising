@@ -10,6 +10,7 @@ import {
 } from "firebase/auth";
 import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
+import Swal from "sweetalert2";
 
 function Auth() {
 
@@ -71,7 +72,12 @@ function Auth() {
           name: user.displayName
         }));
 
-        alert("Login Successful 🎉");
+       Swal.fire({
+  icon: "success",
+  title: "Login Successful 🎉",
+  showConfirmButton: false,
+  timer: 1500
+});
 
         navigate("/");
 
@@ -102,14 +108,23 @@ function Auth() {
           name: formData.name
         }));
 
-        alert("Registration Successful 🎉");
+      Swal.fire({
+  icon: "success",
+  title: "Registration Successful 🎉",
+  showConfirmButton: false,
+  timer: 1500
+});
 
         navigate("/");
       }
 
     } catch (error) {
       console.error(error);
-      alert(error.message);
+    Swal.fire({
+  icon: "error",
+  title: "Login Failed",
+  text: error.message
+});
     }
 
     setLoading(false);

@@ -120,12 +120,26 @@ function Products() {
 
           <div className="hero-text" data-aos="fade-right">
 
-            <h1>🌿 Discover Natural & Eco Products</h1>
+          <h1 
+  className="fw-bold display-4 text-white"
+  style={{ 
+    color: "#1a1a1a",
+    textShadow: "2px 2px 6px rgba(0,0,0,0.3)"
+  }}
+>
+  🌿 Discover Natural & Eco Products
+</h1>
 
-            <p>
-              Sustainable, eco-friendly products crafted with care.
-              Shop natural items that are good for you and the planet.
-            </p>
+<p 
+  className="fw-bold fs-5 text-white"
+  style={{ 
+    color: "#333",
+    textShadow: "1px 1px 4px rgba(0,0,0,0.25)"
+  }}
+>
+  Sustainable, eco-friendly products crafted with care.
+  Shop natural items that are good for you and the planet.
+</p>
 
             <button
               className="shop-btn"
