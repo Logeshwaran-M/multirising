@@ -81,7 +81,7 @@ const Footer = () => {
 
             <p>
               <FaEnvelope className="me-2" />
-              info@multirisingexports.com
+             support@multirising.com
             </p>
 
             <p>

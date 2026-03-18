@@ -36,9 +36,9 @@ const NavbarComponent = () => {
         <Container className="d-flex justify-content-between align-items-center">
        
           <div className="d-flex gap-3">
-            <span>  <FaEnvelope/>  multirisingexports@gmail.com</span>
-            <span> <FaEnvelope/>  info@multirisingexports.com</span>
+           
             <span> <FaEnvelope/>  infomultirisingexports@gmail.com</span>
+             <span>  <FaEnvelope/>  support@multirising.com</span>
             <span>    <FaPhone style={{ transform: "rotate(90deg)", marginRight: "8px" }} />  +91 76192 10277</span>
           </div>
           <LanguageTranslator />

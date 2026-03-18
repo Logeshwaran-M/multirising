@@ -34,7 +34,7 @@ body {
   text-align: center;
 }
 
-/* ================= NAV LINKS ================= */
+/* ================= NAV LINKS ================ */
 .navbar-nav .nav-link {
   color:green !important;
   font-weight: 500;
@@ -55,8 +55,10 @@ body {
   transition: width 0.3s ease;
 }
 
-.navbar{
-  top:35px !important;
+.navbar {
+  top: 30px !important;   /* match reduced topbar height */
+  min-height: 50px;       /* reduce navbar row height */
+  padding: 0.3rem 0.5rem; /* smaller vertical padding */
 }
 
 /* When topbar hidden (mobile) remove gap */
@@ -615,8 +617,8 @@ border-radius:3px;
 .topbar{
 background:#0f9d7a;
 color:white;
-font-size:14px;
-height:40px;
+font-size:15px;
+height:35px;
 display:flex;
 align-items:center;
 position:fixed;
