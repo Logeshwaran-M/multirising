@@ -38,7 +38,7 @@ const NavbarComponent = () => {
           <div className="d-flex gap-3">
            
             <span> <FaEnvelope/>  infomultirisingexports@gmail.com</span>
-             <span>  <FaEnvelope/>  support@multirising.com</span>
+             <span>  <FaEnvelope/>  support@multirisingexports.com</span>
             <span>    <FaPhone style={{ transform: "rotate(90deg)", marginRight: "8px" }} />  +91 76192 10277</span>
           </div>
           <LanguageTranslator />
