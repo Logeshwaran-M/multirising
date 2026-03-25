@@ -5,12 +5,8 @@
   "type": "module",
 
   "scripts": {
-    "lint": "echo 'skip lint'",
-    "serve": "firebase emulators:start --only functions",
-    "shell": "firebase functions:shell",
-    "start": "npm run shell",
-    "deploy": "firebase deploy --only functions",
-    "logs": "firebase functions:log"
+     "start": "node index.js",
+  "dev": "nodemon index.js"
   },
 
   "engines": {
