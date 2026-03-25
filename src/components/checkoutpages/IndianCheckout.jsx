@@ -18,15 +18,73 @@ const buyNowProduct = location.state?.product;
 
 const productsToShow = buyNowProduct ? [buyNowProduct] : cartItems;
 
-const [formData,setFormData] = useState({
-firstName:"",
-lastName:"",
-email:"",
-phone:"",
-address:"",
-city:"",
-state:"Karnataka",
-pinCode:""
+const handlePayment = async () => {
+  try {
+    // 1️⃣ Create Razorpay order from backend
+    const res = await fetch("http://localhost:5000/create-razorpay-order", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ amount: finalTotal, currency: "INR" }),
+    });
+
+    const orderData = await res.json();
+
+    if (!orderData || !orderData.id) {
+      alert("Payment order creation failed");
+      return;
+    }
+
+    // 2️⃣ Razorpay options
+    const options = {
+      key:import.meta.env.VITE_RAZORPAY_KEY,
+      amount: orderData.amount,
+      currency: orderData.currency,
+      name: "Your Shop Name",
+      description: "Order Payment",
+      order_id: orderData.id,
+      prefill: {
+        name: `${formData.firstName} ${formData.lastName}`,
+        email: formData.email,
+        contact: formData.phone,
+      },
+      theme: { color: "#28a745" },
+
+      // ✅ Payment Success Handler
+      handler: function (response) {
+        console.log("Payment Successful:", response);
+
+        // ✅ Call order placement AFTER payment
+        handlePlaceOrder();
+      },
+
+      // Optional: Payment failed handler
+      modal: {
+        ondismiss: function () {
+          alert("Payment cancelled");
+        },
+      },
+    };
+
+    const rzp = new window.Razorpay(options);
+    rzp.open();
+  } catch (err) {
+    console.error(err);
+    alert("Payment failed. Try again.");
+  }
+};
+
+const [formData, setFormData] = useState({
+  firstName: "",
+  lastName: "",
+  email: "",
+  phone: "",
+  addressLine1: "",
+  addressLine2: "",
+  landmark: "",
+  city: "",
+  state: "Karnataka",
+  pinCode: "",
+  country: "India"
 });
 
 const indianStates = [
@@ -58,7 +116,7 @@ if(
 !formData.firstName ||
 !formData.email ||
 !formData.phone ||
-!formData.address ||
+ !formData.addressLine1 ||
 !formData.city ||
 !formData.state ||
 !formData.pinCode
@@ -155,10 +213,24 @@ onChange={handleChange}
 />
 
 <Form.Control
-className="mb-3"
-name="address"
-placeholder="Address"
-onChange={handleChange}
+  className="mb-3"
+  name="addressLine1"
+  placeholder="Address Line 1"
+  onChange={handleChange}
+/>
+
+<Form.Control
+  className="mb-3"
+  name="addressLine2"
+  placeholder="Address Line 2"
+  onChange={handleChange}
+/>
+
+<Form.Control
+  className="mb-3"
+  name="landmark"
+  placeholder="Landmark"
+  onChange={handleChange}
 />
 
 <Row>
@@ -206,7 +278,7 @@ className="mt-4 w-100 fw-bold"
 variant="success"
 size="lg"
 style={{borderRadius:"10px"}}
-onClick={handlePlaceOrder}
+  onClick={handlePayment}
 
 >
 
