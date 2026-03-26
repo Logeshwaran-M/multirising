@@ -9,8 +9,8 @@ import { auth } from "../../firebase";
 function CheckoutInternational() {
   const API_URL =
   window.location.hostname === "localhost"
-    ? "https://YOUR-PROJECT.vercel.app"
-    : "";
+    ? "https://multirising.vercel.app"
+    : "https://multirising.vercel.app";
 
   const { cartItems, total } = useCart();
   const navigate = useNavigate();
@@ -151,6 +151,7 @@ function CheckoutInternational() {
         "Content-Type": "application/json",
       },
     body: JSON.stringify({
+       type: "international",
   name: data.firstName + " " + data.lastName,
   email: data.email,
   phone: data.phone,

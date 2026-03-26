@@ -51,6 +51,7 @@ const CountriesSection = () => {
   setBulkData({ ...bulkData, [name]: value });
 };
 
+const API_URL = "https://multirising.vercel.app";
 
 const handleBulkSubmit = async (e) => {
   e.preventDefault();
@@ -59,6 +60,35 @@ const handleBulkSubmit = async (e) => {
     await addDoc(collection(db, "bulkOrders"), bulkData);
 
     toast.success("Request submitted successfully!");
+  } catch (err) {
+    console.error(err);
+    toast.error("Something went wrong");
+  }
+
+    try {
+    // ✅ 1. Save to Firestore
+    await addDoc(collection(db, "bulkOrders"), bulkData);
+
+    // ✅ 2. Send Email via Vercel API
+    const res = await fetch(`${API_URL}/api/send-bulk-order`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+     body: JSON.stringify({ ...bulkData, type: "bulk" }),
+    });
+
+    const result = await res.json();
+
+    if (!res.ok) {
+      throw new Error(result.error || "Email failed");
+    }
+
+    toast.success("Request submitted & email sent!");
+    
+    // ✅ Clear form
+    setBulkData({});
+
   } catch (err) {
     console.error(err);
     toast.error("Something went wrong");

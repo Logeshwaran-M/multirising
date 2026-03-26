@@ -2,17 +2,15 @@ import nodemailer from "nodemailer";
 
 export default async function handler(req, res) {
 
-  // ✅ CORS FIX
+  // ✅ CORS
   res.setHeader("Access-Control-Allow-Origin", "*");
   res.setHeader("Access-Control-Allow-Methods", "POST, OPTIONS");
   res.setHeader("Access-Control-Allow-Headers", "Content-Type");
 
-  // ✅ Handle preflight
   if (req.method === "OPTIONS") {
     return res.status(200).end();
   }
 
-  // ✅ Allow only POST
   if (req.method !== "POST") {
     return res.status(405).json({ message: "Method not allowed" });
   }
@@ -33,51 +31,133 @@ export default async function handler(req, res) {
       },
     });
 
-    // ✅ Product list
-    const productList = data.products
-      ?.map(p => `<li>${p.name} × ${p.quantity} (₹${p.price})</li>`)
-      .join("");
+    const type = data.type;
 
-    // 📧 ADMIN EMAIL
-    await transporter.sendMail({
-      from: process.env.EMAIL_USER,
-      to: process.env.EMAIL_USER,
-      subject: "🚀 New International Order",
-      html: `
-        <h2>New Order</h2>
-        <p><b>Name:</b> ${data.name}</p>
-        <p><b>Email:</b> ${data.email}</p>
-        <p><b>Phone:</b> ${data.phone}</p>
-        <p><b>Country:</b> ${data.country}</p>
+    // ✅ SAFE PRODUCT LIST
+    const productList = Array.isArray(data.products)
+      ? data.products.map(p => `<li>${p.name} × ${p.quantity} (₹${p.price})</li>`).join("")
+      : "No products";
 
-        <h3>Products:</h3>
-        <ul>${productList}</ul>
+    // =========================
+    // 📦 BULK ORDER
+    // =========================
+    if (type === "bulk") {
 
-        <h3>Total: ₹${data.total}</h3>
-      `,
-    });
+      await transporter.sendMail({
+        from: process.env.EMAIL_USER,
+        to: process.env.EMAIL_USER,
+        subject: "📦 New Bulk Order Request",
+        html: `
+          <h2>Bulk Order Request</h2>
+          <p><b>Name:</b> ${data.name}</p>
+          <p><b>Email:</b> ${data.email}</p>
+          <p><b>Phone:</b> ${data.phone}</p>
+          <p><b>Country:</b> ${data.country}</p>
+          <p><b>Quantity:</b> ${data.quantity}</p>
+          <p><b>Message:</b> ${data.message || "N/A"}</p>
+        `,
+      });
 
-    // 📧 CUSTOMER EMAIL
-    await transporter.sendMail({
-      from: process.env.EMAIL_USER,
-      to: data.email,
-      subject: "Order Received ✅",
-      html: `
-        <h2>Thank you ${data.name} 😊</h2>
-        <p>Your order has been received.</p>
-        <p>We will contact you shortly.</p>
+      await transporter.sendMail({
+        from: process.env.EMAIL_USER,
+        to: data.email,
+        subject: "Bulk Request Received ✅",
+        html: `
+          <h2>Thank you ${data.name} 😊</h2>
+          <p>Your bulk order request has been received.</p>
+          <p>We will contact you soon.</p>
+        `,
+      });
 
-        <h3>Total: ₹${data.total}</h3>
+    }
 
-        <br/>
-        <p>Regards,<br/><b>Your Brand</b></p>
-      `,
-    });
+    // =========================
+    // 🌍 INTERNATIONAL ORDER
+    // =========================
+    else if (type === "international") {
+
+      await transporter.sendMail({
+        from: process.env.EMAIL_USER,
+        to: process.env.EMAIL_USER,
+        subject: "🌍 New International Order",
+        html: `
+          <h2>International Order</h2>
+          <p><b>Name:</b> ${data.name}</p>
+          <p><b>Email:</b> ${data.email}</p>
+          <p><b>Phone:</b> ${data.phone}</p>
+          <p><b>Country:</b> ${data.country}</p>
+
+          <h3>Products:</h3>
+          <ul>${productList}</ul>
+
+          <h3>Total: ₹${data.total}</h3>
+        `,
+      });
+
+      await transporter.sendMail({
+        from: process.env.EMAIL_USER,
+        to: data.email,
+        subject: "Order Confirmed 🌍",
+        html: `
+          <h2>Thank you ${data.name} 😊</h2>
+          <p>Your international order has been placed.</p>
+          <p>Total: ₹${data.total}</p>
+        `,
+      });
+
+    }
+
+    // =========================
+    // 🇮🇳 INDIAN ORDER
+    // =========================
+    else if (type === "indian") {
+
+      await transporter.sendMail({
+        from: process.env.EMAIL_USER,
+        to: process.env.EMAIL_USER,
+        subject: "🇮🇳 New Indian Order",
+        html: `
+          <h2>Indian Order</h2>
+          <p><b>Name:</b> ${data.name}</p>
+          <p><b>Email:</b> ${data.email}</p>
+          <p><b>Phone:</b> ${data.phone}</p>
+          <p><b>City:</b> ${data.city}</p>
+          <p><b>State:</b> ${data.state}</p>
+          <p><b>Pincode:</b> ${data.pincode}</p>
+
+          <h3>Products:</h3>
+          <ul>${productList}</ul>
+
+          <h3>Total: ₹${data.total}</h3>
+        `,
+      });
+
+      await transporter.sendMail({
+        from: process.env.EMAIL_USER,
+        to: data.email,
+        subject: "Order Confirmed 🇮🇳",
+        html: `
+          <h2>Thank you ${data.name} 🙏</h2>
+          <p>Your order has been successfully placed.</p>
+          <p>We will deliver soon.</p>
+
+          <p><b>Total:</b> ₹${data.total}</p>
+        `,
+      });
+
+    }
+
+    // =========================
+    // ❌ DEFAULT
+    // =========================
+    else {
+      return res.status(400).json({ error: "Invalid order type" });
+    }
 
     return res.status(200).json({ success: true });
 
   } catch (error) {
     console.error("Email Error:", error);
-    return res.status(500).json({ error: "Email failed" });
+    return res.status(500).json({ error: error.message });
   }
 }

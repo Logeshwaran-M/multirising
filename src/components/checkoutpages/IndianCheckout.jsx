@@ -7,6 +7,10 @@ import { placeOrder } from "../Services/orderService";
 import { auth } from "../../firebase";
 
 function CheckoutIndia() {
+  const API_URL =
+  window.location.hostname === "localhost"
+    ? "https://multirising.vercel.app"
+    : "https://multirising.vercel.app";
 
 const { cartItems, total } = useCart();
 const navigate = useNavigate();
