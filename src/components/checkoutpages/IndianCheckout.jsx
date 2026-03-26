@@ -21,7 +21,7 @@ const productsToShow = buyNowProduct ? [buyNowProduct] : cartItems;
 const handlePayment = async () => {
   try {
     // 1️⃣ Create Razorpay order from backend
-    const res = await fetch("http://localhost:5000/create-razorpay-order", {
+    const res = await fetch("https://multirising-1.onrender.com/create-razorpay-order", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ amount: finalTotal, currency: "INR" }),
