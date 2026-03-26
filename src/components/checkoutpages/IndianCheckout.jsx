@@ -55,6 +55,7 @@ const handlePayment = async () => {
 
         // ✅ Call order placement AFTER payment
         handlePlaceOrder();
+        navigate("/orders");
       },
 
       // Optional: Payment failed handler
