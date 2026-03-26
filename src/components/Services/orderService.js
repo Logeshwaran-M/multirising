@@ -18,7 +18,7 @@ export const placeOrder = async (userId, orderData) => {
     console.log("✅ Order saved:", docRef.id);
 
     // 2️⃣ Send to backend (Shiprocket)
-    const response = await fetch("http://localhost:5000/create-order", {
+    const response = await fetch("https://multirising-1.onrender.com/create-order", {
       method: "POST",
       headers: {
         "Content-Type": "application/json"
