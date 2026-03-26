@@ -60,3 +60,7 @@ box-shadow:0 18px 35px rgba(0,0,0,0.15);
 background: linear-gradient(135deg,#f0fdf4,#dcfce7);
 padding:60px 0;
 }
+
+.bulk-order-section {
+  background: linear-gradient(135deg, #f5f7fa, #c3cfe2);
+}

@@ -7,6 +7,10 @@ import { placeOrder } from "../Services/orderService";
 import { auth } from "../../firebase";
 
 function CheckoutInternational() {
+  const API_URL =
+  window.location.hostname === "localhost"
+    ? "https://YOUR-PROJECT.vercel.app"
+    : "";
 
   const { cartItems, total } = useCart();
   const navigate = useNavigate();
@@ -135,10 +139,48 @@ function CheckoutInternational() {
         pinCode: data.zipCode
       }
     };
+    try {
 
+    // ✅ 1. SAVE ORDER (your existing)
     await placeOrder(user.uid, orderData);
+
+    // ✅ 2. SEND EMAIL (NEW)
+    await fetch(`${API_URL}/api/send-bulk-order`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    body: JSON.stringify({
+  name: data.firstName + " " + data.lastName,
+  email: data.email,
+  phone: data.phone,
+  country: data.country,
+  total: finalTotal,
+
+  products: productsToShow.map(p => ({
+    name: p.name,
+    price: p.price,
+    quantity: p.quantity || 1
+  })),
+
+  address: {
+    city: data.city,
+    state: data.state,
+    zipCode: data.zipCode
+  },
+
+  message: "International Order from Website"
+}),
+    });
+
+    // ✅ 3. SUCCESS
     setShowPopup(true);
-  };
+
+  } catch (error) {
+    console.error(error);
+    alert("Something went wrong");
+  }
+};
 
   return (
     <Container className="p-5 mt-5">

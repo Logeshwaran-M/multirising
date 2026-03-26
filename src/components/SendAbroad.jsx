@@ -15,6 +15,7 @@ import { useState, useEffect } from "react";
 
 import { collection, getDocs } from "firebase/firestore";
 import { db } from "../firebase";
+import { addDoc } from "firebase/firestore";
 
 import AOS from "aos";
 import "aos/dist/aos.css";
@@ -42,6 +43,27 @@ const CountriesSection = () => {
   const [products, setProducts] = useState([]);
   const [searchTerm, setSearchTerm] = useState("");
   const [selectedCategory, setSelectedCategory] = useState("");
+  const [bulkData, setBulkData] = useState({});
+
+
+  const handleBulkChange = (e) => {
+  const { name, value } = e.target;
+  setBulkData({ ...bulkData, [name]: value });
+};
+
+
+const handleBulkSubmit = async (e) => {
+  e.preventDefault();
+
+  try {
+    await addDoc(collection(db, "bulkOrders"), bulkData);
+
+    toast.success("Request submitted successfully!");
+  } catch (err) {
+    console.error(err);
+    toast.error("Something went wrong");
+  }
+};
 
   const filteredProducts = products.filter((product) => {
 
@@ -287,6 +309,91 @@ const CountriesSection = () => {
         </Row>
 
       </div>
+
+      <div className="bulk-order-section py-5 bg-white">
+
+  <Container>
+
+    <h2 className="main-heading text-center mb-3">
+      Bulk Orders <span>Worldwide</span>
+    </h2>
+
+    <p className="text-center text-muted mb-4">
+      Need large quantity or custom design? Submit your request and we’ll contact you.
+    </p>
+
+    <Row className="justify-content-center">
+
+      <Col md={8}>
+
+        <Card className="p-4 shadow-sm border-0 rounded-4">
+
+          <Form onSubmit={handleBulkSubmit}>
+
+            <Form.Control
+              name="name"
+              placeholder="Full Name"
+              onChange={handleBulkChange}
+              className="mb-3"
+            />
+
+            <Form.Control
+              name="email"
+              placeholder="Email"
+              onChange={handleBulkChange}
+              className="mb-3"
+            />
+
+            <Form.Control
+              name="phone"
+              placeholder="Phone Number"
+              onChange={handleBulkChange}
+              className="mb-3"
+            />
+
+            <Form.Select
+              name="country"
+              onChange={handleBulkChange}
+              className="mb-3"
+            >
+              <option>Select Country</option>
+              <option>USA</option>
+              <option>UK</option>
+              <option>UAE</option>
+              <option>Australia</option>
+            </Form.Select>
+
+            <Form.Control
+              name="quantity"
+              placeholder="Quantity"
+              onChange={handleBulkChange}
+              className="mb-3"
+            />
+
+            <Form.Control
+              as="textarea"
+              rows={3}
+              name="message"
+              placeholder="Requirements"
+              onChange={handleBulkChange}
+              className="mb-3"
+            />
+
+            <Button type="submit" className="w-100">
+              Submit Bulk Request
+            </Button>
+
+          </Form>
+
+        </Card>
+
+      </Col>
+
+    </Row>
+
+  </Container>
+
+</div>
 
       {/* PROCESS */}
 

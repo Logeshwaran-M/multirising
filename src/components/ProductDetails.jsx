@@ -205,17 +205,6 @@ function ProductDetails() {
 
           </div>
 
-
-          {/* Extra Info */}
-
-          <div className="mt-4 p-3 bg-light rounded-3">
-
-            <p className="mb-1">🚚 Free Delivery Available</p>
-            <p className="mb-1">🔄 7 Days Easy Return</p>
-            <p className="mb-0">🌿 100% Eco Friendly</p>
-
-          </div>
-
         </Col>
 
       </Row>
@@ -299,7 +288,7 @@ function ProductDetails() {
             Cancel
           </Button>
 
-          <Button variant="success" onClick={()=>navigate("/login")}>
+          <Button variant="success" onClick={()=>navigate("/auth")}>
             Login Now
           </Button>
 

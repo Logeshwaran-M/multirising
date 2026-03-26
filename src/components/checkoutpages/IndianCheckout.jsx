@@ -34,6 +34,11 @@ const handlePayment = async () => {
       return;
     }
 
+     if (!/^\d{10}$/.test(formData.phone)) {
+    alert("Please enter a valid 10-digit phone number");
+    return;
+  }
+
     // 2️⃣ Razorpay options
     const options = {
       key:import.meta.env.VITE_RAZORPAY_KEY,

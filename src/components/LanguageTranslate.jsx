@@ -13,7 +13,7 @@ const LanguageTranslator = () => {
       new window.google.translate.TranslateElement(
         {
           pageLanguage: "en",
-          includedLanguages: "en,zh-CN,ar,sw,es",
+         includedLanguages: "en,fr,de,it,es,ru,zh-CN,ja,id,bn,ar,vi,sv,tl,fa,th,ms,ur",
           layout: window.google.translate.TranslateElement.InlineLayout.SIMPLE,
         },
         "google_translate_element"
