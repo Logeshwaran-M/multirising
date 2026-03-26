@@ -24,6 +24,12 @@ import "./css/abroad.css";
 
 const CountriesSection = () => {
 
+
+   const API_URL =
+  window.location.hostname === "localhost"
+    ? "https://multirising.vercel.app"
+    : "https://multirising.vercel.app";
+    
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
@@ -51,7 +57,7 @@ const CountriesSection = () => {
   setBulkData({ ...bulkData, [name]: value });
 };
 
-const API_URL = "https://multirising.vercel.app";
+
 
 const handleBulkSubmit = async (e) => {
   e.preventDefault();
