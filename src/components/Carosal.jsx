@@ -12,7 +12,7 @@ import img8 from "../assets/country/UAE.png";
 import img9 from "../assets/country/uk.png";
 import img10 from "../assets/country/USA.avif";
 import img11 from "../assets/country/china.jpg";
-import img12 from "../assets/country/indonesia.jpg";
+import img12 from "../assets/country/Indonesia.jpg";
 import img13 from "../assets/country/Bangladesh.png";
 import img14 from "../assets/country/russia.jpg";
 import img15 from "../assets/country/Mexico.webp";
