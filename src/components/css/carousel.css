@@ -6,7 +6,8 @@
 .scroll-track {
   display: flex;
   gap: 40px; /* space between items */
-  animation: scroll 10s linear infinite;
+   width: max-content;
+  animation: scroll 30s linear infinite;
 }
 
 .scroll-track > * {
