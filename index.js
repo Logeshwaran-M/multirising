@@ -3,6 +3,7 @@ import axios from "axios";
 import cors from "cors";
 import dotenv from "dotenv";
 import Razorpay from "razorpay";
+import { parsePhoneNumberFromString } from "libphonenumber-js";
 
 
 dotenv.config();
@@ -83,8 +84,7 @@ app.post("/create-order", async (req, res) => {
       "Saudi Arabia": "SA"
     };
 
-    const countryName = address.country || "India";
-    const countryCode = countryMap[countryName] || countryName;
+    const countryCode = address.country || "IN";
 
     // ✅ Detect International
     const isInternational = countryCode !== "IN" ? 1 : 0;
@@ -113,15 +113,29 @@ app.post("/create-order", async (req, res) => {
       phone: address.phone
     };
 
-     const rawPhone = String(cleanAddress.phone || "").trim().replace(/\D/g, "");
+    const rawPhone = String(cleanAddress.phone || "").trim();
 
-// Shiprocket format
-const billingPhone = (cleanAddress.phone || "")
-  .toString()
-  .trim()
-  .replace(/\D/g, "");
-  const finalBillingPhone = isInternational ? billingPhone:`+91${billingPhone}`;
+const phoneNumber = parsePhoneNumberFromString(
+  rawPhone,
+  cleanAddress.country // MUST be ISO like "US", "IN"
+);
+
+if (!phoneNumber || !phoneNumber.isValid()) {
+  return res.status(400).json({
+    success: false,
+    error: "Invalid phone number"
+  });
+}
+
+const finalBillingPhone = phoneNumber.format("E.164"); 
+// Example: +919876543210 / +14155552671
     // ✅ VALIDATION (SMART)
+    if (finalBillingPhone.length < 8) {
+  return res.status(400).json({
+    success: false,
+    error: "Invalid phone length"
+  });
+}
     if (
       !cleanAddress.firstName ||
       !cleanAddress.address ||
@@ -167,6 +181,7 @@ const billingPhone = (cleanAddress.phone || "")
 
 // Then use in payload
 billing_phone: finalBillingPhone,
+shipping_phone: finalBillingPhone,
 
         shipping_is_billing: true,
 
