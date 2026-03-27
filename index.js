@@ -90,13 +90,16 @@ app.post("/create-order", async (req, res) => {
     // ✅ Detect International
     const isInternational = countryCode !== "IN" ? 1 : 0;
 
-    const rawPincode =
+   const rawPincode =
   address.zipCode ||
+  address.zip ||
   address.pinCode ||
   address.pincode ||
   "";
-
-const cleanPincode = rawPincode.toString().trim();
+const cleanPincode = (rawPincode || "").toString().trim();
+if(!cleanPincode) {
+  console.warn("⚠️ Pincode is empty after cleaning:", rawPincode);
+}
     // 🧹 CLEAN ADDRESS
     const cleanAddress = {
       firstName: address.firstName?.trim(),
