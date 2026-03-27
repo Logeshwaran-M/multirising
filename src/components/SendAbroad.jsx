@@ -403,6 +403,7 @@ const handleBulkSubmit = async (e) => {
               name="name"
               placeholder="Full Name"
               onChange={handleBulkChange}
+               value={bulkData.name || ""} 
               className="mb-3"
             />
 
@@ -410,6 +411,7 @@ const handleBulkSubmit = async (e) => {
               name="email"
               placeholder="Email"
               onChange={handleBulkChange}
+                value={bulkData.email || ""}
               className="mb-3"
             />
 
@@ -417,6 +419,7 @@ const handleBulkSubmit = async (e) => {
               name="phone"
               placeholder="Phone Number"
               onChange={handleBulkChange}
+                value={bulkData.phone || ""} 
               className="mb-3"
             />
 
@@ -424,7 +427,8 @@ const handleBulkSubmit = async (e) => {
   name="country"
   onChange={handleBulkChange}
   className="mb-3"
-  value={bulkData.country}
+ 
+   value={bulkData.country || ""} 
 >
   <option value="">Select Country</option>
   {countries.map((c, idx) => (
@@ -436,6 +440,7 @@ const handleBulkSubmit = async (e) => {
               name="quantity"
               placeholder="Quantity"
               onChange={handleBulkChange}
+               value={bulkData.quantity || ""} 
               className="mb-3"
             />
 
@@ -445,6 +450,7 @@ const handleBulkSubmit = async (e) => {
               name="message"
               placeholder="Requirements"
               onChange={handleBulkChange}
+               value={bulkData.message || ""} 
               className="mb-3"
             />
 
