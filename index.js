@@ -84,11 +84,19 @@ app.post("/create-order", async (req, res) => {
       "Saudi Arabia": "SA"
     };
 
-    const countryCode = address.country || "IN";
+   const countryCode =
+  countryMap[address.country] || address.country || "IN";
 
     // ✅ Detect International
     const isInternational = countryCode !== "IN" ? 1 : 0;
 
+    const rawPincode =
+  address.zipCode ||
+  address.pinCode ||
+  address.pincode ||
+  "";
+
+const cleanPincode = rawPincode.toString().trim();
     // 🧹 CLEAN ADDRESS
     const cleanAddress = {
       firstName: address.firstName?.trim(),
@@ -107,7 +115,7 @@ app.post("/create-order", async (req, res) => {
 
       country: countryCode,
 
-      pincode: String(address.pinCode || address.zipCode),
+      pincode: cleanPincode,
 
       email: address.email,
       phone: address.phone
@@ -154,6 +162,8 @@ const finalBillingPhone = phoneNumber.format("E.164");
       isInternational
     });
 
+    
+  
     const response = await axios.post(
       "https://apiv2.shiprocket.in/v1/external/orders/create/adhoc",
       {
@@ -169,7 +179,7 @@ const finalBillingPhone = phoneNumber.format("E.164");
         billing_last_name: cleanAddress.lastName,
         billing_address: cleanAddress.address,
         billing_city: cleanAddress.city,
-        billing_pincode: cleanAddress.pincode,
+        billing_pincode: cleanPincode,
 
         // ❗ fallback for international
         billing_state: cleanAddress.state || "NA",
