@@ -146,6 +146,33 @@ export default async function handler(req, res) {
       });
 
     }
+      else if (type === "contact") {
+
+      await transporter.sendMail({
+        from: process.env.EMAIL_USER,
+        to: process.env.EMAIL_USER,
+        subject: "📧 New Contact Us Message",
+        html: `
+          <h2>New Contact Us Message</h2>
+          <p><b>Name:</b> ${data.name}</p>
+          <p><b>Email:</b> ${data.email}</p>
+          <p><b>Phone:</b> ${data.phone || "N/A"}</p>
+          <p><b>Message:</b> ${data.message}</p>
+        `,
+      });
+
+      await transporter.sendMail({
+        from: process.env.EMAIL_USER,
+        to: data.email,
+        subject: "Message Received ✅",
+        html: `
+          <h2>Thank you ${data.name} 😊</h2>
+          <p>We have received your message and will get back to you soon.</p>
+        `,
+      });
+
+    }
+
 
     // =========================
     // ❌ DEFAULT

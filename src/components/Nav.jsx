@@ -179,6 +179,9 @@ const NavbarComponent = () => {
               <Nav.Link as={NavLink} to="/about" className="nav-item-custom px-4">
                 About Us
               </Nav.Link>
+              <Nav.Link as={NavLink} to="/contact" className="nav-item-custom px-4">
+                Contact Us
+              </Nav.Link>
             </Nav>
           </Navbar.Collapse>
         </Container>

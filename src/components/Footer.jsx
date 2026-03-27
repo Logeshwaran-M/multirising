@@ -40,7 +40,7 @@ const Footer = () => {
     <FaFacebookF />
   </a>
 
-  <a href="#" className="me-3 text-white fs-5">
+  <a href="https://www.instagram.com/multirisingexports?igsh=MTYwNW5qZjY5d3lycQ==" className="me-3 text-white fs-5">
     <FaInstagram />
   </a>
 

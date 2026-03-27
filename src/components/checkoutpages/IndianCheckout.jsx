@@ -142,6 +142,25 @@ totalAmount: finalTotal,
 address: formData
 };
 
+// Send email after order placed
+try {
+  await fetch(`${API_URL}/api/send-order-email`, {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({
+       type: "India",
+      name: formData.firstName + " " + formData.lastName,
+      email: formData.email,
+      phone: formData.phone,
+      address: formData,
+      products: productsToShow,
+      total: finalTotal
+    }),
+  });
+} catch (err) {
+  console.error("Failed to send order email:", err);
+}
+
 await placeOrder(user.uid, orderData);
 
 setShowPopup(true);

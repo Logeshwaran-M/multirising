@@ -26,6 +26,7 @@ import Terms from "./components/legal/Terms";
 import ShippingPolicy from "./components/legal/ShippingPolicy";
 import RefundPolicy from "./components/legal/RefundPolicy";
 import Wishlist from "./components/WishList";
+import ContactUs from "./components/Contact";
 
 
 // Dummy pages (create these files)
@@ -69,6 +70,7 @@ function App() {
 
         {/* About Page */}
         <Route path="/about" element={<About/>} />
+        <Route path="/contact" element={<ContactUs/>}/>
 
         {/* 404 Page */}
         <Route

@@ -12,7 +12,7 @@ function CheckoutInternational() {
     ? "https://multirising.vercel.app"
     : "https://multirising.vercel.app";
 
-  const { cartItems, total } = useCart();
+  const { cartItems, total,clearCart } = useCart(); 
   const navigate = useNavigate();
   const location = useLocation();
 
@@ -175,7 +175,9 @@ function CheckoutInternational() {
     });
 
     // ✅ 3. SUCCESS
+     clearCart();
     setShowPopup(true);
+     navigate("/orders");
 
   } catch (error) {
     console.error(error);
