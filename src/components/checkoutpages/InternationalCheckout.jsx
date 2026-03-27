@@ -5,7 +5,6 @@ import { FaArrowLeft } from "react-icons/fa";
 import { useNavigate, useLocation } from "react-router-dom";
 import { placeOrder } from "../Services/orderService";
 import { auth } from "../../firebase";
-import { getCode } from "country-list";
 
 function CheckoutInternational() {
   const API_URL =
@@ -24,7 +23,7 @@ const [loading, setLoading] = useState(false);
 
   
 
-const countries = [
+  const countries = [
   "Afghanistan","Albania","Algeria","Andorra","Angola","Antigua and Barbuda","Argentina",
   "Armenia","Australia","Austria","Azerbaijan","Bahamas","Bahrain","Bangladesh","Barbados",
   "Belarus","Belgium","Belize","Benin","Bhutan","Bolivia","Bosnia and Herzegovina","Botswana",
@@ -50,13 +49,6 @@ const countries = [
   "United Arab Emirates","United Kingdom","United States","Uruguay","Uzbekistan","Vanuatu","Vatican City",
   "Venezuela","Vietnam","Yemen","Zambia","Zimbabwe"
 ];
-
-const countryWithISO = countries
-  .map(name => ({
-    name,
-    code: getCode(name)
-  }))
-  .filter(c => c.code); // remove invalid
 
   // ✅ STATE
   const [data, setData] = useState({
@@ -148,7 +140,7 @@ const countryWithISO = countries
     return;
   }
   setLoading(true); 
-
+  
   const orderData = {
     orderType: "International",
     products: productsToShow,
@@ -301,13 +293,11 @@ const countryWithISO = countries
               <Row>
                 <Col>
                   <Form.Select name="country" value={data.country} onChange={handleChange}>
-  <option value="">Select Country</option>
-  {countryWithISO.map((c, i) => (
-    <option key={i} value={c.code}>
-      {c.name}
-    </option>
-  ))}
-</Form.Select>
+                    <option value="">Select Country</option>
+                    {countries.map((c,i)=>(
+                      <option key={i}>{c}</option>
+                    ))}
+                  </Form.Select>
                 </Col>
 
                 <Col>
