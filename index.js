@@ -220,7 +220,7 @@ shipping_phone: finalBillingPhone,
     console.log("✅ Shiprocket Success:", response.data);
 
    // ✅ CHECK SHIPROCKET RESPONSE PROPERLY
-if (response.data?.status !== 1) {
+if (response.data?.status_code !== 1)
   console.error("❌ Shiprocket API Error:", response.data);
 
   return res.status(400).json({
