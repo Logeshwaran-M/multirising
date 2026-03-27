@@ -204,20 +204,31 @@ billing_phone: finalBillingPhone,
 
     console.log("✅ Shiprocket Success:", response.data);
 
-    res.json({
-      success: true,
-      type: isInternational ? "International" : "Domestic",
-      data: response.data
-    });
+   // ✅ CHECK SHIPROCKET RESPONSE PROPERLY
+if (response.data?.status !== 1) {
+  console.error("❌ Shiprocket API Error:", response.data);
+
+  return res.status(400).json({
+    success: false,
+    error: response.data
+  });
+}
+
+// ✅ SUCCESS ONLY WHEN STATUS = 1
+res.json({
+  success: true,
+  type: isInternational ? "International" : "Domestic",
+  data: response.data
+});
 
   } catch (error) {
-    console.error("❌ Shiprocket Error:", error.response?.data || error.message);
+  console.error("❌ Shiprocket Error:", error.response?.data || error.message);
 
-    res.status(500).json({
-      success: false,
-      error: error.response?.data || error.message
-    });
-  }
+  return res.status(400).json({
+    success: false,
+    error: error.response?.data || error.message
+  });
+}
 });
 
 /* 🚀 Start Server */

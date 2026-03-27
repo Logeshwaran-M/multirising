@@ -63,7 +63,9 @@ const handlePayment = async () => {
         console.log("Payment Successful:", response);
 
         // ✅ Call order placement AFTER payment
+        
         handlePlaceOrder();
+        clearCart();
         navigate("/orders");
       },
 

@@ -98,86 +98,115 @@ function CheckoutInternational() {
     ? buyNowProduct.price * (buyNowProduct.quantity || 1)
     : total;
 
-  const handlePlaceOrder = async () => {
+ const handlePlaceOrder = async () => {
+  const user = auth.currentUser;
 
-    const user = auth.currentUser;
+  if (!user) {
+    alert("Please login first");
+    return;
+  }
 
-    if (!user) {
-      alert("Please login first");
-      return;
+  if (
+    !data.firstName ||
+    !data.email ||
+    !data.phone ||
+    !data.addressLine1 ||
+    !data.city ||
+    !data.state ||
+    !data.country ||
+    !data.zipCode
+  ) {
+    alert("Please fill all fields");
+    return;
+  }
+
+  const orderData = {
+    orderType: "International",
+    products: productsToShow,
+    totalAmount: finalTotal,
+    address: {
+      firstName: data.firstName,
+      lastName: data.lastName,
+      email: data.email,
+      phone: data.phone,
+      addressLine1: data.addressLine1,
+      addressLine2: data.addressLine2,
+      landmark: data.landmark,
+      city: data.city,
+      state: data.state,
+      country: data.country,
+      pinCode: data.zipCode
     }
+  };
 
-    if (
-      !data.firstName ||
-      !data.email ||
-      !data.phone ||
-      !data.addressLine1 ||
-      !data.city ||
-      !data.state ||
-      !data.country ||
-      !data.zipCode
-    ) {
-      alert("Please fill all fields");
-      return;
-    }
+  try {
+    // ✅ 1. CALL YOUR BACKEND (SHIPROCKET)
+    const shipRes = await fetch("https://multirising-1.onrender.com/create-order", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(orderData),
+    });
 
-    const orderData = {
-      orderType: "International",
-      products: productsToShow,
-      totalAmount: finalTotal,
-      address: {
-        firstName: data.firstName,
-        lastName: data.lastName,
-        email: data.email,
-        phone: data.phone,
-        addressLine1: data.addressLine1,
-        addressLine2: data.addressLine2,
-        landmark: data.landmark,
-        city: data.city,
-        state: data.state,
-        country: data.country,
-        pinCode: data.zipCode
-      }
-    };
+    let shipData;
     try {
+      shipData = await shipRes.json();
+    } catch (err) {
+      const text = await shipRes.text();
+      console.error("Shiprocket HTML error:", text);
+      alert("Server error");
+      return;
+    }
 
-    // ✅ 1. SAVE ORDER (your existing)
-    await placeOrder(user.uid, orderData);
+    // ❌ STOP IF SHIPROCKET FAILS
+    if (!shipRes.ok || !shipData.success) {
+      console.error("Shiprocket Failed:", shipData);
+      alert("Shipping failed. Order not placed.");
+      return;
+    }
 
-    // ✅ 2. SEND EMAIL (NEW)
+    // ✅ 2. SAVE ORDER (ONLY AFTER SUCCESS)
+    await placeOrder(user.uid, {
+      ...orderData,
+      shiprocketOrderId: shipData.data?.order_id
+    });
+
+    // ✅ 3. SEND EMAIL
     await fetch(`${API_URL}/api/send-bulk-order`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
       },
-    body: JSON.stringify({
-       type: "international",
-  name: data.firstName + " " + data.lastName,
-  email: data.email,
-  phone: data.phone,
-  country: data.country,
-  total: finalTotal,
-
-  products: productsToShow.map(p => ({
-    name: p.name,
-    price: p.price,
-    quantity: p.quantity || 1
-  })),
-
-  address: {
-    city: data.city,
-    state: data.state,
-    zipCode: data.zipCode
-  },
-
-  message: "International Order from Website"
-}),
+      body: JSON.stringify({
+        type: "international",
+        name: data.firstName + " " + data.lastName,
+        email: data.email,
+        phone: data.phone,
+        country: data.country,
+        total: finalTotal,
+        products: productsToShow.map(p => ({
+          name: p.name,
+          price: p.price,
+          quantity: p.quantity || 1
+        })),
+        address: {
+          city: data.city,
+          state: data.state,
+          zipCode: data.zipCode
+        },
+        message: "International Order from Website"
+      }),
     });
 
-    // ✅ 3. SUCCESS
-     clearCart();
+    // ✅ 4. CLEAR CART
+    clearCart();
+
+    // ✅ 5. SUCCESS UI
     setShowPopup(true);
-     navigate("/orders");
+
+    // ✅ 6. NAVIGATE
+    navigate("/orders");
 
   } catch (error) {
     console.error(error);

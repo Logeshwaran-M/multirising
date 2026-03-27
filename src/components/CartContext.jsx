@@ -11,6 +11,10 @@ export const CartProvider = ({ children }) => {
     return savedCart ? JSON.parse(savedCart) : [];
   });
 
+  const clearCart = () => {
+  setCartItems([]);
+};
+
   // save cart whenever it changes
   useEffect(() => {
     localStorage.setItem("cartItems", JSON.stringify(cartItems));
@@ -75,6 +79,7 @@ export const CartProvider = ({ children }) => {
         decreaseQty,
         removeItem,
         cartCount,
+         clearCart,
         total,
       }}
     >
