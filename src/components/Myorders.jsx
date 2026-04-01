@@ -20,6 +20,41 @@ function MyOrders() {
 const [orders,setOrders] = useState([]);
 const [loading,setLoading] = useState(true);
 const [activeTab,setActiveTab] = useState("India");
+const [showTracking, setShowTracking] = useState(false);
+const [selectedOrder, setSelectedOrder] = useState(null);
+const [trackingData, setTrackingData] = useState(null);
+const [trackingLoading, setTrackingLoading] = useState(false);
+
+
+const API_URL = "http://localhost:5000";
+
+const handleTrackOrder = async (order) => {
+  if (!order.awb) {
+    Swal.fire("No Tracking", "AWB not available for this order", "info");
+    return;
+  }
+
+  setSelectedOrder(order);
+  setShowTracking(true);
+  setTrackingLoading(true);
+
+  try {
+    const res = await fetch(`${API_URL}/api/track/${order.awb}`);
+    const data = await res.json();
+
+    if (!data.success || data.data?.tracking_data?.error) {
+      throw new Error(data.data?.tracking_data?.error || "Tracking failed");
+    }
+
+    setTrackingData(data.data);
+
+  } catch (err) {
+    console.error(err);
+    Swal.fire("Error", err.message, "error");
+  } finally {
+    setTrackingLoading(false);
+  }
+};
 
 useEffect(()=>{
 
@@ -373,6 +408,15 @@ Delivery Address
 </small>
 
 {/* Buttons */}
+
+
+<Button
+  variant="primary"
+  className="w-100 mt-2"
+  onClick={() => handleTrackOrder(order)}
+>
+  Track Order
+</Button>
 
 {order.orderStatus!=="Delivered" &&
 order.orderStatus!=="Cancelled" && (

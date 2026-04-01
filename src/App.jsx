@@ -27,6 +27,9 @@ import ShippingPolicy from "./components/legal/ShippingPolicy";
 import RefundPolicy from "./components/legal/RefundPolicy";
 import Wishlist from "./components/WishList";
 import ContactUs from "./components/Contact";
+import { PayPalScriptProvider } from "@paypal/react-paypal-js";
+import TrackOrder from "./components/TrackOrder";
+import ArecaBlog from "./components/Blog";
 
 
 // Dummy pages (create these files)
@@ -41,12 +44,17 @@ function App() {
     once: true,     // animation happens only once
   });
 }, []);
+const clientId = import.meta.env.VITE_PAYPAL_CLIENT_ID?.trim();
   return (
     <>
      <ToastContainer position="top-right" autoClose={1500} />
       <NavbarComponent />
+     
+
+        {console.log("PayPal Client ID:", import.meta.env.VITE_PAYPAL_CLIENT_ID)}
       <Routes>
         {/* Home Page */}
+    
         <Route path="/" element={<HeroSection />} />
 
         <Route path="/auth"  element={<Auth/>}/>
@@ -83,7 +91,9 @@ function App() {
         />
 
         <Route path="/checkout-india" element={<CheckoutIndia />} />
+             
 <Route path="/checkout-international" element={<CheckoutInternational />} />
+
 <Route path="/orders" element={<MyOrders />} />
 
 <Route path="/privacy-policy" element={<PrivacyPolicy />} />
@@ -91,7 +101,11 @@ function App() {
 <Route path="/shipping-policy" element={<ShippingPolicy />} />
 <Route path="/refund-policy" element={<RefundPolicy />} />
 <Route path="/wishlist" element={<Wishlist/>}/>
+<Route path="/track" element={<TrackOrder/>}/>
+<Route path="/blog" element={<ArecaBlog/>}/>
+
       </Routes>
+     
       <Footer/>
     </>
   );

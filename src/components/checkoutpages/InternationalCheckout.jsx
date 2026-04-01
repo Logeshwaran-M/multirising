@@ -5,6 +5,7 @@ import { FaArrowLeft } from "react-icons/fa";
 import { useNavigate, useLocation } from "react-router-dom";
 import { placeOrder } from "../Services/orderService";
 import { auth } from "../../firebase";
+import { PayPalScriptProvider, PayPalButtons } from "@paypal/react-paypal-js";
 
 function CheckoutInternational() {
   const API_URL =
@@ -64,6 +65,19 @@ const [loading, setLoading] = useState(false);
     country: "",
     zipCode: ""
   });
+
+  const isFormValid = () => {
+  return (
+    data.firstName &&
+    data.email &&
+    data.phone &&
+    data.addressLine1 &&
+    data.city &&
+    data.state &&
+    data.country &&
+    data.zipCode
+  );
+};
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -238,8 +252,15 @@ const [loading, setLoading] = useState(false);
   
   } 
 };
+const INR_TO_USD = 83; // approx
+const usdAmount = (finalTotal / INR_TO_USD).toFixed(2);
 
+
+const convertToUSD = (priceInINR) => {
+  return priceInINR / INR_TO_USD; // ❗ no toFixed here
+};
   return (
+   
     <Container className="p-5 mt-5">
 
       {/* HEADER */}
@@ -305,14 +326,39 @@ const [loading, setLoading] = useState(false);
                 </Col>
               </Row>
 
-              <Button
-  className="mt-4 w-100"
-  variant="success"
-  onClick={handlePlaceOrder}
-  disabled={loading}
->
-  {loading ? "Placing Order..." : `Pay ₹${finalTotal}`}
-</Button>
+            <PayPalButtons
+  style={{ layout: "vertical", color: "gold", shape: "rect", label: "pay" }}
+  className="mt-3"
+   disabled={!isFormValid()}   // 🔥 THIS LINE FIXES IT
+  createOrder={async (data, actions) => {
+    // call backend to create PayPal order
+    
+    const res = await fetch("https://multirising-1.onrender.com/create-paypal-order", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ amount: usdAmount, currency: "USD" }),
+    });
+    const order = await res.json();
+    return order.id; // return order ID
+  }}
+onApprove={async (data) => {
+  console.log("APPROVED DATA:", data);
+
+  const res = await fetch(
+    `https://multirising-1.onrender.com/capture-paypal-order/${data.orderID}`,
+    { method: "POST" }
+  );
+
+  const captureData = await res.json();
+  console.log("CAPTURE RESPONSE:", captureData);
+
+  await handlePlaceOrder();
+}}
+  onError={(err) => {
+    console.error("PayPal Error:", err);
+    alert("Payment failed. Try again.");
+  }}
+/>
 
             </Form>
 
@@ -332,10 +378,10 @@ const [loading, setLoading] = useState(false);
                   <img src={item.image} width={60} alt="" />
                   <div className="ms-3">
                     <h6>{item.name}</h6>
-                    <small>₹{item.price} × {qty}</small>
+                  <small>${convertToUSD(item.price)} × {qty}</small>
                   </div>
                   <div className="ms-auto">
-                    ₹{item.price * qty}
+                   ${(convertToUSD(item.price) * qty).toFixed(2)}
                   </div>
                 </div>
               );
@@ -344,7 +390,7 @@ const [loading, setLoading] = useState(false);
             <hr/>
             <div className="d-flex justify-content-between">
               <strong>Total</strong>
-              <strong>₹{finalTotal}</strong>
+              <strong>${usdAmount}</strong>
             </div>
 
           </Card>
@@ -367,6 +413,7 @@ const [loading, setLoading] = useState(false);
       </Modal>
 
     </Container>
+
   );
 }
 

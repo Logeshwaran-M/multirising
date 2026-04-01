@@ -103,6 +103,7 @@ export default async function handler(req, res) {
         html: `
           <h2>Thank you ${data.name} 😊</h2>
           <p>Your international order has been placed.</p>
+            <ul>${productList}</ul>
           <p>Total: ₹${data.total}</p>
         `,
       });

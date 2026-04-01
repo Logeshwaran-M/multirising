@@ -1,6 +1,7 @@
 import heroImage from "../assets/palm.jpg";
 import { Container, Row, Col, Form, Button, Card } from "react-bootstrap";
 import { useEffect, useState } from "react";
+import { FaMapMarkerAlt, FaPhoneAlt, FaEnvelope } from "react-icons/fa";
 
 export default function ContactUs() {
   const API_URL =
@@ -63,102 +64,87 @@ export default function ContactUs() {
       {/* Hero Section */}
       <section
         style={{
-          paddingTop: "40px",
           backgroundImage: `url(${heroImage})`,
           backgroundSize: "cover",
           backgroundPosition: "center",
-          height: "300px",
+          height: "320px",
           position: "relative",
         }}
       >
         <div
           style={{
-            backgroundColor: "rgba(0,0,0,0.5)",
+            background: "linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6))",
             height: "100%",
-            width: "100%",
             display: "flex",
             flexDirection: "column",
             justifyContent: "center",
             alignItems: "center",
             color: "white",
-            textAlign: "center",
           }}
         >
-          <h1 className="fw-bold">CONTACT US</h1>
-          <div
-            style={{
-              width: "60px",
-              height: "3px",
-              backgroundColor: "white",
-              margin: "10px auto",
-            }}
-          ></div>
+          <h1 className="fw-bold display-5">Contact Us</h1>
+          <p className="text-light">We’d love to hear from you</p>
         </div>
       </section>
 
-      {/* Contact Form Section */}
-      <section className="py-5">
+      {/* Form + Info Section */}
+      <section className="py-5 bg-light">
         <Container>
-          <Row className="justify-content-center">
-            <Col md={8}>
-              <Card className="p-4 shadow-sm rounded-4">
-                <h2 className="fw-bold text-center mb-4">Get in Touch</h2>
+          <Row className="g-4">
+            {/* Contact Form */}
+            <Col md={6}>
+              <Card className="p-4 shadow-lg border-0 rounded-4">
+                <h3 className="fw-bold mb-3">Get in Touch</h3>
 
                 {success && (
-                  <p className="text-success text-center">
-                    🎉 Your message has been sent successfully!
-                  </p>
+                  <p className="text-success">✅ Message sent successfully!</p>
                 )}
 
                 <Form onSubmit={handleSubmit}>
-                  <Form.Group className="mb-3">
-                    <Form.Control
-                      type="text"
-                      name="name"
-                      placeholder="Your Name"
-                      value={formData.name}
-                      onChange={handleChange}
-                      required
-                    />
-                  </Form.Group>
+                  <Form.Control
+                    className="mb-3"
+                    type="text"
+                    name="name"
+                    placeholder="Your Name"
+                    value={formData.name}
+                    onChange={handleChange}
+                    required
+                  />
 
-                  <Form.Group className="mb-3">
-                    <Form.Control
-                      type="email"
-                      name="email"
-                      placeholder="Your Email"
-                      value={formData.email}
-                      onChange={handleChange}
-                      required
-                    />
-                  </Form.Group>
+                  <Form.Control
+                    className="mb-3"
+                    type="email"
+                    name="email"
+                    placeholder="Your Email"
+                    value={formData.email}
+                    onChange={handleChange}
+                    required
+                  />
 
-                  <Form.Group className="mb-3">
-                    <Form.Control
-                      type="text"
-                      name="phone"
-                      placeholder="Phone (+CountryCode)"
-                      value={formData.phone}
-                      onChange={handleChange}
-                    />
-                  </Form.Group>
+                  <Form.Control
+                    className="mb-3"
+                    type="text"
+                    name="phone"
+                    placeholder="Phone (+CountryCode)"
+                    value={formData.phone}
+                    onChange={handleChange}
+                  />
 
-                  <Form.Group className="mb-3">
-                    <Form.Control
-                      as="textarea"
-                      rows={5}
-                      name="message"
-                      placeholder="Your Message"
-                      value={formData.message}
-                      onChange={handleChange}
-                      required
-                    />
-                  </Form.Group>
+                  <Form.Control
+                    className="mb-3"
+                    as="textarea"
+                    rows={4}
+                    name="message"
+                    placeholder="Your Message"
+                    value={formData.message}
+                    onChange={handleChange}
+                    required
+                  />
 
                   <Button
                     type="submit"
-                    variant="success"
-                    className="w-100 fw-bold"
+                    className="w-100 rounded-pill fw-bold"
+                    style={{ backgroundColor: "#198754", border: "none" }}
                     disabled={loading}
                   >
                     {loading ? "Sending..." : "Send Message"}
@@ -166,6 +152,52 @@ export default function ContactUs() {
                 </Form>
               </Card>
             </Col>
+
+            {/* Contact Info */}
+            <Col md={6}>
+              <Card className="p-4 shadow-lg border-0 rounded-4 mb-4">
+                <h4 className="fw-bold mb-3">
+                  <FaMapMarkerAlt className="me-2 text-success" /> Our Address
+                </h4>
+                <p>No. 14, 22nd Main Road, 11th Cross</p>
+                <p>Raghavendra Layout, Padmanabhanagar</p>
+                <p>Bengaluru, Karnataka - 560070</p>
+
+                <hr />
+
+                <p>
+                  <FaPhoneAlt className="me-2 text-success" /> +91 76192 10277
+                </p>
+                <p>
+                  <FaEnvelope className="me-2 text-success" /> support@multirisingexports.com
+                </p>
+
+                <a
+                  href="https://www.google.com/maps?q=No.14,22nd Main Road,11th Cross,Raghavendra Layout,Padmanabhanagar,Bengaluru,560070"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="btn btn-outline-success mt-2"
+                >
+                  View on Map
+                </a>
+              </Card>
+
+              {/* Map */}
+            </Col>
+          </Row>
+          <Row>
+
+            <Card className="shadow-lg border-0 rounded-4 overflow-hidden mt-3">
+                <iframe
+                  title="Google Map"
+                  width="100%"
+                  height="250"
+                  style={{ border: 0 }}
+                  loading="lazy"
+                  allowFullScreen
+                  src="https://www.google.com/maps?q=No.14,22nd Main Road,11th Cross,Raghavendra Layout,Padmanabhanagar,Bengaluru,560070&output=embed"
+                ></iframe>
+              </Card>
           </Row>
         </Container>
       </section>

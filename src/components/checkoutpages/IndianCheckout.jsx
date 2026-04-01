@@ -12,7 +12,7 @@ function CheckoutIndia() {
     ? "https://multirising.vercel.app"
     : "https://multirising.vercel.app";
 
-const { cartItems, total } = useCart();
+const { cartItems, total,clearCart } = useCart();
 const navigate = useNavigate();
 const location = useLocation();
 
@@ -59,16 +59,36 @@ const handlePayment = async () => {
       theme: { color: "#28a745" },
 
       // ✅ Payment Success Handler
-      handler: function (response) {
-        console.log("Payment Successful:", response);
+    handler: async function (response) {
+  try {
+    const verifyRes = await fetch(
+      "https://multirising-1.onrender.com/verify-payment",
+      {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          ...response,
+          products: productsToShow,
+          totalAmount: finalTotal,
+          address: formData,
+          userId: auth.currentUser?.uid,
+        }),
+      }
+    );
 
-        // ✅ Call order placement AFTER payment
-        
-        handlePlaceOrder();
-        clearCart();
-        navigate("/orders");
-      },
+    const data = await verifyRes.json();
 
+    if (data.success) {
+      clearCart();
+      navigate("/orders");
+    } else {
+      alert("Payment verification failed");
+    }
+  } catch (err) {
+    console.error(err);
+    alert("Something went wrong");
+  }
+},
       // Optional: Payment failed handler
       modal: {
         ondismiss: function () {

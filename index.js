@@ -5,12 +5,106 @@ import dotenv from "dotenv";
 import Razorpay from "razorpay";
 
 
+
+
 dotenv.config();
 
 const app = express();
 app.use(cors());
 app.use(express.json());
 
+
+const PAYPAL_CLIENT = process.env.PAYPAL_CLIENT_ID;
+const PAYPAL_SECRET = process.env.PAYPAL_SECRET;
+const PAYPAL_API = "https://api-m.paypal.com"; // ✅ LIVE // sandbox first
+
+
+
+// Generate Access Token
+async function getPaypalAccessToken() {
+  const auth = Buffer.from(`${PAYPAL_CLIENT}:${PAYPAL_SECRET}`).toString("base64");
+  const { data } = await axios.post(
+    `${PAYPAL_API}/v1/oauth2/token`,
+    "grant_type=client_credentials",
+    {
+      headers: {
+        Authorization: `Basic ${auth}`,
+        "Content-Type": "application/x-www-form-urlencoded",
+      },
+    }
+  );
+  return data.access_token;
+}
+
+// Create PayPal Order
+app.post("/capture-paypal-order/:orderId", async (req, res) => {
+  try {
+    const orderId = req.params.orderId;
+    const accessToken = await getPaypalAccessToken();
+
+    const { data } = await axios.post(
+      `${PAYPAL_API}/v2/checkout/orders/${orderId}/capture`,
+      {},
+      {
+        headers: {
+          Authorization: `Bearer ${accessToken}`,
+          "Content-Type": "application/json",
+        },
+      }
+    );
+
+    res.json(data); // payment details
+  } catch (err) {
+    console.error("❌ Capture Error:", err.response?.data || err.message);
+    res.status(500).json(err.response?.data || err.message);
+  }
+});
+
+// Create PayPal Order
+app.post("/create-paypal-order", async (req, res) => {
+  try {
+    const { amount, currency } = req.body;
+    if (!amount) return res.status(400).json({ error: "Amount is required" });
+
+    const accessToken = await getPaypalAccessToken();
+
+    const orderPayload = {
+      intent: "CAPTURE",
+      purchase_units: [
+        {
+          amount: {
+            currency_code: currency || "USD",
+            value: amount.toString(),
+          },
+        },
+      ],
+    };
+
+    const { data } = await axios.post(
+      `${PAYPAL_API}/v2/checkout/orders`,
+      orderPayload,
+      {
+        headers: {
+          Authorization: `Bearer ${accessToken}`,
+          "Content-Type": "application/json",
+        },
+      }
+    );
+
+    // ✅ Return order ID to frontend
+
+
+  console.log("PAYPAL ORDER:", data); // 👈 MUST show { id: "..." }
+
+ res.json({
+  id: data.id
+});// ✅ IMPORTANT
+
+  } catch (err) {
+    console.error("❌ Create PayPal Order Error:", err.response?.data || err.message);
+    res.status(500).json({ error: err.response?.data || err.message });
+  }
+});
 
 const razorpay = new Razorpay({
   key_id: process.env.RAZORPAY_KEY,
@@ -58,6 +152,7 @@ const getHSN = (category) => {
     default: return "6109";
   }
 };
+
 
 
 /* 📦 Create Order API */
@@ -140,6 +235,9 @@ const billingPhone = (cleanAddress.phone || "")
       isInternational
     });
 
+
+
+    
     const response = await axios.post(
       "https://apiv2.shiprocket.in/v1/external/orders/create/adhoc",
       {
@@ -229,6 +327,47 @@ res.json({
     error: error.response?.data || error.message
   });
 }
+});
+
+// ✅ KEEP THIS OUTSIDE (top-level)
+app.get("/api/track/:awb", async (req, res) => {
+  try {
+    const { awb } = req.params;
+
+    const token = await getShiprocketToken(); // ✅ reuse function
+
+    const trackRes = await axios.get(
+      `https://apiv2.shiprocket.in/v1/external/courier/track/awb/${awb}`,
+      {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      }
+    );
+
+    const data = trackRes.data;
+
+    // ✅ HANDLE EMPTY TRACKING
+    if (!data?.tracking_data || data.tracking_data.shipment_track.length === 0) {
+      return res.status(404).json({
+        success: false,
+        message: "No tracking data available yet (Order not shipped)"
+      });
+    }
+
+    res.json({
+      success: true,
+      data
+    });
+
+  } catch (err) {
+    console.error("Tracking Error:", err.response?.data || err.message);
+
+    res.status(500).json({
+      success: false,
+      error: err.response?.data || err.message
+    });
+  }
 });
 
 /* 🚀 Start Server */
