@@ -421,15 +421,7 @@ Delivery Address
 {order.orderStatus!=="Delivered" &&
 order.orderStatus!=="Cancelled" && (
 
-<Button
-variant="danger"
-className="w-100 mt-3"
-onClick={()=>cancelOrder(order.id)}
->
 
-Cancel Order
-
-</Button>
 
 )}
 
