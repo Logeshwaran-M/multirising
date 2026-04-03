@@ -667,4 +667,9 @@ cursor:pointer;
 color:black;
 }
 
+.form-col {
+  background: linear-gradient(135deg, #d1fae5, #ecfdf5);
+  border-radius: 20px;
+}
+
 

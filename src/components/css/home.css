@@ -277,41 +277,7 @@ width:140px;
 
 }
 
-.call-float {
-  position: fixed;
-  width: 60px;
-  height: 60px;
-  bottom: 100px; /* IMPORTANT: above WhatsApp */
-  right: 20px;
-  background-color: #28a745;
-  color: #fff;
-  border-radius: 50%;
-  text-align: center;
-  font-size: 26px;
-  box-shadow: 2px 2px 10px rgba(0,0,0,0.3);
-  z-index: 9999; /* VERY IMPORTANT */
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.call-float:hover {
-  background-color: #1f8f3a;
-}
-
-/* WhatsApp button (just confirm it's below) */
-.whatsapp-float {
-  position: fixed;
-  width: 60px;
-  height: 60px;
-  bottom: 30px; /* lower than call button */
-  right: 20px;
-  background-color: #25d366;
-  color: #fff;
-  border-radius: 50%;
-  z-index: 9999;
-}
-
+/* Container */
 .contact-float-container {
   position: fixed;
   bottom: 30px;
@@ -324,7 +290,7 @@ width:140px;
   width: 60px;
   height: 60px;
   border-radius: 50%;
-  background: #2983d6;
+  background: linear-gradient(135deg, #198754, #28a745);
   color: #fff;
   border: none;
   font-size: 22px;
@@ -332,9 +298,36 @@ width:140px;
   align-items: center;
   justify-content: center;
   cursor: pointer;
+  box-shadow: 0 5px 20px rgba(0,0,0,0.3);
+  transition: all 0.3s ease;
 }
 
-/* Child Buttons */
+/* Rotate animation */
+
+
+/* Tooltip label */
+.contact-label {
+  position: absolute;
+  right: 70px;
+  bottom: 18px;
+  background: #111;
+  color: #fff;
+  padding: 6px 14px;
+  border-radius: 20px;
+  font-size: 13px;
+  opacity: 0;
+  transform: translateX(10px);
+  transition: 0.3s ease;
+  white-space: nowrap;
+}
+
+/* Show on hover */
+.contact-float-container:hover .contact-label {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+/* Child buttons */
 .child-btn {
   position: absolute;
   right: 0;
@@ -345,6 +338,15 @@ width:140px;
   align-items: center;
   justify-content: center;
   color: #fff;
+  opacity: 0;
+  transform: translateY(20px);
+  transition: all 0.3s ease;
+}
+
+/* Show animation */
+.child-btn.show {
+  opacity: 1;
+  transform: translateY(0);
 }
 
 /* Call */
@@ -357,4 +359,9 @@ width:140px;
 .whatsapp-float {
   bottom: 140px;
   background: #25d366;
+}
+
+/* Hover effect */
+.child-btn:hover {
+  transform: scale(1.1);
 }

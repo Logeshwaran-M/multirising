@@ -75,3 +75,20 @@ margin:20px 0;
 }
 
 }
+
+.footer-desc {
+  color: #f7f7f7;              /* soft white (not harsh) */
+  font-size: 14px;
+  line-height: 1.7;
+  text-align: justify;
+  opacity: 0.9;
+  max-width: 280px;
+}
+
+/* Optional: better on mobile */
+@media (max-width: 768px) {
+  .footer-desc {
+    max-width: 100%;
+    text-align: left;
+  }
+}

@@ -66,30 +66,32 @@ const [open, setOpen] = useState(false);
 
   {/* Main Button */}
   <button
-    className="contact-main-btn"
+    className={`contact-main-btn ${open ? "open" : ""}`}
     onClick={() => setOpen(!open)}
   >
     <FaCommentDots />
   </button>
 
+  {/* Tooltip Text */}
+  <span className="contact-label">Contact Us</span>
+
   {/* Call Button */}
-  {open && (
-    <a href="tel:7619210277" className="call-float child-btn">
-      <FaPhone style={{ transform: "rotate(90deg)" }} />
-    </a>
-  )}
+  <a
+    href="tel:7619210277"
+    className={`call-float child-btn ${open ? "show" : ""}`}
+  >
+    <FaPhone style={{ transform: "rotate(90deg)" }} />
+  </a>
 
   {/* WhatsApp Button */}
-  {open && (
-    <a
-      href="https://wa.me/7619210277"
-      className="whatsapp-float child-btn"
-      target="_blank"
-      rel="noreferrer"
-    >
-      <FaWhatsapp />
-    </a>
-  )}
+  <a
+    href="https://wa.me/7619210277"
+    className={`whatsapp-float child-btn ${open ? "show" : ""}`}
+    target="_blank"
+    rel="noreferrer"
+  >
+    <FaWhatsapp />
+  </a>
 
 </div>
 

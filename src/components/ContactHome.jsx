@@ -86,14 +86,14 @@ export default function ContactSection() {
       </Col>
 
       {/* RIGHT SIDE (FORM) */}
-      <Col md={6}>
-        <Card className="contact-card p-4 border-0 rounded-4">
+      <Col md={6} >
+        <Card className="contact-card p-4 border-0 rounded-4 ">
 
           {success && (
             <p className="text-success">✅ Message sent successfully!</p>
           )}
 
-          <Form onSubmit={handleSubmit}>
+          <Form onSubmit={handleSubmit}  >
             <Form.Control
               className="mb-3 input-field"
               type="text"

@@ -34,7 +34,9 @@ const Footer = () => {
             />
 
            {/* Social Media */}
-
+    <p className="footer-desc mt-4">
+  We provide eco-friendly areca leaf products made from naturally fallen leaves, ensuring sustainability and quality for every use.
+</p>
 
           </Col>
 
