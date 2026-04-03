@@ -418,12 +418,7 @@ Delivery Address
   Track Order
 </Button>
 
-{order.orderStatus!=="Delivered" &&
-order.orderStatus!=="Cancelled" && (
 
-
-
-)}
 
 <Button
 variant="dark"
