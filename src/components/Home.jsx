@@ -1,5 +1,5 @@
 import { Container, Row, Col, Button, Card } from "react-bootstrap";
-import { FaWhatsapp } from "react-icons/fa";
+import { FaWhatsapp ,FaPhone,FaCommentDots } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
 import heroImage from "../assets/hero.png";
 import service1 from "../assets/fsdelivery.jpg";
@@ -14,6 +14,8 @@ import frame from "../assets/frame1.png"
 import frame2 from "../assets/frame2.png"
 import { useEffect } from "react";
 import AOS from "aos";
+import { useState } from "react";
+import ContactSection from "./ContactHome";
 
 const HeroSection = () => {
   const navigate = useNavigate();
@@ -25,6 +27,8 @@ const HeroSection = () => {
     easing: "ease-in-out",
   });
 }, []);
+
+const [open, setOpen] = useState(false);
 
  useEffect(() => {
     window.scrollTo(0, 0);
@@ -58,16 +62,36 @@ const HeroSection = () => {
 </div>
 </div>
 
-      
+<div className="contact-float-container">
 
-  <a
-  href="https://wa.me/7619210277"
-  className="whatsapp-float"
-  target="_blank"
-  rel="noreferrer"
->
-  <FaWhatsapp />
-</a>
+  {/* Main Button */}
+  <button
+    className="contact-main-btn"
+    onClick={() => setOpen(!open)}
+  >
+    <FaCommentDots />
+  </button>
+
+  {/* Call Button */}
+  {open && (
+    <a href="tel:7619210277" className="call-float child-btn">
+      <FaPhone style={{ transform: "rotate(90deg)" }} />
+    </a>
+  )}
+
+  {/* WhatsApp Button */}
+  {open && (
+    <a
+      href="https://wa.me/7619210277"
+      className="whatsapp-float child-btn"
+      target="_blank"
+      rel="noreferrer"
+    >
+      <FaWhatsapp />
+    </a>
+  )}
+
+</div>
 
 
 
@@ -229,7 +253,7 @@ Send Bulk Gifts Abroad
  <Col md={4} data-aos="zoom-in" data-aos-delay="200">
     <div className="feature-box p-4 shadow-sm brand-card-hover h-100">
      <img src={leaf} alt="Eco Friendly" className="feature-img" />
-      <h5 className="mt-3 text-success">🌱 100% Natural & Eco-Friendly</h5>
+      <h5 className="mt-3 text-success"> 100% Natural & Eco-Friendly</h5>
       <p className="text-muted">
         Our products are made from naturally fallen Areca leaves.
         No chemicals, no plastic, no tree cutting — completely
@@ -246,7 +270,7 @@ Send Bulk Gifts Abroad
  <Col md={4} data-aos="zoom-in" data-aos-delay="200">
     <div className="feature-box p-4 shadow-sm brand-card-hover h-100">
     <img src={iso} alt="Export Quality" className="feature-img" />
-      <h5 className="mt-3 text-success">🌍 International Export Standards</h5>
+      <h5 className="mt-3 text-success"> International Export Standards</h5>
       <p className="text-muted">
         Manufactured under strict hygiene and quality control
         processes to meet global export requirements.
@@ -262,7 +286,7 @@ Send Bulk Gifts Abroad
   <Col md={4} data-aos="zoom-in" data-aos-delay="200">
     <div className="feature-box p-4 shadow-sm brand-card-hover h-100">
      <img src={support} alt="Trusted" className="feature-img" />
-      <h5 className="mt-3 text-success">🤝 Trusted by Global Clients</h5>
+      <h5 className="mt-3 text-success"> Trusted by Global Clients</h5>
       <p className="text-muted">
         We serve restaurants, wholesalers, and distributors
         worldwide with reliable service and long-term partnerships.
@@ -276,7 +300,7 @@ Send Bulk Gifts Abroad
 
 </Row>
 </Container>
-
+<ContactSection/>
 
     </section>
   );

@@ -276,3 +276,85 @@ width:140px;
 }
 
 }
+
+.call-float {
+  position: fixed;
+  width: 60px;
+  height: 60px;
+  bottom: 100px; /* IMPORTANT: above WhatsApp */
+  right: 20px;
+  background-color: #28a745;
+  color: #fff;
+  border-radius: 50%;
+  text-align: center;
+  font-size: 26px;
+  box-shadow: 2px 2px 10px rgba(0,0,0,0.3);
+  z-index: 9999; /* VERY IMPORTANT */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.call-float:hover {
+  background-color: #1f8f3a;
+}
+
+/* WhatsApp button (just confirm it's below) */
+.whatsapp-float {
+  position: fixed;
+  width: 60px;
+  height: 60px;
+  bottom: 30px; /* lower than call button */
+  right: 20px;
+  background-color: #25d366;
+  color: #fff;
+  border-radius: 50%;
+  z-index: 9999;
+}
+
+.contact-float-container {
+  position: fixed;
+  bottom: 30px;
+  right: 20px;
+  z-index: 9999;
+}
+
+/* Main Button */
+.contact-main-btn {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  background: #2983d6;
+  color: #fff;
+  border: none;
+  font-size: 22px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+
+/* Child Buttons */
+.child-btn {
+  position: absolute;
+  right: 0;
+  width: 55px;
+  height: 55px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+}
+
+/* Call */
+.call-float {
+  bottom: 70px;
+  background: #28a745;
+}
+
+/* WhatsApp */
+.whatsapp-float {
+  bottom: 140px;
+  background: #25d366;
+}
