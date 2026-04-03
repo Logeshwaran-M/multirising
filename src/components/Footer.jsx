@@ -76,7 +76,7 @@ const Footer = () => {
 
             <p className="fs-5">
               <FaMapMarkerAlt className="me-2" />
-              Karnataka, India
+           Bengaluru, Karnataka - 560070
             </p>
 
           </Col>
