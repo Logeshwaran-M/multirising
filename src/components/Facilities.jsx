@@ -57,7 +57,7 @@ export default function Facilities(){
   <Row className="text-center mb-4">
     <Col>
       <h2
-  className="fw-bold border-bottom border-3 border-success d-inline-block pb-2"
+  className="fw-bold border-bottom border-3 border-success d-inline-block brand-title pb-2"
   data-aos="fade-up"
 >
   Our Facilities
@@ -165,7 +165,7 @@ export default function Facilities(){
         <Container className="py-5">
   <Row className="mb-4 text-center">
     <Col>
-      <h2 className="fw-bold border-bottom border-3 border-success d-inline-block pb-2">
+      <h2 className="fw-bold border-bottom border-3 brand-title border-success d-inline-block pb-2">
         Where Our Areca Plates Shine
       </h2>
       <p className="text-muted mt-3 px-md-5">

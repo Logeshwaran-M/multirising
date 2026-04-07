@@ -204,7 +204,11 @@ const [loading, setLoading] = useState(false);
     // ✅ 2. SAVE ORDER (ONLY AFTER SUCCESS)
     await placeOrder(user.uid, {
       ...orderData,
-      shiprocketOrderId: shipData.data?.order_id
+      shiprocket: {
+    orderId: shipData.data?.order_id,
+    shipmentId: shipData.data?.shipment_id,
+    trackingNumber: shipData.data?.awb_code || "" // store AWB
+  }
     });
 
     // ✅ 3. SEND EMAIL

@@ -24,7 +24,32 @@ const productsToShow = buyNowProduct ? [buyNowProduct] : cartItems;
 
 const handlePayment = async () => {
   try {
-    // 1️⃣ Create Razorpay order from backend
+    const user = auth.currentUser;
+    if (!user) {
+      alert("Please login first");
+      return;
+    }
+
+    // Validate required fields
+    if (
+      !formData.firstName ||
+      !formData.email ||
+      !formData.phone ||
+      !formData.addressLine1 ||
+      !formData.city ||
+      !formData.state ||
+      !formData.pinCode
+    ) {
+      alert("Please fill all delivery address fields");
+      return;
+    }
+
+    if (!/^\d{10}$/.test(formData.phone)) {
+      alert("Please enter a valid 10-digit phone number");
+      return;
+    }
+
+    // 1️⃣ Create Razorpay order
     const res = await fetch("https://multirising-1.onrender.com/create-razorpay-order", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
@@ -32,23 +57,17 @@ const handlePayment = async () => {
     });
 
     const orderData = await res.json();
-
     if (!orderData || !orderData.id) {
       alert("Payment order creation failed");
       return;
     }
 
-     if (!/^\d{10}$/.test(formData.phone)) {
-    alert("Please enter a valid 10-digit phone number");
-    return;
-  }
-
-    // 2️⃣ Razorpay options
+    // 2️⃣ Razorpay checkout
     const options = {
-      key:import.meta.env.VITE_RAZORPAY_KEY,
+      key: import.meta.env.VITE_RAZORPAY_KEY,
       amount: orderData.amount,
       currency: orderData.currency,
-      name: "Your Shop Name",
+      name: "Multirising Exports",
       description: "Order Payment",
       order_id: orderData.id,
       prefill: {
@@ -58,38 +77,76 @@ const handlePayment = async () => {
       },
       theme: { color: "#28a745" },
 
-      // ✅ Payment Success Handler
-    handler: async function (response) {
-  try {
-    const verifyRes = await fetch(
-      "https://multirising-1.onrender.com/verify-payment",
-      {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          ...response,
-          products: productsToShow,
-          totalAmount: finalTotal,
-          address: formData,
-          userId: auth.currentUser?.uid,
-        }),
-      }
-    );
+      handler: async function (response) {
+        try {
+          // 3️⃣ Verify Razorpay payment
+          const verifyRes = await fetch("https://multirising-1.onrender.com/verify-payment", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify(response),
+          });
+          const verifyData = await verifyRes.json();
 
-    const data = await verifyRes.json();
+          if (!verifyData.success) {
+            alert("Payment verification failed");
+            return;
+          }
 
-    if (data.success) {
-      clearCart();
-      navigate("/orders");
-    } else {
-      alert("Payment verification failed");
-    }
-  } catch (err) {
-    console.error(err);
-    alert("Something went wrong");
-  }
-},
-      // Optional: Payment failed handler
+          // 4️⃣ Create Shiprocket order
+          const shipRes = await fetch("https://multirising-1.onrender.com/create-order", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({
+              address: formData,
+              products: productsToShow,
+              totalAmount: finalTotal,
+            }),
+          });
+          const shipData = await shipRes.json();
+
+          if (!shipData.success) {
+            alert("Order placed but shipping failed");
+          }
+
+          // 5️⃣ Send Order Email
+          try {
+            await fetch(`${API_URL}/api/send-order-email`, {
+              method: "POST",
+              headers: { "Content-Type": "application/json" },
+              body: JSON.stringify({
+                type: "India",
+                name: formData.firstName + " " + formData.lastName,
+                email: formData.email,
+                phone: formData.phone,
+                address: formData,
+                products: productsToShow,
+                total: finalTotal,
+              }),
+            });
+          } catch (emailErr) {
+            console.error("Failed to send order email:", emailErr);
+          }
+
+          // 6️⃣ Save everything in Firebase
+          await placeOrder(user.uid, {
+            orderType: "India",
+            products: productsToShow,
+            totalAmount: finalTotal,
+            address: formData,
+            shiprocket: shipData.data || {},
+            paymentDetails: response,
+          });
+
+          // 7️⃣ Clear cart & show popup
+          clearCart();
+          setShowPopup(true);
+
+        } catch (err) {
+          console.error(err);
+          alert("Something went wrong after payment");
+        }
+      },
+
       modal: {
         ondismiss: function () {
           alert("Payment cancelled");
@@ -161,7 +218,8 @@ const orderData = {
 orderType:"India",
 products: productsToShow,
 totalAmount: finalTotal,
-address: formData
+address: formData,
+
 };
 
 // Send email after order placed
@@ -451,4 +509,4 @@ Go to My Orders </Button>
 
 }
 
-export default CheckoutIndia;
+export default CheckoutIndia;  

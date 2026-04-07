@@ -786,4 +786,30 @@ color:black;
   box-shadow: 0 15px 35px rgba(0, 0, 0, 0.4);
 }
 
+.user-dropdown .dropdown-toggle {
+  display: flex !important;
+  align-items: center !important;
+  gap: 6px;
+}
 
+.user-dropdown .dropdown-toggle::after {
+  margin-left: 6px;   /* spacing for arrow */
+  vertical-align: middle;
+}
+
+
+.profile-avatar {
+  width: 70px;
+  height: 70px;
+  border-radius: 50%;
+  background: #28a745;
+  color: white;
+  font-size: 28px;
+  font-weight: bold;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  margin: auto;
+}

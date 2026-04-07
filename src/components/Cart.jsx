@@ -43,7 +43,7 @@ return(
 
 <div className="text-center">
 
-<h4>Your cart is empty 😔</h4>
+<h4>Your cart is empty </h4>
 <p>Looks like you haven’t added anything yet.</p>
 
 <Button variant="dark" onClick={()=>navigate("/products")} className="mt-3">

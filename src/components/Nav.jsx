@@ -101,14 +101,20 @@ const NavbarComponent = () => {
           <div className="d-flex align-items-center ms-auto">
             <Nav className="d-flex flex-row gap-3 align-items-center">
               {user ? (
-                <NavDropdown
-                  title={<FaUser size={20} style={greenIconStyle} />}
-                  id="user-dropdown"
-                  align="end"
-                  className="user-dropdown"
-                >
-                  <UserMenu />
-                </NavDropdown>
+              <NavDropdown
+  title={
+    <div className="d-flex align-items-center gap-2">
+      <FaUser size={18} style={greenIconStyle} />
+      <span className="fw-semibold">{user?.name || "User"}</span>
+    </div>
+  }
+  id="user-dropdown"
+  align="end"
+  className="user-dropdown"
+>
+  <UserMenu />
+</NavDropdown>
+               
               ) : (
                 <Nav.Link as={NavLink} to="/auth" className="icon-hover">
                   <FaUser size={20} style={greenIconStyle} />

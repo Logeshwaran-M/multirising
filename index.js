@@ -3,7 +3,7 @@ import axios from "axios";
 import cors from "cors";
 import dotenv from "dotenv";
 import Razorpay from "razorpay";
-
+import crypto from "crypto";
 
 
 
@@ -120,6 +120,32 @@ app.post("/create-razorpay-order", async (req, res) => {
   };
   const order = await razorpay.orders.create(options);
   res.json(order);
+});
+
+app.post("/verify-payment", async (req, res) => {
+  try {
+    const { razorpay_order_id, razorpay_payment_id, razorpay_signature } = req.body;
+
+    if (!razorpay_order_id || !razorpay_payment_id || !razorpay_signature) {
+      return res.status(400).json({ success: false, error: "Missing fields for verification" });
+    }
+
+    // Create the expected signature
+    const generated_signature = crypto
+      .createHmac("sha256", process.env.RAZORPAY_SECRET)
+      .update(razorpay_order_id + "|" + razorpay_payment_id)
+      .digest("hex");
+
+    if (generated_signature === razorpay_signature) {
+      // ✅ Signature is valid
+      return res.json({ success: true });
+    } else {
+      return res.status(400).json({ success: false, error: "Invalid signature" });
+    }
+  } catch (err) {
+    console.error("❌ Razorpay Verify Error:", err.message);
+    return res.status(500).json({ success: false, error: err.message });
+  }
 });
 
 /* 🔐 Generate Shiprocket Token */
@@ -316,7 +342,11 @@ if (response.data?.status !== 1) {
 res.json({
   success: true,
   type: isInternational ? "International" : "Domestic",
-  data: response.data
+  data: {
+    order_id: response.data.order_id,
+    shipment_id: response.data.shipment_id,
+    awb_code: response.data.shipment_tracking[0]?.awb || "" // may be empty initially
+  }
 });
 
   } catch (error) {

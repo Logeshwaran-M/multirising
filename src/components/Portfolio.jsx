@@ -4,6 +4,8 @@ import heroImage from "../assets/palm.jpg"; // your background image
  import tining from "../assets/tining.webp"
  import { useEffect } from "react";
  import AOS from "aos";
+ import { FaFire } from "react-icons/fa";
+ import "./css/portfolio.css"
 
 const PortfolioBanner = () => {
 
@@ -54,7 +56,7 @@ const PortfolioBanner = () => {
   className="text-center py-5 rounded-4"
   data-aos="fade-up"
 >
-       <h2 className="fw-bold  d-inline-block border-bottom border-3 border-primary pb-2">
+       <h2 className="fw-bold brand-title  d-inline-block border-bottom border-3 border-success pb-2">
          Product Portfolio
         </h2>
         <p className="text-muted mb-0 px-md-5">
@@ -79,7 +81,7 @@ const PortfolioBanner = () => {
 
     {/* Right Side Content */}
     <Col md={6}>
-      <h3 className="fw-bold d-inline-block border-bottom border-3 border-primary pb-2">
+      <h3 className="fw-bold d-inline-block border-bottom border-3  brand-title  border-success pb-2">
         Our Eco-Friendly Process
       </h3>
 
@@ -111,7 +113,7 @@ const PortfolioBanner = () => {
 
 
 <Container className="py-5 text-center">
-  <h3 className="fw-bold border-bottom border-3 border-success d-inline-block pb-2">
+  <h3 className="fw-bold border-bottom brand-title border-3 border-success d-inline-block pb-2">
     Why Choose Our Areca Products?
   </h3>
 
@@ -120,7 +122,7 @@ const PortfolioBanner = () => {
     <Col md={4} data-aos="fade-up" data-aos-delay="100">
       <div className="p-4 shadow rounded-4 mb-2 h-100 bg-white card">
         <img width={"100%"} src="https://cdn.vectorstock.com/i/preview-1x/90/97/biodegradable-icon-vector-29299097.jpg" alt="Biodegradable" className="feature-icon" />
-        <h5>🌍 100% Biodegradable</h5>
+        <h5> 100% Biodegradable</h5>
         <p className="text-muted">
           Completely decomposes within 60–90 days without harming the environment.
         </p>
@@ -128,19 +130,21 @@ const PortfolioBanner = () => {
     </Col>
 
     <Col md={4} data-aos="fade-up" data-aos-delay="300">
-      <div className="p-4 shadow mb-2 rounded-4 bg-light h-100 card">
-        <img  src="https://t4.ftcdn.net/jpg/07/86/72/79/360_F_786727946_37tj8pcfhSVegkVe3BxbccFJWvEm6ySZ.jpg" alt="Heat Resistant" className="feature-icon" />
-        <h5>🔥 Heat & Liquid Resistant</h5>
-        <p className="text-muted">
-          Suitable for hot curries, soups, and oily foods without leakage.
-        </p>
-      </div>
+   <div className="p-4 shadow mb-2 rounded-4 bg-white h-100 card d-flex flex-column align-items-center text-center">
+ <div className="feature-icons">
+  <FaFire />
+</div>
+  <h5>Heat & Liquid Resistant</h5>
+  <p className="text-muted">
+    Suitable for hot curries, soups, and oily foods without leakage.
+  </p>
+</div>
     </Col>
 
     <Col md={4} data-aos="fade-up" data-aos-delay="500">
-      <div className="p-4 shadow mb-2 rounded-4 bg-light h-100 card">
+      <div className="p-4 shadow mb-2 rounded-4  bg-white h-100 card">
         <img src="https://img.freepik.com/premium-vector/natural-leaf-icon-100-natural-vector-image-template-green-nature-100-organic-natural_619470-320.jpg?" alt="Chemical Free" className="feature-icon" />
-        <h5>🌱 Chemical Free</h5>
+        <h5> Chemical Free</h5>
         <p className="text-muted">
           No polish, wax, bleach, or synthetic additives used.
         </p>
