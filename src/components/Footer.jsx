@@ -34,10 +34,10 @@ const Footer = () => {
             />
 
            {/* Social Media */}
-    <p className="footer-desc mt-4">
-  We provide eco-friendly areca leaf products made from naturally fallen leaves, ensuring sustainability and quality for every use.
+ <p className="mt-4 fs-5 mx-auto description-text">
+  Eco-friendly areca leaf products made from natural leaves. <br />
+  Designed for quality, durability, and elegant serving.
 </p>
-
           </Col>
 
           {/* Quick Links */}
@@ -76,7 +76,9 @@ const Footer = () => {
 
             <p className="fs-5">
               <FaMapMarkerAlt className="me-2" />
-           Bengaluru, Karnataka - 560070
+
+             Bengaluru, Karnataka - 560070
+
             </p>
 
           </Col>

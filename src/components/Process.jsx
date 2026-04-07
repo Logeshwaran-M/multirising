@@ -9,6 +9,7 @@ import collect from "../assets/process/collect.png"
 import dry from "../assets/process/dry.png"
 import pack from "../assets/process/pack.png"
 import wash from "../assets/process/wash.png"
+import leaf from "../assets/process/leafe.png"
 
 
 const lifecycleSteps = [
@@ -18,7 +19,7 @@ const lifecycleSteps = [
     title: "FALLEN LEAVES",
     description:
       "Ripened palm leaves naturally fall from trees. Nothing is forcefully taken — fully natural and eco-friendly.",
-    image: "https://horticulture.co.uk/wp-content/uploads/2022/10/arecapalmplantcare-header-1600x1067.jpg",
+    image:leaf 
   },
   {
     id: 2,
@@ -81,6 +82,7 @@ const lifecycleSteps = [
 
 function ArecaLifecycle() {
 
+  
   useEffect(() => {
   AOS.init({
     duration: 1000,

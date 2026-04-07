@@ -17,7 +17,7 @@ import DeliveryForm from "./components/DeliveryForm";
 import ArecaLifecycle from "./components/Process";
 import AOS from "aos";
 import "aos/dist/aos.css";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import CheckoutIndia from "./components/checkoutpages/IndianCheckout";
 import CheckoutInternational from "./components/checkoutpages/InternationalCheckout";
 import MyOrders from "./components/Myorders";
@@ -30,6 +30,7 @@ import ContactUs from "./components/Contact";
 import { PayPalScriptProvider } from "@paypal/react-paypal-js";
 import TrackOrder from "./components/TrackOrder";
 import ArecaBlog from "./components/Blog";
+import { FaWhatsapp ,FaPhone,FaCommentDots } from "react-icons/fa";
 
 
 // Dummy pages (create these files)
@@ -38,6 +39,11 @@ import ArecaBlog from "./components/Blog";
 
 function App() {
 
+    useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+  
+  const [open, setOpen] = useState(false);
   useEffect(() => {
   AOS.init({
     duration: 1000, // animation speed
@@ -47,6 +53,38 @@ function App() {
 const clientId = import.meta.env.VITE_PAYPAL_CLIENT_ID?.trim();
   return (
     <>
+    <div className="contact-float-container">
+
+  {/* Main Button */}
+  <button
+    className={`contact-main-btn ${open ? "open" : ""}`}
+    onClick={() => setOpen(!open)}
+  >
+    <FaCommentDots />
+  </button>
+
+  {/* Tooltip Text */}
+  <span className="contact-label">Contact Us</span>
+
+  {/* Call Button */}
+  <a
+    href="tel:7619210277"
+    className={`call-float child-btn ${open ? "show" : ""}`}
+  >
+    <FaPhone style={{ transform: "rotate(90deg)" }} />
+  </a>
+
+  {/* WhatsApp Button */}
+  <a
+    href="https://wa.me/7619210277"
+    className={`whatsapp-float child-btn ${open ? "show" : ""}`}
+    target="_blank"
+    rel="noreferrer"
+  >
+    <FaWhatsapp />
+  </a>
+
+</div>
      <ToastContainer position="top-right" autoClose={1500} />
       <NavbarComponent />
      

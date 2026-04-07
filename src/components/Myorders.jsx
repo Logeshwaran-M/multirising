@@ -28,6 +28,10 @@ const [trackingLoading, setTrackingLoading] = useState(false);
 
 const API_URL = "http://localhost:5000";
 
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+  
 const handleTrackOrder = async (order) => {
   if (!order.awb) {
     Swal.fire("No Tracking", "AWB not available for this order", "info");

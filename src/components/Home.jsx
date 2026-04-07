@@ -1,21 +1,19 @@
 import { Container, Row, Col, Button, Card } from "react-bootstrap";
-import { FaWhatsapp ,FaPhone,FaCommentDots } from "react-icons/fa";
+
 import { useNavigate } from "react-router-dom";
 import heroImage from "../assets/hero.png";
-import service1 from "../assets/fsdelivery.jpg";
-import service2 from "../assets/premium.webp";
-import service3 from "../assets/exports.jpg";
+
 import ShapesSection from "./ShapeSection";
-import iso from "../assets/iso.webp";
-import support from "../assets/support.jpg";
-import leaf from "../assets/leaf.jpg";
+
 import '../components/css/home.css'
-import frame from "../assets/frame1.png"
+
 import frame2 from "../assets/frame2.png"
 import { useEffect } from "react";
 import AOS from "aos";
-import { useState } from "react";
+
 import ContactSection from "./ContactHome";
+import { FaTruck, FaStar, FaGlobe } from "react-icons/fa";
+import { FaLeaf, FaAward, FaUsers } from "react-icons/fa";
 
 const HeroSection = () => {
   const navigate = useNavigate();
@@ -28,7 +26,7 @@ const HeroSection = () => {
   });
 }, []);
 
-const [open, setOpen] = useState(false);
+
 
  useEffect(() => {
     window.scrollTo(0, 0);
@@ -38,62 +36,28 @@ const [open, setOpen] = useState(false);
     <section className="home-page">
 
       {/* HERO WITH OVERLAY */}
-      <div className="hero-wrapper brand-hero ">
-        <img src={heroImage} alt="Hero" className="hero-img" />
-        <div className="hero-dark-overlay"></div>
+    <div className="hero-wrapper brand-hero">
+  <img src={heroImage} alt="Hero" className="hero-img" />
+  
+  {/* Move the dark overlay inside or make sure it's absolute */}
+  <div className="hero-dark-overlay" style={{
+    position: 'absolute', 
+    top: 0, left: 0, width: '100%', height: '100%', 
+   zIndex: 1 
+  }}></div>
 
-   <div className="hero-overlay text-center" data-aos="zoom-in">
-
-  <h1 className="hero-title">
-    Premium Areca Leaf Products
-  </h1>
-
-  <p className="text-white">
-   <b> Eco-friendly • Sustainable • Export Quality</b>
-  </p>
-
-  <button
-    className="shop-btn mt-3"
-    onClick={() => navigate("/products")}
-  >
-    Shop Now
-  </button>
-
-</div>
+  <div className="hero-overlay " data-aos="zoom-in">
+    <h2 className="hero-title">Premium Areca Leaf Products</h2>
+    <p className="text-white fw-bold">
+       Eco-friendly • Sustainable • Export Quality
+    </p>
+    <button className="shop-btn mt-3" onClick={() => navigate("/products")}>
+      Shop Now
+    </button>
+  </div>
 </div>
 
-<div className="contact-float-container">
 
-  {/* Main Button */}
-  <button
-    className={`contact-main-btn ${open ? "open" : ""}`}
-    onClick={() => setOpen(!open)}
-  >
-    <FaCommentDots />
-  </button>
-
-  {/* Tooltip Text */}
-  <span className="contact-label">Contact Us</span>
-
-  {/* Call Button */}
-  <a
-    href="tel:7619210277"
-    className={`call-float child-btn ${open ? "show" : ""}`}
-  >
-    <FaPhone style={{ transform: "rotate(90deg)" }} />
-  </a>
-
-  {/* WhatsApp Button */}
-  <a
-    href="https://wa.me/7619210277"
-    className={`whatsapp-float child-btn ${open ? "show" : ""}`}
-    target="_blank"
-    rel="noreferrer"
-  >
-    <FaWhatsapp />
-  </a>
-
-</div>
 
 
 
@@ -209,29 +173,40 @@ Send Bulk Gifts Abroad
       <Container className="py-5 text-center">
         <h2 className="fw-bold brand-title">Our Services</h2>
 
-        <Row className="g-4 mt-3">
-          {[service1, service2, service3].map((img, i) => (
-         <Col md={4} key={i} data-aos="fade-up" data-aos-delay={i * 200}>
-              <div className="service-card shadow-sm p-3 brand-card-hover bg-white">
-                <img src={img} alt="" className="rounded" />
-                <h5 className="fw-bold mt-3 text-success">
-                  {i === 0
-                    ? "Fast Delivery"
-                    : i === 1
-                    ? "Premium Quality"
-                    : "Global Export"}
-                </h5>
-                <p className="text-muted">
-                  {i === 0
-                    ? "Quick & safe delivery worldwide."
-                    : i === 1
-                    ? "Highest international quality standards."
-                    : "Reliable exports across the globe."}
-                </p>
-              </div>
-            </Col>
-          ))}
-        </Row>
+     <Row className="g-4 mt-3">
+  {[1, 2, 3].map((item, i) => (
+    <Col md={4} key={i} data-aos="fade-up" data-aos-delay={i * 200}>
+      <div className="service-card shadow-sm p-4 brand-card-hover bg-white text-center">
+
+        {/* ICON */}
+        <div className="service-icon mb-3">
+          {i === 0 && <FaTruck size={50} className="text-success" />}
+          {i === 1 && <FaStar size={50} className="text-success" />}
+          {i === 2 && <FaGlobe size={50} className="text-success" />}
+        </div>
+
+        {/* TITLE */}
+        <h5 className="fw-bold mt-2 text-dark">
+          {i === 0
+            ? "Fast Delivery"
+            : i === 1
+            ? "Premium Quality"
+            : "Global Export"}
+        </h5>
+
+        {/* TEXT */}
+        <p className="text-muted">
+          {i === 0
+            ? "Quick & safe delivery worldwide."
+            : i === 1
+            ? "Highest international quality standards."
+            : "Reliable exports across the globe."}
+        </p>
+
+      </div>
+    </Col>
+  ))}
+</Row>
       </Container>
 
 
@@ -253,10 +228,13 @@ Send Bulk Gifts Abroad
 
   {/* 1 */}
  <Col md={4} data-aos="zoom-in" data-aos-delay="200">
-    <div className="feature-box p-4 shadow-sm brand-card-hover h-100">
-     <img src={leaf} alt="Eco Friendly" className="feature-img" />
-      <h5 className="mt-3 text-success"> 100% Natural & Eco-Friendly</h5>
-      <p className="text-muted">
+ 
+    <div className="feature-box p-4 shadow-sm brand-card-hover h-100 d-flex flex-column text-center">
+        <div className="feature-icon mb-3">
+    <FaLeaf size={50} className="text-success" />
+  </div>
+      <h5 className="mt-3 text-dark"> 100% Natural & Eco-Friendly</h5>
+    <p className="text-muted flex-grow-1">
         Our products are made from naturally fallen Areca leaves.
         No chemicals, no plastic, no tree cutting — completely
         biodegradable and compostable.
@@ -270,10 +248,12 @@ Send Bulk Gifts Abroad
 
   {/* 2 */}
  <Col md={4} data-aos="zoom-in" data-aos-delay="200">
-    <div className="feature-box p-4 shadow-sm brand-card-hover h-100">
-    <img src={iso} alt="Export Quality" className="feature-img" />
-      <h5 className="mt-3 text-success"> International Export Standards</h5>
-      <p className="text-muted">
+ <div className="feature-box p-4 shadow-sm brand-card-hover h-100 d-flex flex-column text-center">
+       <div className="feature-icon mb-3">
+    <FaAward size={50} className="text-success" />
+  </div>
+      <h5 className="mt-3 text-dark"> International Export Standards</h5>
+   <p className="text-muted flex-grow-1">
         Manufactured under strict hygiene and quality control
         processes to meet global export requirements.
           Our production facility follows international compliance 
@@ -286,10 +266,12 @@ Send Bulk Gifts Abroad
 
   {/* 3 */}
   <Col md={4} data-aos="zoom-in" data-aos-delay="200">
-    <div className="feature-box p-4 shadow-sm brand-card-hover h-100">
-     <img src={support} alt="Trusted" className="feature-img" />
-      <h5 className="mt-3 text-success"> Trusted by Global Clients</h5>
-      <p className="text-muted">
+   <div className="feature-box p-4 shadow-sm brand-card-hover h-100 d-flex flex-column text-center">
+     <div className="feature-icon mb-3">
+    <FaUsers size={50} className="text-success" />
+  </div>
+      <h5 className="mt-3 text-dark"> Trusted by Global Clients</h5>
+      <p className="text-muted flex-grow-1">
         We serve restaurants, wholesalers, and distributors
         worldwide with reliable service and long-term partnerships.
           Our commitment to timely delivery, transparent communication, 

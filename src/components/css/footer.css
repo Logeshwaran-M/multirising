@@ -85,6 +85,11 @@ margin:20px 0;
   max-width: 280px;
 }
 
+.description-text {
+  max-width: 700px;   /* controls line width */
+  line-height: 1.7;   /* better readability */
+}
+
 /* Optional: better on mobile */
 @media (max-width: 768px) {
   .footer-desc {

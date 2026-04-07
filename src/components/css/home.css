@@ -1,27 +1,4 @@
-.whatsapp-float {
-  position: fixed;
-  bottom: 25px;
-  right: 25px;
-  background: linear-gradient(135deg, #25d366, #1ebe5d);
-  color: #fff;
-  font-size: 28px;
-  padding: 16px;
-  border-radius: 50%;
-  text-decoration: none;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
-  transition: all 0.3s ease;
-  z-index: 999;
-  animation: pulse 2s infinite;
-}
 
-/* Hover effect */
-.whatsapp-float:hover {
-  transform: translateY(-6px) scale(1.1);
-  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.4);
-}
 
 
 .hero-section {
@@ -52,7 +29,7 @@ margin-top:40px;
 .banner-img{
 width:100%;
 height:100%;
-object-fit:cover;
+ object-fit: cover;  
 transition:0.5s ease;
 }
 
@@ -93,21 +70,7 @@ background:#1e7e34;
 transform:translateY(-2px);
 }
 
-.banner-overlay{
-position:absolute;
-top:0;
-left:0;
-width:100%;
-height:100%;
-background:linear-gradient(
-to right,
-rgba(0,0,0,0.65),
-rgba(0,0,0,0.2)
-);
-display:flex;
-align-items:center;
-padding-left:80px;
-}
+
 
 /* text */
 
@@ -164,12 +127,10 @@ transform:translateY(0);
 }
 
 
-.frame-banner {
-  width: 100%;
-  height: 350px;
-  object-fit: cover;
-  display: block;
-}
+ .frame-banner {
+    height: 350px;
+    width: 100%;
+  }
 
 /* Mobile View */
 @media (max-width: 768px) {
@@ -178,26 +139,40 @@ transform:translateY(0);
   }
 }
 
-.hero-overlay{
-position:absolute;
-top:0;
-left:0;
-width:100%;
-height:100%;
-display:flex;
-flex-direction:column;
-justify-content:center;
-align-items:center;
-text-align:center;
-color:white;
-padding:20px;
+.hero-wrapper {
+  position: relative;  /* 🔥 REQUIRED */
 }
 
-.hero-title{
-font-size:48px;
-font-weight:700;
-margin-bottom:10px;
+.hero-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+
+  width: 100%;
+  height: 100%;
+  z-index: 2;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+
+  align-items: flex-start;   /* 🔥 LEFT */
+  text-align: left;          /* 🔥 LEFT */
+
+  padding-left: 5%;          /* 👈 adjust (5%–12%) */
 }
+
+/* Ensure title doesn't have max-width pushing it left */
+.hero-title {
+  color: white;
+  font-size: 2.5rem;
+ 
+  max-width: 100%;
+  text-shadow: 2px 2px 10px rgba(0, 0, 0, 0.7);
+  margin-bottom: 10px;
+  width: 50%;
+}
+
 
 .hero-subtitle{
 font-size:18px;
@@ -278,90 +253,48 @@ width:140px;
 }
 
 /* Container */
-.contact-float-container {
-  position: fixed;
-  bottom: 30px;
-  right: 20px;
-  z-index: 9999;
+
+
+@media (max-width: 768px) {
+
+  .hero-overlay {
+    display: flex !important;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center !important;
+    padding: 0 15px !important; 
+  }
+
+  .hero-overlay * {
+    text-align: center !important;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .hero-title {
+    font-size: 24px !important;
+    max-width: 100%;
+     width: 50%;
+  }
+
+  .hero-overlay p {
+    font-size: 14px;
+  }
+
+  .shop-btn {
+    display: block;
+    margin: 10px auto 0;
+  }
 }
 
-/* Main Button */
-.contact-main-btn {
-  width: 60px;
-  height: 60px;
+.feature-icon {
+  width: 80px;
+  height: 80px;
+  margin: auto;
   border-radius: 50%;
-  background: linear-gradient(135deg, #198754, #28a745);
-  color: #fff;
-  border: none;
-  font-size: 22px;
+  background: rgba(40, 167, 69, 0.1);
   display: flex;
   align-items: center;
   justify-content: center;
-  cursor: pointer;
-  box-shadow: 0 5px 20px rgba(0,0,0,0.3);
-  transition: all 0.3s ease;
-}
-
-/* Rotate animation */
-
-
-/* Tooltip label */
-.contact-label {
-  position: absolute;
-  right: 70px;
-  bottom: 18px;
-  background: #111;
-  color: #fff;
-  padding: 6px 14px;
-  border-radius: 20px;
-  font-size: 13px;
-  opacity: 0;
-  transform: translateX(10px);
-  transition: 0.3s ease;
-  white-space: nowrap;
-}
-
-/* Show on hover */
-.contact-float-container:hover .contact-label {
-  opacity: 1;
-  transform: translateX(0);
-}
-
-/* Child buttons */
-.child-btn {
-  position: absolute;
-  right: 0;
-  width: 55px;
-  height: 55px;
-  border-radius: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  color: #fff;
-  opacity: 0;
-  transform: translateY(20px);
-  transition: all 0.3s ease;
-}
-
-/* Show animation */
-.child-btn.show {
-  opacity: 1;
-  transform: translateY(0);
-}
-
-/* Call */
-.call-float {
-  bottom: 70px;
-  background: #28a745;
-}
-
-/* WhatsApp */
-.whatsapp-float {
-  bottom: 140px;
-  background: #25d366;
-}
-
-/* Hover effect */
-.child-btn:hover {
-  transform: scale(1.1);
 }

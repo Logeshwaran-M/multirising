@@ -83,17 +83,25 @@ export default function ContactUs() {
           }}
         >
           <h1 className="fw-bold display-5">Contact Us</h1>
-          <p className="text-light">We’d love to hear from you</p>
+        <div
+  style={{
+    width: "60px",
+    height: "3px",
+    backgroundColor: "white",
+    margin: "10px auto",
+  }}
+  data-aos="fade-up"
+></div>
         </div>
       </section>
 
       {/* Form + Info Section */}
       <section className="py-5 bg-light">
         <Container>
-          <Row className="g-4">
+         <Row className="g-4 align-items-stretch">
             {/* Contact Form */}
-            <Col md={6}>
-              <Card className="p-4 shadow-lg border-0 rounded-4">
+         <Col md={6} className="d-flex">
+  <Card className="p-4 shadow-lg border-0 rounded-4 w-100 h-100">
                 <h3 className="fw-bold mb-3">Get in Touch</h3>
 
                 {success && (
@@ -154,13 +162,11 @@ export default function ContactUs() {
             </Col>
 
             {/* Contact Info */}
-            <Col md={6}>
-              <Card className="p-4 shadow-lg border-0 rounded-4 mb-4">
+        <Col md={6} className="d-flex">
+<Card className="p-4 shadow-lg border-0 rounded-4 w-100 h-100 d-flex flex-column justify-content-between">
                 <h4 className="fw-bold mb-3">
                   <FaMapMarkerAlt className="me-2 text-success" /> Our Address
                 </h4>
-                <p>No. 14, 22nd Main Road, 11th Cross</p>
-                <p>Raghavendra Layout, Padmanabhanagar</p>
                 <p>Bengaluru, Karnataka - 560070</p>
 
                 <hr />
@@ -173,10 +179,10 @@ export default function ContactUs() {
                 </p>
 
                 <a
-                  href="https://www.google.com/maps?q=No.14,22nd Main Road,11th Cross,Raghavendra Layout,Padmanabhanagar,Bengaluru,560070"
+                 href="https://www.google.com/maps/search/?api=1&query=No.14,22nd Main Road,11th Cross,Raghavendra Layout,Padmanabhanagar,Bengaluru,560070"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="btn btn-outline-success mt-2"
+                    className="w-100 btn btn-success rounded-pill fw-bold"
                 >
                   View on Map
                 </a>
