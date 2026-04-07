@@ -330,17 +330,12 @@ billing_phone: finalBillingPhone,
 
    // ✅ CHECK SHIPROCKET RESPONSE PROPERLY
 // Old code:
-if (response.data?.status !== 1) {
-  return res.status(400).json({ success: false, error: response.data });
-}
+const shipData = response.data;
 
-// ✅ Fixed version:
-if (response.data?.status_code !== 1) {
-  console.error("❌ Shiprocket API Error:", response.data);
-  return res.status(400).json({
-    success: false,
-    error: response.data
-  });
+// Only fail if Shiprocket returns an actual error
+if (shipData.status_code !== 1) {
+  console.error("❌ Shiprocket API Error:", shipData);
+  return res.status(500).json({ success: false, error: shipData });
 }
 
 // If status_code === 1, treat as success
