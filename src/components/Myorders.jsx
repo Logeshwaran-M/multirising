@@ -33,7 +33,7 @@ const API_URL = "http://localhost:5000";
   }, []);
   
 const handleTrackOrder = async (order) => {
-  if (!order.awb) {
+  if (!order.shiprocket?.awb_code) {
     Swal.fire("No Tracking", "AWB not available for this order", "info");
     return;
   }
@@ -269,7 +269,7 @@ className="mb-4 border-0 shadow rounded-4"
 <div className="d-flex justify-content-between mb-3">
 
 <h6 className="fw-bold">
-Order ID: {order.id}
+  Order ID: {order.shiprocket?.awb_code || order.shiprocket?.order_id || order.id}
 </h6>
 
 <small className="text-muted">
