@@ -350,7 +350,8 @@ res.json({
   data: {
     order_id: response.data.order_id,
     shipment_id: response.data.shipment_id,
-    awb_code: response.data.awb_code || "" // may be empty initially
+    awb_code: response.data.awb_code || null, // will be generated later
+    courier_name: response.data.courier_name || null,// may be empty initially
   }
 });
 

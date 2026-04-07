@@ -127,14 +127,14 @@ const handlePayment = async () => {
           } catch (emailErr) {
             console.error("Failed to send order email:", emailErr);
           }
-
+         console.log(shipData.data)
           // 6️⃣ Save everything in Firebase
           await placeOrder(user.uid, {
             orderType: "India",
             products: productsToShow,
             totalAmount: finalTotal,
             address: formData,
-            shiprocket: shipData.data || {},
+             shiprocket: shipData.data,
             paymentDetails: response,
           });
 
@@ -177,6 +177,67 @@ const [formData, setFormData] = useState({
   pinCode: "",
   country: "India"
 });
+
+const handleTestPayment = async () => {
+  try {
+    const user = JSON.parse(localStorage.getItem("user"));
+    if (!user) {
+      alert("Please login first");
+      return;
+    }
+
+    // Validate required fields
+    if (
+      !formData.firstName ||
+      !formData.email ||
+      !formData.phone ||
+      !formData.addressLine1 ||
+      !formData.city ||
+      !formData.state ||
+      !formData.pinCode
+    ) {
+      alert("Please fill all delivery address fields");
+      return;
+    }
+
+    // Call Shiprocket directly (simulate successful payment)
+    const shipRes = await fetch(
+      "https://multirising-1.onrender.com/create-order",
+      {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          address: formData,
+          products: productsToShow,
+          totalAmount: finalTotal,
+        }),
+      }
+    );
+
+    const shipData = await shipRes.json();
+    console.log("🚀 Shiprocket Response:", shipData);
+
+    if (!shipData.success) {
+      alert("Failed to create Shiprocket order");
+      return;
+    }
+
+    // Save directly to Firebase (simulate payment success)
+    await placeOrder(user.uid, {
+      orderType: "India",
+      products: productsToShow,
+      totalAmount: finalTotal,
+      address: formData,
+      shiprocket: shipData.data,
+      paymentDetails: { testPayment: true }, // mark it as test
+    });
+
+    setShowPopup(true);
+  } catch (err) {
+    console.error("Test payment failed:", err);
+    alert("Test payment failed. Check console.");
+  }
+};
 
 const indianStates = [
 "Andhra Pradesh","Arunachal Pradesh","Assam","Bihar","Chhattisgarh","Goa",
@@ -383,6 +444,14 @@ onChange={handleChange}
 </Col>
 
 </Row>
+<Button
+  className="mt-4 w-100 fw-bold"
+  variant="warning"
+  size="lg"
+  onClick={handleTestPayment}
+>
+  Test Shiprocket Order
+</Button>
 
 <Button
 className="mt-4 w-100 fw-bold"
