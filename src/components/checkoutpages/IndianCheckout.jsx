@@ -24,7 +24,7 @@ const productsToShow = buyNowProduct ? [buyNowProduct] : cartItems;
 
 const handlePayment = async () => {
   try {
-    const user = auth.currentUser;
+    const user = JSON.parse(localStorage.getItem("user"));
     if (!user) {
       alert("Please login first");
       return;
@@ -49,27 +49,32 @@ const handlePayment = async () => {
       return;
     }
 
-    // 1️⃣ Create Razorpay order
-    const res = await fetch("https://multirising-1.onrender.com/create-razorpay-order", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ amount: finalTotal, currency: "INR" }),
-    });
-
-    const orderData = await res.json();
-    if (!orderData || !orderData.id) {
-      alert("Payment order creation failed");
+ 
+    // 1️⃣ Create Razorpay order but don't wait for it completely
+    const res = await fetch(
+      "https://multirising-1.onrender.com/create-razorpay-order",
+      {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ amount: finalTotal, currency: "INR" }),
+      }
+    );
+   const orderData = await res.json(); // now we have actual orderData
+    if (!orderData?.id) {
+      alert("Failed to create order");
       return;
     }
+
+   // parse JSON but don't await yet
 
     // 2️⃣ Razorpay checkout
     const options = {
       key: import.meta.env.VITE_RAZORPAY_KEY,
-      amount: orderData.amount,
-      currency: orderData.currency,
+      amount: finalTotal * 100, // paise
+      currency: "INR",
       name: "Multirising Exports",
       description: "Order Payment",
-      order_id: orderData.id,
+     order_id: orderData.id, // will update after promise resolves
       prefill: {
         name: `${formData.firstName} ${formData.lastName}`,
         email: formData.email,
@@ -79,33 +84,29 @@ const handlePayment = async () => {
 
       handler: async function (response) {
         try {
-          // 3️⃣ Verify Razorpay payment
-          const verifyRes = await fetch("https://multirising-1.onrender.com/verify-payment", {
-            method: "POST",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify(response),
-          });
-          const verifyData = await verifyRes.json();
+         
 
-          if (!verifyData.success) {
-            alert("Payment verification failed");
-            return;
-          }
+          // 3️⃣ Verify Razorpay payment
+           
 
           // 4️⃣ Create Shiprocket order
-          const shipRes = await fetch("https://multirising-1.onrender.com/create-order", {
-            method: "POST",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({
-              address: formData,
-              products: productsToShow,
-              totalAmount: finalTotal,
-            }),
-          });
+          const shipRes = await fetch(
+            "https://multirising-1.onrender.com/create-order",
+            {
+              method: "POST",
+              headers: { "Content-Type": "application/json" },
+              body: JSON.stringify({
+                address: formData,
+                products: productsToShow,
+                totalAmount: finalTotal,
+              }),
+            }
+          );
           const shipData = await shipRes.json();
 
           if (!shipData.success) {
             alert("Order placed but shipping failed");
+            return;
           }
 
           // 5️⃣ Send Order Email
@@ -140,7 +141,6 @@ const handlePayment = async () => {
           // 7️⃣ Clear cart & show popup
           clearCart();
           setShowPopup(true);
-
         } catch (err) {
           console.error(err);
           alert("Something went wrong after payment");
@@ -156,6 +156,8 @@ const handlePayment = async () => {
 
     const rzp = new window.Razorpay(options);
     rzp.open();
+
+    // Update order_id once orderData resolves
   } catch (err) {
     console.error(err);
     alert("Payment failed. Try again.");

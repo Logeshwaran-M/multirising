@@ -329,23 +329,28 @@ billing_phone: finalBillingPhone,
     console.log("✅ Shiprocket Success:", response.data);
 
    // ✅ CHECK SHIPROCKET RESPONSE PROPERLY
+// Old code:
 if (response.data?.status !== 1) {
-  console.error("❌ Shiprocket API Error:", response.data);
+  return res.status(400).json({ success: false, error: response.data });
+}
 
+// ✅ Fixed version:
+if (response.data?.status_code !== 1) {
+  console.error("❌ Shiprocket API Error:", response.data);
   return res.status(400).json({
     success: false,
     error: response.data
   });
 }
 
-// ✅ SUCCESS ONLY WHEN STATUS = 1
+// If status_code === 1, treat as success
 res.json({
   success: true,
   type: isInternational ? "International" : "Domestic",
   data: {
     order_id: response.data.order_id,
     shipment_id: response.data.shipment_id,
-    awb_code: response.data.shipment_tracking[0]?.awb || "" // may be empty initially
+    awb_code: response.data.awb_code || "" // may be empty initially
   }
 });
 
