@@ -8,9 +8,8 @@ import { auth } from "../../firebase";
 
 function CheckoutIndia() {
   const API_URL =
-  window.location.hostname === "localhost"
-    ? "https://multirisingexports.com/"
-    : "https://multirising.vercel.app";
+  window.location.hostname === "https://multirisingexports.com/"
+   
 
 const { cartItems, total,clearCart } = useCart();
 const navigate = useNavigate();
