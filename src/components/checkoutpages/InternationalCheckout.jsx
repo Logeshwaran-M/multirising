@@ -10,7 +10,7 @@ import { PayPalScriptProvider, PayPalButtons } from "@paypal/react-paypal-js";
 function CheckoutInternational() {
   const API_URL =
   window.location.hostname === "localhost"
-    ? "https://multirising.vercel.app"
+    ? "https://multirisingexports.com/"
     : "https://multirising.vercel.app";
 
   const { cartItems, total,clearCart } = useCart(); 
