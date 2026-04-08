@@ -5,24 +5,34 @@ import { FaArrowLeft } from "react-icons/fa";
 import { useNavigate, useLocation } from "react-router-dom";
 import { placeOrder } from "../Services/orderService";
 import { auth } from "../../firebase";
+import { useRef } from "react";
+
+
 
 function CheckoutIndia() {
-  const API_URL =
-  window.location.hostname === "https://multirisingexports.com/"
+ const API_URL =
+  window.location.hostname === "multirisingexports.com"
+    ? "https://multirisingexports.com"
+    : "http://localhost:5000";
    
-
+let isProcessingOrder = false;
 const { cartItems, total,clearCart } = useCart();
 const navigate = useNavigate();
 const location = useLocation();
-
+const [loading, setLoading] = useState(false);
 const [showPopup, setShowPopup] = useState(false);
 
 const buyNowProduct = location.state?.product;
 
 const productsToShow = buyNowProduct ? [buyNowProduct] : cartItems;
 
+
+const orderLock = useRef(false);
+
 const handlePayment = async () => {
   try {
+     if (loading) return;
+       setLoading(true);
     const user = JSON.parse(localStorage.getItem("user"));
     if (!user) {
       alert("Please login first");
@@ -84,7 +94,16 @@ const handlePayment = async () => {
       handler: async function (response) {
         try {
          
+            
+    // 🚫 STOP duplicate execution
+     if (orderLock.current) {
+      console.log("⛔ Duplicate Shiprocket call blocked");
+      return;
+    }
 
+    orderLock.current = true;
+
+    console.log("🔥 Handler executed ONCE");
           // 3️⃣ Verify Razorpay payment
            
 
@@ -126,7 +145,7 @@ const handlePayment = async () => {
           } catch (emailErr) {
             console.error("Failed to send order email:", emailErr);
           }
-         console.log(shipData.data)
+        
           // 6️⃣ Save everything in Firebase
           await placeOrder(user.uid, {
             orderType: "India",
@@ -385,15 +404,16 @@ onChange={handleChange}
 </Row>
 
 <Button
+ disabled={loading}
 className="mt-4 w-100 fw-bold"
 variant="success"
 size="lg"
 style={{borderRadius:"10px"}}
   onClick={handlePayment}
-
+  
 >
 
-Pay ₹{finalTotal}
+{loading ? "Processing..." : `Pay ₹${finalTotal}`}
 
 </Button>
 
